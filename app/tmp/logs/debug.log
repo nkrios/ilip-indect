@@ -1,0 +1,5 @@
+2013-03-06 18:02:19 Notice: Notice (8): Undefined index: SSL_CLIENT_VERIFY in [/opt/xplico/xi/app/controllers/users_controller.php, line 260]
+2013-03-12 16:43:07 Notice: Notice (8): Undefined index:  in [/opt/xplico/xi/app/views/fbuchats/chats.ctp, line 56]
+2013-03-12 17:00:43 Notice: Notice (8): Undefined index: userlogin in [/opt/xplico/xi/app/controllers/users_controller.php, line 112]
+2013-03-12 17:00:53 Notice: Notice (8): Undefined index: userlogin in [/opt/xplico/xi/app/controllers/users_controller.php, line 112]
+2013-03-12 17:00:56 Notice: Notice (8): Undefined index: userlogin in [/opt/xplico/xi/app/controllers/users_controller.php, line 112]

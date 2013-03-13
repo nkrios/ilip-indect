@@ -1,0 +1,38 @@
+<head>
+<!-- 	<meta http-equiv="refresh" content="5" url="/pluginManager/pluginmanager" > -->
+</head>
+
+<div class="cache_contents view">
+  <div class="body">
+
+	<!-- ACTIONS -->
+	<div class="cache_contents actions_2">
+	  <div class="search">
+		<ul>
+		    <li><?php echo $this->Html->link(__('List Cache Contents', true), array('action' => 'index')); ?> </li>
+		    <li><?php echo $this->Html->link(__('Clear all Cache Contents', true), array('action' => 'clear'), null, sprintf(__('Are you sure you want to delete all the cache contents?', true))); ?></li>
+		</ul>
+	  </div>
+	</div>
+	<br/>
+	<!-- INFO -->
+	<div class="cache_contentsInfo view_2">
+	  <fieldset>
+	      <legend><?php __('View Cache Content'); ?></legend>
+	      <br/>
+		<?php __('Content Name'); ?>:
+		<?php echo $cacheContent['Content']['contentName']; ?>
+		<?php __('Content Hash'); ?>:
+		<?php echo $cacheContent['CacheContent']['contentHash']; ?>
+		<?php __('ContentLength'); ?>:
+		<?php echo $cacheContent['CacheContent']['contentLength']; ?>
+		<?php __('Content Relevance'); ?>:
+		<?php echo $cacheContent['CacheContent']['contentPriority']; ?>
+		<?php __('Process Message'); ?>
+		<?php echo $cacheContent['CacheContent']['processMessage']; ?>
+
+	</fieldset>
+	</div> <br>
+  </div>
+</div>
+
