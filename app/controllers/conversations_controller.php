@@ -73,7 +73,7 @@ class ConversationsController extends AppController{
 //		App::import('Model', 'Streams');
 //		$stream = new Stream();
 		$conditions = array('Stream.conversation_id' => $id);
-                $this->Stream->recursive = -1;
+        $this->Stream->recursive = -1;
 		$streams = $this->Stream->find('all', array('conditions'=>$conditions));
 
 		$this->set('streams', $streams);

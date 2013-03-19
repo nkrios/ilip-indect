@@ -1,19 +1,69 @@
 
 <script type='text/javascript'>
-  $(function() {
-      $("#hoff").button();
-      $("#hon").button();
-      if (<?php echo $help; ?>) {
-        $("#help_off").hide();
-      }
-      else {
-        $("#help_on").hide();
-      }
-      $("#hoff, #hon").click(function() {
-        $("#help_off").toggle(1000);
-        $("#help_on").toggle(500);
-      });
-  });
+
+	var cX = 0; var cY = 0; var rX = 0; var rY = 0;
+	function UpdateCursorPosition(e){ cX = e.pageX; cY = e.pageY;}
+	function UpdateCursorPositionDocAll(e){ cX = event.clientX; cY = event.clientY;}
+	if(document.all) { document.onmousemove = UpdateCursorPositionDocAll; }
+	else { document.onmousemove = UpdateCursorPosition; }
+	function AssignPosition(d) {
+		if(self.pageYOffset) {
+			rX = self.pageXOffset;
+			rY = self.pageYOffset;
+		}else if(document.documentElement && document.documentElement.scrollTop) {
+			rX = document.documentElement.scrollLeft;
+			rY = document.documentElement.scrollTop;
+		}else if(document.body) {
+			rX = document.body.scrollLeft;
+			rY = document.body.scrollTop;
+		}
+
+		if(document.all) {
+			cX += rX; 
+			cY += rY;
+		}
+		d.style.left = (cX+10) + "px";
+		d.style.top = (cY+10) + "px";
+	}
+	function HideContent(d) {
+		// if(d.length < 1) { return; }
+		// document.getElementById(d).style.display = "none";
+		d.style.display = "none";
+	}
+	function ShowContent(d) {
+		// if(d.length < 1) { return; }
+		// var dd = document.getElementById(d);
+		console.log(d);
+		var dd = d;
+		AssignPosition(dd);
+		dd.style.display = "block";
+	}
+	function ReverseContentDisplay(d) {
+		if(d.length < 1) { return; }
+		var dd = document.getElementById(d);
+		AssignPosition(dd);
+		if(dd.style.display == "none") { dd.style.display = "block"; }
+		else { dd.style.display = "none"; }
+	}
+
+	$(function addListeners() {		
+		// $('.info-block h3').mouseover(ShowContent($('.info-block h3').nextAll("table")[0]));
+		// $('.info-block h3').mouseout(HideContent($('.info-block h3').nextAll("table")[0]));
+	});
+
+
+  	$(function() {
+    	//$("#hoff").button();
+  		//$("#hon").button();
+		if (<?php echo $help; ?>) $("#help_off").hide();
+		else $("#help_on").hide();
+
+		$("#hoff, #hon").click(function() {
+			$("#help_off").toggle(1000);
+			$("#help_on").toggle(500);
+		});
+  	});
+
 </script>
 
 <div id="help_off">
@@ -34,9 +84,11 @@
     	</script>
    <?php endif ?>
 
-  <div class="solinfo shadow-box-bottom">
+   <div><!-- Upper block -->
+
+  <div class="solinfo">
     
-    <h2><?php __('Session Data'); ?></h2>
+    <h2 class="shadow-box-bottom"><?php __('Session Data'); ?></h2>
      
     <?php if ($pbar) : ?>
 
@@ -48,7 +100,7 @@
     
     <?php endif ?>
 
-    <table>
+    <table class="shadow-box-bottom">
       <tr>
           <th><?php __('Case and Session name'); ?></th>
           <td><?php echo $html->link($sol['Pol']['name'], '/pols/view/' .$sol['Pol']['id']).' -> '.$sol['Sol']['name']; ?></td>
@@ -87,299 +139,340 @@
   
   </div>
 
-  <div id='pcap_upload' class="pcap_input shadow-box-bottom">
+  <div id='pcap_upload' class="pcap_input">
 
     <?php if (!$live) : ?>
 
-      <h2><?php __('Pcap set'); ?></h2>
+      <h2 class="shadow-box-bottom"><?php __('Pcap set'); ?></h2>
+
+      <table class="shadow-box-bottom">
+
+        <tr>
+
+          <td>
       
-      <?php if ($last_sol == 1): ?>
+          <?php if ($last_sol == 1): ?>
 
-        <?php if (!$register): ?>
-          <h4><?php echo $html->link(__('SFTP uploading', true), 'sftp://'.env('HOST').'/opt/xplico/pol_'.$sol['Pol']['id'].'/sol_'.$sol['Sol']['id'].'/new/'); ?> <?php __('big pcap files'); ?>.</h4>
-        <?php endif; ?>
+            <?php if (!$register): ?>
+              <h4><?php echo $html->link(__('SFTP uploading', true), 'sftp://'.env('HOST').'/opt/xplico/pol_'.$sol['Pol']['id'].'/sol_'.$sol['Sol']['id'].'/new/'); ?> <?php __('big pcap files'); ?>.</h4>
+            <?php endif; ?>
+          </td>
+        <tr>
+          <td>
 
-        <h4><?php __('Add new pcap file'); ?>.</h4>
+            <h4><?php __('Add new pcap file'); ?>.</h4>
+              <?php
+                echo $form->create(__('Sols', true), array('action' => 'pcap', 'type' => 'file'));
+                echo $form->file('File', array('label' => __('File', true)));
+                echo $form->end(__('Upload', true));
+              ?>
 
-      <?php
-        echo $form->create(__('Sols', true), array('action' => 'pcap', 'type' => 'file'));
-        echo $form->file('File', array('label' => __('File', true)));
-        echo $form->end(__('Upload', true));
-      ?>
+            <?php else: ?>     
+               <span><?php __('Not possible to add new pcap files.'); ?></span>
+            
+          <?php endif; ?>
 
-    <?php else: ?>     
-      <span><?php __('Not possible to add new pcap files.'); ?></span>
-    <?php endif; ?>
+          <?php if ($register): ?>
+                <button id="hon" type="button" style="float: right;"><?php __('Rules'); ?></button>
+          <?php endif; ?>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4><?php echo $html->link(__('List', true), '/inputs/index'); ?> <?php __('of all pcap files'); ?>.</h4>
 
-    <?php if ($register): ?>
-      <button id="hon" type="button" style="float: right;"><?php __('Rules'); ?></button>
-    <?php endif; ?>
-      <h4><?php echo $html->link(__('List', true), '/inputs/index'); ?> <?php __('of all pcap files'); ?>.</h4>
+            <?php else : ?>
+            
+              <h2><?php __('Live'); ?></h2>
+          
+              <div>
+                <?php if ($livestop) : ?>
+          	       <!-- To-do: display, just for info puropouses, the interface name that is currently sniffing.-->
+                  <?php __('Listening at interface'); ?>: <?php echo $interff; ?>
+                  <?php echo $form->create('/sol', array ('action' => 'livestop')); ?>
+                  <?php echo $form->end('Stop'); ?>
+                <?php else : ?>
+                  <?php echo $form->create('sol', array ('action' => 'live'));?>
+                  <?php __('Interface'); ?>:
+                  <?php  echo $form->select('Interface.Type', array($interface,null,null,'Choose adaptor')); ?>
+                <?php echo $form->end(__('Start', true)); ?>
+              </div>
+          
+          <?php endif ?>
+        
+        <?php endif ?>
 
-    <?php else : ?>
-      <h2><?php __('Live'); ?></h2>
-      
-      <?php if ($livestop) : ?>
+        </td>
+      </tr>
 
-        <div>
+    </table>
 
-  	       <!-- To-do: display, just for info puropouses, the interface name that is currently sniffing.-->
-          <?php __('Listening at interface'); ?>: <?php echo $interff; ?>
-          <?php echo $form->create('/sol', array ('action' => 'livestop')); ?>
-          <?php echo $form->end('Stop'); ?>
-
-	      </div>
-
-      <?php else : ?>
-
-        <div>
-          <?php echo $form->create('sol', array ('action' => 'live'));?>
-          <?php __('Interface'); ?>:
-          <?php  echo $form->select('Interface.Type', array($interface,null,null,'Choose adaptor')); ?>
-        <?php echo $form->end(__('Start', true)); ?>
-      </div>
-      
-      <?php endif ?>
-    
-    <?php endif ?>
-     
   </div>
 
-<div>
+  </div><!-- end of upper block -->
 
-<table>
-  <tbody>
-    
-    <tr>
-      <td>
+  <div id="statistic_panel">
 
-        <div class="solbox shadow-box-bottom">
-          <h3><?php __('HTTP'); ?></h3>
-          <dl>
-            <dt><?php __('Post'); ?></dt>
-            <dd><?php echo $web_post; ?></dd>
-            <dt><?php __('Get'); ?></dt>
-            <dd><?php echo $web_get; ?></dd>
-            <dt><?php __('Video'); ?></dt>
-            <dd><?php echo $web_video; ?></dd>
-            <dt><?php __('Images'); ?></dt>
-            <dd><?php echo $web_image; ?></dd>
-          </dl>
-        </div>
+    <table class="shadow-box-bottom">
 
-      </td>
-      <td>
-        <div class="solbox shadow-box-bottom">
-            <h3><?php __('MMS'); ?></h3>
-            <dl>
-              <dt><?php __('Number'); ?></dt>
-              <dd><?php echo $mms_num; ?></dd>
-              <dt><?php __('Contents'); ?></dt>
-              <dd><?php echo $mms_cont; ?></dd>
-              <dt><?php __('Video'); ?></dt>
-              <dd><?php echo $mms_video; ?></dd>
-              <dt><?php __('Images'); ?></dt>
-              <dd><?php echo $mms_image; ?></dd>
-           </dl>
-        </div>
+    <tbody>
+      
+      <tr>
+        <th>Graph</th>
+          
+          <td>
+            <div class="info-block shadow-box-bottom">
+              <h3><?php __('Dns - Arp - Icmpv6'); ?></h3>
+              <table>
+                <tr>
+                  <th><?php __('DNS res'); ?></th>
+                  <td><?php echo $dns_num; ?></td>
+                </tr>
+                <tr>
+                  <th><?php __('ARP/ICMPv6'); ?></th>
+                  <td><?php echo $arp_num.'/'.$icmpv6_num; ?></td>
+                </tr>
+              </table>
+            </div>
 
-      </td>
-      <td>
-        <div class="solbox shadow-box-bottom">    
+        </td>
+      </tr>
+
+      <tr>
+        <th>Web</th>
+
+        <td>
+          <div class="info-block shadow-box-bottom">
+          <h3><?php __('Feed (RSS & Atom)'); ?></h3>
+          <table>
+          <tr>
+            <th><?php __('Number'); ?></th>
+            <td><?php echo $feed_num; ?></td>
+          </tr>
+          </table>
+          </div>
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <th>Mail</th>
+
+        <td>
+          <div class="info-block shadow-box-bottom">
           <h3><?php __('Emails'); ?></h3>
-          <dl>
-            <dt><?php __('Received'); ?></dt>
-            <dd><?php echo $eml_received ?></dd>
-            <dt><?php __('Sent'); ?></dt>
-            <dd><?php echo $eml_sended ?></dd>
-            <dt><?php __('Unreaded'); ?></dt>
-            <dd><?php echo $eml_unread.'/'.$eml_total ?></dd>
-          </dl>
-        </div>
-
-      </td>
-      <td>
-        
-          <div class="solbox shadow-box-bottom">    
-              <h3><?php __('FTP - TFTP - HTTP file'); ?></h3>
-              <dl>
-                <dt><?php __('Connections'); ?></dt>
-                <dd><?php echo $ftp_num." - ".$tftp_num; ?></dd>
-                <dt><?php __('Downloaded'); ?></dt>
-                <dd><?php echo $ftp_down." - ".$tftp_down; ?></dd>
-                <dt><?php __('Uploaded'); ?></dt>
-                <dd><?php echo $ftp_up." - ".$tftp_up; ?></dd>
-                <dt><?php __('HTTP'); ?></dt>
-                <dd><?php echo $httpfile_num; ?></dd>
-              </dl>
+          <table>
+            <tr>
+            <th><?php __('Received'); ?></th>
+            <td><?php echo $eml_received ?></td>
+            </tr>
+              <tr>
+            <th><?php __('Sent'); ?></th>
+            <td><?php echo $eml_sended ?></td>
+            </tr>
+              <tr>
+            <th><?php __('Unreaded'); ?></th>
+            <td><?php echo $eml_unread.'/'.$eml_total ?></td>
+            </tr>
+          </table>
           </div>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        
-          <div class="solbox shadow-box-bottom">
-    
-              <h3><?php __('Web Mail'); ?></h3>
-              <dl>
-                <dt><?php __('Total'); ?></dt>
-                <dd><?php echo $webmail_num; ?></dd>
-                <dt><?php __('Received'); ?></dt>
-                <dd><?php echo $webmail_receiv; ?></dd>
-                <dt><?php __('Sent'); ?></dt>
-                <dd><?php echo $webmail_sent; ?></dd>
-             </dl>
+          <div class="info-block shadow-box-bottom">
+            <h3><?php __('Web Mail'); ?></h3>
+            <table>
+              <tr>
+              <th><?php __('Total'); ?></th>
+              <td><?php echo $webmail_num; ?></td>
+              </tr>
+              <tr>
+              <th><?php __('Received'); ?></th>
+              <td><?php echo $webmail_receiv; ?></td>
+              </tr>
+                <tr>
+              <th><?php __('Sent'); ?></th>
+              <td><?php echo $webmail_sent; ?></td>
+              </tr>
+           </table>
+         </div>
+        </td>
 
+      </tr>
+      <tr>
+
+        <th>VoIP</th>
+
+        <td>      
+          <div class="info-block shadow-box-bottom">  
+          <h3><?php __('SIP'); ?></h3>
+          <table>
+            <tr>
+            <th><?php __('Calls'); ?></th>
+            <td><?php echo $sip_calls ?></td>
+          </tr>
+          </table>
           </div>
+        </td>
 
-      </td>
-      <td>
-        
-        <div class="solbox shadow-box-bottom">
-          
-            <h3><?php __('Facebook Chat / Paltalk'); ?></h3>
-            <dl>
-              <dt><?php __('Users'); ?></dt>
-              <dd><?php echo $fbc_users; ?></dd>
-              <dt><?php __('Chats'); ?></dt>
-              <dd><?php echo $fbc_chats.'/'.$paltalk_num; ?></dd>
-            </dl>
-        </div>
+      </tr>
 
-      </td>
-      <td>
-        
-          <div class="solbox shadow-box-bottom">
-    
-            <h3><?php __('IRC/Paltalk Exp/Msn'); ?></h3>
-            <dl>
-              <dt><?php __('Server'); ?></dt>
-              <dd><?php echo $irc_num; ?></dd>
-              <dt><?php __('Channels'); ?></dt>
-              <dd><?php echo $irc_chnl_num.'/'.$paltalk_exp_num.'/'.$msn_num; ?></dd>
-           </dl>
-            
-        </div>
+      <tr>
 
+        <th>Share</th>
 
-      </td>
-      <td>
-
-        <div class="solbox shadow-box-bottom">
-          
-            <h3><?php __('Dns - Arp - Icmpv6'); ?></h3>
-            <dl>
-              <dt><?php __('DNS res'); ?></dt>
-              <dd><?php echo $dns_num; ?></dd>
-              <dt><?php __('ARP/ICMPv6'); ?></dt>
-              <dd><?php echo $arp_num.'/'.$icmpv6_num; ?></dd>
-            </dl>
-
-        </div>
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        
-        <div class="solbox shadow-box-bottom">
-          
-            <h3><?php __('RTP/VoIP'); ?></h3>
-             <dl>
-              <dt><?php __('Video'); ?></dt>
-              <dd><?php echo $rtp_video ?></dd>
-              <dt><?php __('Audio'); ?></dt>
-              <dd><?php echo $rtp_audio ?></dd>
-             </dl>
-
-        </div>
-
-      </td>
-      <td>
-        
-          <div class="solbox shadow-box-bottom">
-    
-              <h3><?php __('NNTP'); ?></h3>
-              <dl>
-                <dt><?php __('Groups'); ?></dt>
-                <dd><?php echo $nntp_grp; ?></dd>
-                <dt><?php __('Articles'); ?></dt>
-                <dd><?php echo $nntp_artcl; ?></dd>
-             </dl>
-
+        <td>
+          <div class="info-block shadow-box-bottom">
+            <h3><?php __('FTP - TFTP - HTTP file'); ?></h3>
+            <table>
+              <tr>
+              <th><?php __('Connections'); ?></th>
+              <td><?php echo $ftp_num." - ".$tftp_num; ?></td>
+              </tr>
+                <tr>
+              <th><?php __('Downloaded'); ?></th>
+              <td><?php echo $ftp_down." - ".$tftp_down; ?></td>
+              </tr>
+                <tr>
+              <th><?php __('Uploaded'); ?></th>
+              <td><?php echo $ftp_up." - ".$tftp_up; ?></td>
+              </tr>
+                <th><?php __('HTTP'); ?></th>
+              <td><?php echo $httpfile_num; ?></td>
+              </tr>
+            </table>
           </div>
-
-      </td>
-      <td>
-          <div class="solbox shadow-box-bottom">
-    
-              <h3><?php __('Feed (RSS & Atom)'); ?></h3>
-              <dl>
-                <dt><?php __('Number'); ?></dt>
-                <dd><?php echo $feed_num; ?></dd>
-              </dl>
-
-          </div>
-
-      </td>
-      <td>
-        
-        <div class="solbox shadow-box-bottom">
-          
+       
+          <div class="info-block shadow-box-bottom">
             <h3><?php __('Printed files'); ?></h3>
-            <dl>
-              <dt><?php __('Pdf'); ?></dt>
-              <dd><?php echo $pjl_num; ?></dd>
-            </dl>
+            <table>
+              <tr>
+              <th><?php __('Pdf'); ?></th>
+              <td><?php echo $pjl_num; ?></td>
+            </tr>
+            </table>
+          </div>
+  
+          <div class="info-block shadow-box-bottom">
+          <h3><?php __('MMS'); ?></h3>
+          <table>
+            <tr>
+            <th><?php __('Number'); ?></th>
+            <td><?php echo $mms_num; ?></td>
+            </tr>
+              <tr>
+            <th><?php __('Contents'); ?></th>
+            <td><?php echo $mms_cont; ?></td>
+            </tr>
+              <tr>
+            <th><?php __('Video'); ?></th>
+            <td><?php echo $mms_video; ?></td>
+            
+            </tr>
+              <tr>
+                <th><?php __('Images'); ?></th>
+            <td><?php echo $mms_image; ?></td>
+          </tr>
+          </table>
+          </div>
+        </td>
 
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        
-        <div class="solbox shadow-box-bottom">          
+      </tr>
+
+      <tr>
+
+        <th>Chat</th>
+
+        <td>
+          <div class="info-block shadow-box-bottom">
+          <h3><?php __('IRC/Paltalk Exp/Msn'); ?></h3>
+          <table>
+            <tr>
+              <th><?php __('Server'); ?></th>
+              <td><?php echo $irc_num; ?></td>
+            </tr>
+            <tr>
+              <th><?php __('Channels'); ?></th>
+              <td><?php echo $irc_chnl_num.'/'.$paltalk_exp_num.'/'.$msn_num; ?></td>
+            </tr>
+          </table>
+         </div>
+
+          <div class="info-block shadow-box-bottom">
+          <h3><?php __('NNTP'); ?></h3>
+          <table>
+            <tr>
+            <th><?php __('Groups'); ?></th>
+            <td><?php echo $nntp_grp; ?></td>
+            </tr>
+            <tr>
+            <th><?php __('Articles'); ?></th>
+            <td><?php echo $nntp_artcl; ?></td>
+          </tr>
+          </table>
+          </div>
+
+          <div class="info-block shadow-box-bottom">
+            <h3><?php __('Facebook Chat / Paltalk'); ?></h3>
+            <table>
+              <tr>
+              <th><?php __('Users'); ?></th>
+              <td><?php echo $fbc_users; ?></td>
+              </tr>
+              <tr>
+              <th><?php __('Chats'); ?></th>
+              <td><?php echo $fbc_chats.'/'.$paltalk_num; ?></td>
+            </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+
+        <th>Shell</th>
+
+        <td>   
+          <div class="info-block shadow-box-bottom">        
             <h3><?php __('Telnet'); ?></h3>
-            <dl>
-              <dt><?php __('Connections'); ?></dt>
-              <dd><?php echo $telnet_num; ?></dd>
-            </dl>
-        </div>
-
-      </td>
-      <td>
-
-          <div class="solbox shadow-box-bottom">    
-            <h3><?php __('SIP'); ?></h3>
-             <dl>
-              <dt><?php __('Calls'); ?></dt>
-              <dd><?php echo $sip_calls ?></dd>
-             </dl>
+            <table>
+              <tr>
+              <th><?php __('Connections'); ?></th>
+              <td><?php echo $telnet_num; ?></td>
+            </tr>
+            </table>
           </div>
 
-      </td>
-      <td>
-          <div class="solbox shadow-box-bottom">
-    
-              <h3><?php __('Undecoded'); ?></h3>
-              <dl>
-                <dt><?php __('Text flows'); ?></dt>
-                <dd><?php echo $text_num; ?></dd>
-             </dl>
-           
-          </div>
+          <div class="info-block shadow-box-bottom">
+          <h3><?php __('Syslog'); ?></h3>
+          <table>
+            <tr>
+            <th><?php __('Logs'); ?></th>
+            <td><?php echo $syslog_num; ?></td>
+          </tr>
+         </table>
+         </div>
+        </td>
 
-      </td>
-      <td>
-        
+      </tr>
 
-      </td>
-    </tr>
+      <tr>
+         <th>Undecoded</th>
+        <td>   
+          <div class="info-block shadow-box-bottom">
+          <h3><?php __('Undecoded'); ?></h3>
+          <table>
+            <tr>
+            <th><?php __('Text flows'); ?></th>
+            <td><?php echo $text_num; ?></td>
+          </tr>
+         </table>
+      </div>
+        </td>
 
-  </tbody>
-</table>
+      </tr>
+
+    </tbody>
+  </table>
 
 </div>
 
@@ -387,9 +480,9 @@
   <div class="sol">
     <h3><?php __('Rules'); ?></h3>
     <ul>
-      <li><strong><?php __('All data will be deleted at'); ?>: 00:00 GMT</strong></li>
-      <li><?php __('Max pcap file size'); ?>: <strong>5MB</strong>.<?php __(' Larger files will be rejected. There is no limit on how many packets the capture file contains.'); ?></li>
-      <li><strong><?php __('Total pcap size limit'); ?>: 10MB</strong></li>
+      <li><?php __('All data will be deleted at'); ?>: 00:00 GMT</li>
+      <li><?php __('Max pcap file size'); ?>: 5MB.<?php __(' Larger files will be rejected. There is no limit on how many packets the capture file contains.'); ?></li>
+      <li><?php __('Total pcap size limit'); ?>: 10MB</li>
       <li><?php __("While the decoded data are not shared, we make no claims that your data is not viewable by other users. For now, if you want to protect sensitive data in your capture files, don't use the free XplicoDemo service."); ?></li>
       <li><?php __("We recommend using Firefox 3.x, Safari 4.x or greater, or Google Chrome."); ?>
     </ul> 

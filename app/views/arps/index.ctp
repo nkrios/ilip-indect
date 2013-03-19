@@ -1,8 +1,5 @@
-<!--
-Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.org
- Version: MPL 1.1/GPL 2.0/LGPL 2.1
--->
-<script language="JavaScript">
+
+<script language="text/javascript">
     function popupVetrina(whatopen) {
       newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
       return false;
@@ -10,18 +7,18 @@ Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.or
 </script>
 
 <div class="generic">
-<div class="search">
-<center>
+<div class="search shadow-box-bottom">
+
 	<?php echo $form->create('Search', array( 'url' => array('controller' => 'arps', 'action' => 'index')));
 	      echo $form->input('search', array( 'type'=>'text','size' => '30', 'label'=>__('Search:', true), 'default' => $srchd));
-	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-- Choose relevance --',true),'default'=>$relevance));
+	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-- Choose relevance --',true),'default'=>$relevance, 'label'=>__('Relevance:', true)));
 	 echo $form->end(__('Go', true));?>
-</center>
-  <div class="cline"> </div>
+
+
 </div>
-<br>
+
 <!-- to-do : download these data in XLS format (or ODS) -->
-<table id="messagelist" summary="Message list" cellspacing="0" table-layout: auto>
+<table id="messagelist" summary="Message list" cellspacing="0" table-layout="auto" class="shadow-box-bottom">
 <tr>
 	<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 	<th><?php echo $paginator->sort(__('MAC', true), 'mac'); ?></th>
@@ -48,10 +45,10 @@ Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.or
 <?php endforeach; ?>
 </table>
 
-<table id="listpage" summary="Message list" cellspacing="0">
+<table id="listpage" summary="Message list" cellspacing="0" class="shadow-box-bottom">
 <tr>
 	<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-       	<th><?php echo $paginator->numbers(); echo '<br/>'.$paginator->counter(); ?></th>
+       	<th><?php echo $paginator->numbers(); echo $paginator->counter(); ?></th>
 	<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
 </tr>
 </table>

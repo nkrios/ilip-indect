@@ -41,7 +41,7 @@ class SolsController extends AppController {
     var $name = 'Sols';
     var $helpers = array('Html', 'Form', 'Javascript');
     var $components = array('Xplico');
-    var $uses = array('Sol', 'Pol', 'User', 'Source', 'Email', 'Web', 'Ftp', 'Ftp_file', 'Sip', 'Mm', 'Mmscontent', 'Pjl', 'Feed', 'Tftp', 'Tftp_file', 'DnsMessage', 'Nntp_group', 'Nntp_article', 'Fbuchat', 'Fbchat', 'Telnet', 'Webmail', 'Httpfile', 'Unknow', 'Rtp', 'Arp', 'Irc', 'Irc_channel', 'Paltalk_exp', 'Paltalk_room', 'Msn_chat', 'Icmpv6');
+    var $uses = array('Sol', 'Pol', 'User', 'Source', 'Email', 'Web', 'Ftp', 'Ftp_file', 'Sip', 'Mm', 'Mmscontent', 'Pjl', 'Feed', 'Tftp', 'Tftp_file', 'DnsMessage', 'Nntp_group', 'Nntp_article', 'Fbuchat', 'Fbchat', 'Telnet', 'Webmail', 'Httpfile', 'Unknow', 'Rtp', 'Arp', 'Irc', 'Irc_channel', 'Paltalk_exp', 'Paltalk_room', 'Msn_chat', 'Icmpv6','Syslog');
     var $pcap_limit = 10485760;
     
     function beforeFilter() {
@@ -314,6 +314,11 @@ class SolsController extends AppController {
             $this->Icmpv6->recursive = -1;
             $icmpv6_num = $this->Icmpv6->find('count', array('conditions' => ("sol_id = $id")));
             $this->set('icmpv6_num', $icmpv6_num);
+
+            // syslog 
+            $this->Syslog->recursive = -1;
+            $syslog_num = $this->Syslog->find('count', array('conditions' => ("sol_id = $id".$host_srch)));
+            $this->set('syslog_num', $syslog_num);
             
             // estimated time
             $fh = @fopen('/opt/xplico/pol_'.$sol['Sol']['pol_id'].'/tmp/elab_status.log', 'r');

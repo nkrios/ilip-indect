@@ -22,11 +22,11 @@ Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.or
 	<td><?php echo $sol['Sol']['end_time']; ?></td>
 	<td><?php echo $sol['Sol']['status']; ?></td>
 	<td class="actions">
-		<?php
-                    $i++;
-                    if ($i != 1)
-                        echo $html->link(__('Delete', true),'/sols/delete/' . $sol['Sol']['id'], null, 'Are you sure you want to delete \'' . $sol['Sol']['name'] . '\'')
-                ?>
+	<?php
+    	$i++;
+        if ($i != 1)
+        	echo $html->link(__('Delete', true),'/sols/delete/' . $sol['Sol']['id'], null, 'Are you sure you want to delete \'' . $sol['Sol']['name'] . '\'')
+	?>
 	</td>
 </tr>
 <?php endforeach; ?>

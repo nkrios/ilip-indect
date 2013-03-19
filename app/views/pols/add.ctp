@@ -11,8 +11,8 @@
           ),array('separator' => '', 'legend' => false, 'default' => 0 ));
       }
       echo "<br>";
-      echo $form->input('Pol.name',  array('maxlength'=> 50, 'size' => '50', 'label' => __('Case name', true)));
-      echo $form->input('Pol.external_ref',  array('maxlength'=> 50, 'size' => '50', 'label' => __('Category', true)));
+      echo $form->input('Pol.name',  array('maxlength'=> 50, 'size' => '50', 'label' => __('Case name:', true)));
+      echo $form->input('Pol.external_ref',  array('maxlength'=> 50, 'size' => '50', 'label' => __('Category:', true)));
       echo $form->end(__('Create', true)); ?>
   </div>
 </div>

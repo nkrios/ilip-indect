@@ -13,19 +13,17 @@ Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.or
     window.location.href = '<?php echo $dns_gpage_url?>';
   }
 </script>
-<div class="generic">   </div>
+<!-- <div class="generic"></div> -->
 
 <div class="graph">
   <div id="my_chart"></div> 
 </div>
 
 <!--   <div class="graph_select"> -->
-<div class="search" >
-  <center>
+<div class="search" class="shadow-box-bottom">
   <?php echo $form->create('formtime' ,array( 'url' => array('controller' => 'dns_messages', 'action' => 'graph')));
         echo $form->radio('timeinterval', $time_list , array('separator' => ' ', 'legend' => false ));
         echo '<br /><br />';
         echo $form->end(__('Change', true)); ?>
-  </center>
 </div>
 

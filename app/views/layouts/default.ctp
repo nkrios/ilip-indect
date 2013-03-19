@@ -7,7 +7,7 @@
   <meta name='keywords' content='ilip,decoder,internet,ip,traffic,interception,pcap'>
 
   <?php if (isset($refresh_time)):  ?>
-      <meta http-equiv="refresh" content="<?php echo $refresh_time ?>">
+      <!-- <meta http-equiv="refresh" content="<?php echo $refresh_time ?>"> -->
   <?php endif; ?>
   <title>ILIP (Indect Lawful Interception Platform): <?php echo $title_for_layout;?></title>
   <?php 
@@ -18,7 +18,7 @@
     //echo $html->css('themes/ui-darkness/jquery-ui-1.10.0.custom.min.css');
     //echo $html->script('jquery.js');
     echo $html->script('jquery-1.9.1.min.js');
-    //echo $html->script('jquery-ui-custom.min.js');
+    // echo $html->script('jquery-ui-custom.min.js');
     //echo $html->script('jquery-ui-1.10.1.custom.min.js');
     echo $html->script('http_get.js');
     // echo $html->script('jquery.tools-1.2.7.min.js');
@@ -50,32 +50,33 @@
 	   }
     }
   	$(function() {
-  		$("#lang").change(Lang);
-  		$("#accordion").accordion({
-  		    autoHeight: false,
-  		    collapsible: true,
-  		    active: <?php echo $menu_left['active']; ?>,
-  	            icons: {
-      			header: "ui-icon-circle-arrow-e",
-     				headerSelected: "ui-icon-circle-arrow-s"
-  			}
-  		});
+  	 $("#lang").change(Lang);
+    	// 	$("#accordion").accordion({
+    	// 	    autoHeight: false,
+    	// 	    collapsible: true,
+    	// 	    active: <?php echo $menu_left['active']; ?>,
+    	//             icons: {
+     //    			header: "ui-icon-circle-arrow-e",
+     //   				headerSelected: "ui-icon-circle-arrow-s"
+    	// 		}
+    	// 	});
       $("#devel_image").click(function(){$(this).slideUp()});
-  	});
+  	 });
   </script>
 </head>
 
 <body>
 
-  <div id='wrapper'>
-    <!-- #header: holds the logo and top links -->
-    <header id='header'>
+  <div id="wrapper">
+
+    <header id='header'><!-- #header: holds the logo and top links -->
 
       <div id="title">
-
-        <a href='http://www.indect-project.eu'><?php echo $html->image("Indect-logo-bare.jpg", array('alt'=>'INDECT', 'title'=>'INDECT','id'=>'logo_indect')); ?></a>
-        <a href='http://www.uc3m.es'><?php echo $html->image("uc3m_55.png", array('alt'=>'UC3M','title'=>'UC3M','id'=>'logo_uc3m')); ?></a>
-
+        <div>
+          <a href='http://www.indect-project.eu'><?php echo $html->image("Indect-logo-bare.jpg", array('alt'=>'INDECT', 'title'=>'INDECT','id'=>'logo_indect')); ?></a>
+          <a href='http://www.uc3m.es'><?php echo $html->image("uc3m_55.png", array('alt'=>'UC3M','title'=>'UC3M','id'=>'logo_uc3m')); ?></a>
+        </div>
+        
         <h1>ILIP (Indect Lawful Interception Platform)</h1>
 
       </div>
@@ -83,8 +84,9 @@
       <div id="session_info">
 
         <?php if ($session->read('user')): ?>
-          <h2><?php __('User: '); ?><span><?php echo $session->read('username') ?></span><br><span id="changepasswd"><?php echo $html->link(__('Change password', true), '/users/cpassword') ?></span>
-          </h2>
+
+        <h2><?php __('User: '); ?><span><?php echo $html->link( $session->read('username'), '/users/cpassword') ?></span></h2>
+
         <?php endif; ?>
 
         <div id='menu_login'>
@@ -97,7 +99,7 @@
               <?php echo $html->link(__('Logout',true),'/users/logout')?>
             <?php else: ?>
               <?php echo $html->link(__('Login',true),'/users/login')?>
-              
+
           <?php endif; ?>
 
         </div>
@@ -106,44 +108,42 @@
 
     </header><!-- #header end -->
 
-      <div id='adminmenu' >
-        <ul class="menu">
-          <?php foreach ($menu_left['sections'] as $section): ?>
-              
-                <li><a href="#"><?php echo $section['name']; ?></a>
+    <nav id='adminmenu' ><!-- navigation -->
+      <ul class="menu">
+        <?php foreach ($menu_left['sections'] as $section): ?>
+            
+              <li><a href="#"><?php echo $section['name']; ?></a>
 
-                  <ul>
-                    <?php foreach ($section['sub'] as $submenu): ?>
-                      <li><?php echo $html->link($submenu['name'], $submenu['link']) ?></li>
-                    <?php endforeach; ?>
-                  </ul>
+                <ul>
+                  <?php foreach ($section['sub'] as $submenu): ?>
+                    <li><?php echo $html->link($submenu['name'], $submenu['link']) ?></li>
+                  <?php endforeach; ?>
+                </ul>
 
-                </li>
+              </li>
 
-          <?php endforeach; ?>
-          </ul>
-      </div>
+        <?php endforeach; ?>
+      </ul>
+    </nav>
 
-      <div style="clear:both"> </div>
+    
+    <div id="navigation-bar">
+    	<span><?php echo $html->link(__('Session',true),'/sols/view/')?></span>
+    	<span>&rarr;</span>
+    	<span><?php echo $html->link(__('Session',true),'/sols/view/')?></span>
+    </div>
+    
 
-    <!-- #content_wrapper: holds the page content -->
-    <div id='content_wrapper'>
+    <div id='content'>
+      <?php
+        echo $this->Session->flash();
+        echo $content_for_layout;
+      ?>
+    </div>
 
 
+  </div><!-- end Wrapper -->
 
-      <div id='content'>
-        <?php
-           echo $this->Session->flash();
-           echo $content_for_layout;
-        ?>
-      </div>
-    </div> <!-- #content_wrapper end -->
-
-  
-
-</div><!-- #wrapper end -->
-
-<!-- #footer: holds the site footer (logo and links) -->
   <footer id="footer">
 
     <div id="footer_links">
@@ -173,7 +173,7 @@
 
         <?php else: ?>
           <li><?php echo $html->link(__('Licenses', true), '/users/licenses') ?></li>
-          <!-- <li><?php echo $html->link(__('Register', true), '/users/register') ?></li> -->
+          <!-- <li><?php //echo $html->link(__('Register', true), '/users/register') ?></li> -->
         <?php endif; ?>
       </ul>
     </div>
