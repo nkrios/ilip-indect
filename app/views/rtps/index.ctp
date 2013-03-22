@@ -1,43 +1,28 @@
-<!--
-Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.org
- Version: MPL 1.1/GPL 2.0/LGPL 2.1
--->
-<script language="JavaScript">
+
+<script language="text/javascript">
     function popupVetrina(whatopen) {
       newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
       return false;
     }
 </script>
 <div class="generic">
-<div class="search">
+	<div class="search shadow-box-bottom">
+	<?php echo $form->create('Search',array( 'url' => array('controller' => 'rtps', 'action' => 'index')));
+	      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=> __('Search:', true), 'default' => $srchd));
+	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
+	      echo $form->end(__('Go', true));?>
+	</div>
 
-<center>
-<?php echo $form->create('Search',array( 'url' => array('controller' => 'rtps', 'action' => 'index')));
-      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=> __('Search:', true), 'default' => $srchd));
-      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-- Choose relevance --',true),'default'=>$relevance));
-      echo $form->end(__('Go', true));?>
-</center>
-</div>
-<br/>
 
-<!--
-Export to .csv
--->
-<?php
-   echo $form->create('ParserCSV',array( 'url' => array('controller' => 'rtps', 'action' => 'export')));
-   echo $form->end(__('Export to .csv file', true));
-?>
-<br/>
-
-<table id="messagelist" summary="Message list" cellspacing="0">
+<table id="messagelist" class="shadow-box-bottom">
 <tr>
 	<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 	<th class="from"><?php echo $paginator->sort(__('From', true), 'from_addr'); ?></th>
-        <th class="to"><?php echo $paginator->sort(__('To', true), 'to_addr'); ?></th>
+    <th class="to"><?php echo $paginator->sort(__('To', true), 'to_addr'); ?></th>
 	<th class="number"><?php echo $paginator->sort(__('Duration', true), 'duration'); ?></th>
-	<th><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>
-	<th><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
-        <th class="date"><?php __('Info'); ?></th>
+	<th class="relevance"><?php echo $paginator->sort(__('Rel.',true), 'relevance'); ?></th>
+	<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
+    <th class="date"><?php __('Info'); ?></th>
 </tr>
 <?php foreach ($rtps as $rtp): ?>
 <?php
@@ -63,28 +48,32 @@ Export to .csv
   </tr>
 <?php else : ?>
  <tr>
-	<td><b><?php echo $rtp['Rtp']['capture_date']; ?></b></td>
-        <td><b><?php echo $rtp['Rtp']['from_addr']; ?></b></td>
-        <td><b><?php echo $rtp['Rtp']['to_addr']; ?></b></td>
-	<td><b><?php echo $html->link($hms,'/rtps/view/' . $rtp['Rtp']['id']); ?></b></td>
-	<td><b><?php
+	<td><?php echo $rtp['Rtp']['capture_date']; ?></td>
+        <td><?php echo $rtp['Rtp']['from_addr']; ?></td>
+        <td><?php echo $rtp['Rtp']['to_addr']; ?></td>
+	<td><?php echo $html->link($hms,'/rtps/view/' . $rtp['Rtp']['id']); ?></td>
+	<td><?php
 		if($rtp['Rtp']['relevance'] > 0){
 			echo $rtp['Rtp']['relevance'];
 		}
-	 ?></b></td>
-	<td><b><?php echo $rtp['Rtp']['comments']; ?></b></td>
+	 ?></td>
+	<td><?php echo $rtp['Rtp']['comments']; ?></td>
 
-        <td class="pinfo"><b><a href="#" onclick="popupVetrina('/rtps/info/<?php echo $rtp['Rtp']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a></b><div class="ipcap"><b><?php echo $html->link('pcap', 'pcap/' . $rtp['Rtp']['id']); ?></b></div></td>
+        <td class="pinfo"><a href="#" onclick="popupVetrina('/rtps/info/<?php echo $rtp['Rtp']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $rtp['Rtp']['id']); ?></div></td>
   </tr>
 <?php endif ?>
 <?php endforeach; ?>
-</table>
+	<table id="listpage" class="shadow-box-bottom">
+		<tr>
+			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
+		       	<th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
+			<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
+		</tr>
+	</table>
 
-<table id="listpage" summary="Message list" cellspacing="0">
-<tr>
-	<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-       	<th><?php echo $paginator->numbers(); echo '<br/>'.$paginator->counter(); ?></th>
-	<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-</tr>
-</table>
+<!--Export to .csv-->
+<?php
+   echo $form->create('ParserCSV',array( 'url' => array('controller' => 'sips', 'action' => 'export')));
+   echo $form->end(__('Export to .csv file', true));
+?>
 </div>

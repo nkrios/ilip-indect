@@ -6,7 +6,7 @@ Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.or
 <div class="sols">
 <h2 class="shadow-box-bottom"><?php __('List of listening sessions of case: '); ?><span class="red"><?php echo $pol_name; ?></span></h2>
 
-<table cellpadding="0" cellspacing="0" class="shadow-box-bottom">
+<table class="shadow-box-bottom">
 <tr>
 	<th><?php __('Name'); ?></th>
 	<th><?php __('Start Time'); ?></th>
@@ -33,3 +33,5 @@ Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.or
 </table>
 
 </div>
+
+<?php //echo var_dump($this->Session->read('pol')); ?>

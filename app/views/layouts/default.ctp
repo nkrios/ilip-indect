@@ -13,7 +13,6 @@
   <?php 
     echo $html->css('style');
     echo $html->css('mail');
-    echo $html->css('webimages');
     //echo $html->css('themes/ui-darkness/jquery-ui-custom.css');
     //echo $html->css('themes/ui-darkness/jquery-ui-1.10.0.custom.min.css');
     //echo $html->script('jquery.js');
@@ -128,16 +127,17 @@
 
     
     <div id="navigation-bar">
-    	<span><?php echo $html->link(__('Session',true),'/sols/view/')?></span>
-    	<span>&rarr;</span>
-    	<span><?php echo $html->link(__('Session',true),'/sols/view/')?></span>
+    	<span><?php echo $html->link(__('Sessions',true),'/sols/view/'.$this->Session->read('sol'))?></span>
+		<span>&rarr;</span>
+    	<span><?php echo $html->link(__('Session',true),'/sols/view/'.$this->Session->read('pol'))?></span>
     </div>
     
 
     <div id='content'>
       <?php
-        echo $this->Session->flash();
         echo $content_for_layout;
+
+        echo $this->Session->flash();
       ?>
     </div>
 

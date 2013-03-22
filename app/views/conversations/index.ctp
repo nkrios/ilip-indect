@@ -1,21 +1,17 @@
 <script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
 <script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
 <div class="generic">
-<div class="search">
+	<div class="search shadow-box-bottom">
 
-<center>
-<?php echo $form->create('Search',array( 'url' => array('controller' => 'conversations', 'action' => 'index')));
-      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=> __('Search:', true), 'default' => $srchd));
-      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-- Choose relevance --',true),'default'=>$relevance));
-      echo $form->end(__('Go', true));?>
-</center>
-</div>
+	<?php echo $form->create('Search',array( 'url' => array('controller' => 'conversations', 'action' => 'index')));
+	      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=> __('Search:', true), 'default' => $srchd));
+	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
+	      echo $form->end(__('Go', true));?>
 
-<br/>
+	</div>
 
-<table id="messagelist" summary="Message list" cellspacing="0">
+<table id="messagelist" class="shadow-box-bottom">
 	<tr>	
-		<th></th>
 		<th><?php echo $paginator->sort(__('Id', true), 'id'); ?></th>
 		<th><?php echo $paginator->sort(__('Name', true), 'name'); ?></th>
 		<th><?php echo $paginator->sort(__('Transcription Date', true),
@@ -49,20 +45,15 @@
 	<?php endforeach; ?>
 </table>
 
-<table id="listpage" summary="Message list" cellspacing="0">
-<tr>
-	<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-       	<th><?php echo $paginator->numbers(); echo '<br/>'.$paginator->counter(); ?></th>
-	<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-</tr>
-</table>
+	<table id="listpage" class="shadow-box-bottom">
+		<tr>
+			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
+		       	<th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
+			<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
+		</tr>
+	</table>
 </div>
 
-
-<script>
-$(document).ready(function() 
-    { 
-        $("#conversations").tablesorter(); 
-    } 
-);
+<script type="text/javascript">
+$(document).ready(function(){$("#conversations").tablesorter();});
 </script>

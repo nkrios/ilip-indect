@@ -73,6 +73,12 @@ class XplicoComponent extends Object
                                          array('name' => __('Session', true), 'link' => '/sols/view/'.$solid)
                                          )
                                    ),
+                                array('name' => __('Plugin Manager',true), 'sub' => array(
+                                         array('name' => __('Plugins',true), 'link' => '/plugins/index'),
+                                         array('name' => __('Plugin Rules',true), 'link' => '/types_plugins/index'),
+                                         array('name' => __('Cache',true), 'link' => '/cache_contents/index')
+                                         )
+                                  ),
                                array('name' => __('Graphs', true), 'sub' => array(
                                          array('name' => __('Dns', true), 'link' => '/dns_messages/index'),
                                          array('name' => __('Arp', true), 'link' => '/arps/index'),
@@ -121,13 +127,6 @@ class XplicoComponent extends Object
                                    ),
                                array('name' => __('Undecoded', true), 'sub' => array(
                                          array('name' => __('TCP-UDP', true), 'link' => '/unknows/index')
-                                         )
-                                   ),
-
-                             array('name' => __('Plugin Manager',true), 'sub' => array(
-                                         array('name' => __('Plugins',true), 'link' => '/plugins/index'),
-                                         array('name' => __('Plugin Rules',true), 'link' => '/types_plugins/index'),
-                                         array('name' => __('Cache',true), 'link' => '/cache_contents/index')
                                          )
                                    )
                                )

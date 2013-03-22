@@ -17,7 +17,6 @@ th {font-weight: bold; vertical-align: bottom;}
 td {font-weight: normal; vertical-align: top;}
 hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
 input, select {vertical-align: middle;}
-pre {  white-space: pre; /* CSS2 */  white-space: pre-wrap; /* CSS 2.1 */  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */  word-wrap: break-word; /* IE */}
 input[type="radio"] {vertical-align: text-bottom;}
 input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
 .ie6 input {vertical-align: text-bottom;}
@@ -35,12 +34,11 @@ pre, code, kbd, samp {font-family: monospace, sans-serif;}
 button, input, select, textarea {margin: 0;}
 button {width: auto; overflow: visible;}
 .clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }  
-.clearfix:after { clear: both; }  
-.clearfix { zoom: 1; }  
+.clearfix:after { clear: both; } .clearfix { zoom: 1; }  
 
 /*Here, it starts the fun*/
 a:link,a:visited,a:active{color:#DDD;text-decoration: none;}
-a:hover{color: #9c9}
+a:hover{color: #152A65}
 
 body{
   min-height: 100%;
@@ -49,6 +47,7 @@ body{
   text-align: center;
   background-color: #EEE;
   color: #333;
+  overflow-x:hidden; 
 }
 
 /*#content_wrapper{min-height:100%;  }*/
@@ -86,7 +85,7 @@ header #title h1 {
 }
 header #title #logo_indect,header #title #logo_uc3m{
   height: 100%;
-  margin: 0 0.5em;
+  margin: 0;
   display: inline-block;
   vertical-align: middle;
   box-shadow: 0 0 5px #000;
@@ -141,17 +140,17 @@ header #session_info h2 #changepasswd a:hover{color: #454}
 /* Main Content wrapper */
 #content {
   width: 100%;
-  padding: 0.5em;
+  padding: 0.3em;
   margin: 0em auto;
   color: black;
-  width: 86%;
+  width: 96%;
   min-height: 100%;
   display: inline-block;
   vertical-align: top;
   margin-bottom: 2.5em;
 }
 #content a{color:#506CA1;}
-#content a:hover{color: #95E11D}
+#content a:hover{color: #152A65}
 
 /*Footer*/
 footer {
@@ -288,16 +287,29 @@ footer #language_box{
 #adminmenu .menu ul li:last-child a { border: none; }
 
 #navigation-bar{
+	height: auto;
 	width: 100%;
-	height: 2em;
-	padding: 0;
+	padding: 0.5em 0.3em;
 	text-align: left;
-
+	color: #ddd;
 }
 #navigation-bar span{
+  margin: 0.1em;
 	display: inline-block;
 	vertical-align: middle;
-	height: 100%;
+	/*height: 100%;*/
+
+}
+
+#navigation-bar span a{
+    background-color: rgba(200,200,200,0.5);
+      padding: 0.2em 0.3em;
+      border-radius: 0.8em;
+      color:#333;
+      font-weight: bold;
+}
+#navigation-bar span a:hover{
+  color:#1716A1;
 }
 
 
@@ -307,9 +319,9 @@ footer #language_box{
 
 /*Forms Generic style*/
 /*form{background-color: #f9f9f9}*/
-form div {margin: 0.5em auto;}
+form div {margin:0.5em;display: inline-block;}
 form h2{margin: 1em auto;  text-shadow: 0 0 2px #aaa;}
-form label{padding: 0 1em;font-weight: bold;vertical-align: middle;}
+form label{padding: 0 1em 0 0.3em;font-weight: bold;vertical-align: middle;color: #211795}
 
 form input[type=submit] {
   display: inline-block;
@@ -325,7 +337,7 @@ form input[type=submit] {
   color:#7d67b8;
   font-family:arial;
   font-weight:bold;
-  padding:6px 24px;
+  padding:5px 20px;
   text-decoration:none;
   text-shadow:1px 1px 0px #ffffff;
 }form input[type=submit]:hover {
@@ -391,16 +403,20 @@ table {
   color:#555;
   background-color: #f9f9f9;
   text-align: center;
+  font-size: 0.8em;
+  display: table;
+  margin: 0.5em auto;
 }
-
 table tr th,table tr td{
   padding: 0.4em;
-  border: 1px solid #A28DBC;
+  border: 1px solid #826DBC;
   vertical-align: middle;
+  font-weight: bold;
 }
 table tr th {
-  background: #D9E2E1;
+  background-color: #B2B5B9;
   color: #616B76;
+  font-size: 1em;
 }
 table tr td:focus,table tr td:hover{
   color: #000;
@@ -411,227 +427,80 @@ table tr:focus,table tr:hover{
   background: #A2ADC0;
 }
 
-
 /** message list styles */
 
-/*body.messagelist{
-  margin: 0px;
-  background-color: #F9F9F9;
-}*/
-table#messagelist{
-  display: table;
-  table-layout: fixed; /* this  prevents you from having long tables due to long URLs. */
-}
+table#messagelist{}
+/*Table headers*/
+table#messagelist tr th.date{width: 10%;}
+table#messagelist tr th.info{width: 5%;}
+table#messagelist tr th.ip{width: 15%;}
+table#messagelist tr th.comments{width: 15%;}
+table#messagelist tr th.url{width: 30%;}
+table#messagelist tr th.actions{width: 10%;}
+table#messagelist tr th.type{  width: 15%;}
+table#messagelist tr th.plfl{  width: 10%;}
+table#messagelist tr th.relevance{  width: 5%;}
+table#messagelist tr th.size{  width: 5%;}
+table#messagelist tr th.from,table#messagelist tr th.to{width: 15%;}
+table#messagelist tr th.number{  width: 5%;}
 
-#messagelist thead tr td
-{
-  height: 20px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 2px;
-  padding-right: 4px;
-  vertical-align: middle;
-  border-bottom: 1px solid #999999;
-  color: #333333;
-  background-color: #EBEBEB;
+/*Table contents*/
+table#messagelist tr td{
+  text-overflow: ellipsis;
+}
+table#messagelist tr td.url{
+  text-align: left; 
+  white-space:nowrap; 
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+table#messagelist tr td.webimgs { 
+  vertical-align: bottom;
+  text-align: center;
+  width: 25%;
   font-size: 11px;
-  font-weight: bold;
+  color: #008000;
+}
+img.webimgs {
+  border: 1px solid black;
 }
 
 
-#messagelist thead tr td a,
-#messagelist thead tr td a:hover
-{
-}
-
-#messagelist tbody tr td
-{
-  height: 16px;
-  padding: 2px;
-  padding-right: 4px;
-  font-size: 11px;
-  overflow: hidden;
-/*  white-space: nowrap;*/
-  border-bottom: 1px solid #EBEBEB;
-  /*cursor: pointer;*/
-}
-
-#messagelist tbody tr td b
-{
-}
-
-#messagelist col
-{
+/* +++++++++++++++++  */
+table#messagelist col{
   display: table-column;
   text-align: left;
-  vertical-align: middle;
 }
-
-#messagelist tr th.comments
-{
-  /*width: 300px;*/
-  vertical-align: middle;
-}
-
-#messagelist tr th.date
-{
-  width: 135px;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-#messagelist tr th.from,
-#messagelist tr th.to
-{
-  width: 180px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.email
-{
+#messagelist tr th.email{
   width: 250px;
-  vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis
 }
-#messagelist tr th.actions
-{
-  width: 60px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.type
-{
-  width: 150px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.room
-{
-  width: 250px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.info
-{
-  width: 50px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.ip
-{
-  width: 105px;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-#messagelist tr th.method
-{
-  width: 55px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.number
-{
-  width: 70px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.plfl
-{
-  width: 20px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.relevance
-{
-  width: 80px;
-  vertical-align: middle;
-}
-
-#messagelist tr th.size
-{
-  width: 65px;
-  overflow: hidden;
-  vertical-align: middle;
-}
-#messagelist tr th.url
-{
-  width: 250px;
-  vertical-align: middle;
-}
-#messagelist tr th.username
-{
-  width: 70px;
-  vertical-align: middle;
-}
-
-#messagelist tr td.date
-{
-  width: 118px;
-  vertical-align: middle;
-}
-
-#messagelist tr td.url
-{
-  text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#messagelist tr.message
-{
-  background-color: #FFFFFF;
-}
-
-/*
-#messagelist tr.odd
-{
-  background-color: #F9F9F9;
-}
-*/
-
-#messagelist tr.unread
-{
+/*#messagelist tr th.room{width: 250px;}
+#messagelist tr th.method{ width: 55px;}
+#messagelist tr th.username{  width: 70px;}
+#messagelist tr.message{  background-color: #FFFFFF;}
+#messagelist tr.unread{
   font-weight: bold;
   background-color: #FFFFFF;
 }
-
-#messagelist tr.selected td
-{
+#messagelist tr.selected td{
   font-weight: bold;
   color: #FFFFFF;
   background-color: #CC3333;
 }
-
-#messagelist tr.unfocused td
-{
+#messagelist tr.unfocused td{
   font-weight: bold;
   color: #FFFFFF;
   background-color: #929292;
 }
-
-#messagelist tr.selected td a.rcmContactAddress
-{
+#messagelist tr.selected td a.rcmContactAddress,#messagelist tr.unfocused td a.rcmContactAddress{
   color: #FFFFFF;
 }
 
-#messagelist tr.unfocused td a.rcmContactAddress
-{
-  color: #FFFFFF;
-}
-
-#messagelist tr.deleted td a.rcmContactAddress
-{
+#messagelist tr.deleted td a.rcmContactAddress,#messagelist tr.deleted td,#messagelist tr.deleted td a{
   color: #CCCCCC;
-}
-
-#messagelist tr.deleted td,
-#messagelist tr.deleted td a
-{
-  color: #CCCCCC;
-}
-
+}*/
 
 /*Paginator*/
 table#listpage th {
@@ -642,18 +511,11 @@ table#listpage th {
 table#listpage tr th.next {
   vertical-align: middle;
   width: 10%;
+  cursor: pointer;
 }
 table#listpage tr th.next:hover{
 	background: #A9C2A1;
 }
-
-
-
-
-
-
-
-
 
 
 /* notices and errors */
@@ -667,7 +529,7 @@ table#listpage tr th.next:hover{
   font-weight: bold;
   box-shadow: 0 2px 5px #999;
   text-shadow: 0 0 1px #AAA;
-  width: 35em;
+  width: 70%;
 }
 .error em {
   font-size: 18px;
@@ -688,7 +550,7 @@ table#listpage tr th.next:hover{
 
 
 /* page of cases list and sessions*/
-.generic,.sols,.pols { padding: 1em;}
+.generic,.sols,.pols { padding: 0.5em;}
 
 .pols > h2,.sols > h2, .solinfo h2,.pcap_input h2{
   border-radius: 10px;
@@ -716,25 +578,21 @@ table#listpage tr th.next:hover{
   border: 2px solid #D1D9C4;
   background-color: white;
   color: #900;
-  margin: 0.5em auto;padding: 1em auto;
+  margin: 0.5em auto;padding: 0.5em;
   font-weight: bold;
 
 }
-form#formtimeGraphForm{
-	padding: 1em;
-}
+.search form{display: inline-block;vertical-align: middle}
+form#formtimeGraphForm{	padding: 1em;}
 
-.src_first {
-  float: right;
+.search .src_first{
   color: #21059B;
-  width: 40%;
-}
-.src_first a img{
-	/*height: 100%;*/
-	width: 40%;
-}
+  vertical-align: middle;
+  display: inline-block;
+  width: 10%;
+}.search .src_first a img{	width: 40%;}
 
-.red{color:darkred;}
+/*.red{color:darkred;}*/
 
 .solinfo,.pcap_input{
   display: inline-block;vertical-align: top;
@@ -748,11 +606,14 @@ form#formtimeGraphForm{
 /*.pcap_input div{padding: 1em}*/
 .pcap_input div h4{text-align: left;}
 
-#statistic_panel table tr td{
-  vertical-align: top;
-  text-align: left;
+#statistic_panel > div{
+  display: inline-block;
+  text-align: center;
+  background-color: rgba(200,200,200,0.5);
+  padding:0.5em;
+  margin:5px;
 }
-#statistic_panel table tr td:hover{background-color: transparent;}
+#statistic_panel > div h3{text-align: left;font-size: 0.8em}
 
 .info-block{
   display: inline-block; 
@@ -760,7 +621,7 @@ form#formtimeGraphForm{
   /*border:1px solid #444;*/
 }
 .info-block h3{
-  font-size: 0.8em;
+  font-size: 0.6em;
   color: #000;
   border: 1px solid #225227;
   background-color: #73a2f0;

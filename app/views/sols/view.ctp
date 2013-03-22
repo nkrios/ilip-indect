@@ -51,8 +51,7 @@
 		// $('.info-block h3').mouseout(HideContent($('.info-block h3').nextAll("table")[0]));
 	});
 
-
-  	$(function() {
+  $(function() {
     	//$("#hoff").button();
   		//$("#hon").button();
 		if (<?php echo $help; ?>) $("#help_off").hide();
@@ -62,7 +61,7 @@
 			$("#help_off").toggle(1000);
 			$("#help_on").toggle(500);
 		});
-  	});
+  });
 
 </script>
 
@@ -213,55 +212,40 @@
 
   <div id="statistic_panel">
 
-    <table class="shadow-box-bottom">
+  	<div>
+  		<h3>Graph</h3>
+        <div class="info-block shadow-box-bottom">
+          <h3><?php echo $html->link(__('Dns - Arp - Icmpv6', true), '/dns_messages/index'); ?></h3>
+          <table>
+            <tr>
+              <th><?php __('DNS res'); ?></th>
+              <td><?php echo $dns_num; ?></td>
+            </tr>
+            <tr>
+              <th><?php __('ARP/ICMPv6'); ?></th>
+              <td><?php echo $arp_num.'/'.$icmpv6_num; ?></td>
+            </tr>
+          </table>
+        </div>
+  	</div>
 
-    <tbody>
-      
-      <tr>
-        <th>Graph</th>
-          
-          <td>
-            <div class="info-block shadow-box-bottom">
-              <h3><?php __('Dns - Arp - Icmpv6'); ?></h3>
-              <table>
-                <tr>
-                  <th><?php __('DNS res'); ?></th>
-                  <td><?php echo $dns_num; ?></td>
-                </tr>
-                <tr>
-                  <th><?php __('ARP/ICMPv6'); ?></th>
-                  <td><?php echo $arp_num.'/'.$icmpv6_num; ?></td>
-                </tr>
-              </table>
-            </div>
-
-        </td>
-      </tr>
-
-      <tr>
-        <th>Web</th>
-
-        <td>
-          <div class="info-block shadow-box-bottom">
-          <h3><?php __('Feed (RSS & Atom)'); ?></h3>
+	<div>
+		<h3>Web</h3>
+        <div class="info-block shadow-box-bottom">
+          <h3><?php echo $html->link(__('Feed (RSS & Atom)',true),'/feeds/index'); ?></h3>
           <table>
           <tr>
             <th><?php __('Number'); ?></th>
             <td><?php echo $feed_num; ?></td>
           </tr>
           </table>
-          </div>
-        </td>
+        </div>
+  	</div>
 
-      </tr>
-
-      <tr>
-
-        <th>Mail</th>
-
-        <td>
-          <div class="info-block shadow-box-bottom">
-          <h3><?php __('Emails'); ?></h3>
+	<div>
+  		<h3>Mail</h3>
+        <div class="info-block shadow-box-bottom">
+          <h3><?php echo $html->link(__('Emails',true),'/emails/index'); ?></h3>
           <table>
             <tr>
             <th><?php __('Received'); ?></th>
@@ -276,10 +260,10 @@
             <td><?php echo $eml_unread.'/'.$eml_total ?></td>
             </tr>
           </table>
-          </div>
+        </div>
 
-          <div class="info-block shadow-box-bottom">
-            <h3><?php __('Web Mail'); ?></h3>
+        <div class="info-block shadow-box-bottom">
+            <h3><?php echo $html->link(__('Web Mail',true),'/webmails/index'); ?></h3>
             <table>
               <tr>
               <th><?php __('Total'); ?></th>
@@ -293,36 +277,41 @@
               <th><?php __('Sent'); ?></th>
               <td><?php echo $webmail_sent; ?></td>
               </tr>
-           </table>
-         </div>
-        </td>
+           	</table>
+        </div>
+  	</div>
 
-      </tr>
-      <tr>
-
-        <th>VoIP</th>
-
-        <td>      
-          <div class="info-block shadow-box-bottom">  
-          <h3><?php __('SIP'); ?></h3>
+	<div>
+		<h3>VoIP</h3>
+        <div class="info-block shadow-box-bottom">  
+          <h3><?php echo $html->link(__('SIP',true),'/sips/index'); ?></h3>
           <table>
             <tr>
             <th><?php __('Calls'); ?></th>
             <td><?php echo $sip_calls ?></td>
           </tr>
           </table>
-          </div>
-        </td>
+        </div>
+        <div class="info-block shadow-box-bottom"> 
+            <h3><?php echo $html->link(__('RTP/VoIP',true),'/rtps/index'); ?></h3>
+            <table>
+            	<tr>
+              		<th><?php __('Video'); ?></th>
+              		<td><?php echo $rtp_video ?></td>
+              	</tr>
+              	<tr>
+              		<th><?php __('Audio'); ?></th>
+              		<td><?php echo $rtp_audio ?></td>
+          		</tr>
+            </table>
 
-      </tr>
+        </div>
+  	</div>
 
-      <tr>
-
-        <th>Share</th>
-
-        <td>
+  	<div>
+		<h3>Share</h3>
           <div class="info-block shadow-box-bottom">
-            <h3><?php __('FTP - TFTP - HTTP file'); ?></h3>
+            <h3><?php echo $html->link(__('FTP - TFTP - HTTP file',true),'/httpfiles/index'); ?></h3>
             <table>
               <tr>
               <th><?php __('Connections'); ?></th>
@@ -343,7 +332,7 @@
           </div>
        
           <div class="info-block shadow-box-bottom">
-            <h3><?php __('Printed files'); ?></h3>
+            <h3><?php echo $html->link(__('Printed files',true),'/pjls/index'); ?></h3>
             <table>
               <tr>
               <th><?php __('Pdf'); ?></th>
@@ -353,7 +342,7 @@
           </div>
   
           <div class="info-block shadow-box-bottom">
-          <h3><?php __('MMS'); ?></h3>
+          <h3><?php echo $html->link(__('MMS',true),'/mmsindex'); ?></h3>
           <table>
             <tr>
             <th><?php __('Number'); ?></th>
@@ -374,15 +363,10 @@
           </tr>
           </table>
           </div>
-        </td>
+  	</div>
 
-      </tr>
-
-      <tr>
-
-        <th>Chat</th>
-
-        <td>
+	<div>
+		<h3>Chat</h3>
           <div class="info-block shadow-box-bottom">
           <h3><?php __('IRC/Paltalk Exp/Msn'); ?></h3>
           <table>
@@ -424,17 +408,13 @@
             </tr>
             </table>
           </div>
-        </td>
-      </tr>
+  	</div>
 
-      <tr>
-
-        <th>Shell</th>
-
-        <td>   
-          <div class="info-block shadow-box-bottom">        
-            <h3><?php __('Telnet'); ?></h3>
-            <table>
+  	<div>
+		  <h3>Shell</h3>
+      <div class="info-block shadow-box-bottom">        
+        <h3><?php __('Telnet'); ?></h3>
+          <table>
               <tr>
               <th><?php __('Connections'); ?></th>
               <td><?php echo $telnet_num; ?></td>
@@ -451,13 +431,10 @@
           </tr>
          </table>
          </div>
-        </td>
+  	</div>
 
-      </tr>
-
-      <tr>
-         <th>Undecoded</th>
-        <td>   
+  	<div>
+		<h3>Undecoded</h3>
           <div class="info-block shadow-box-bottom">
           <h3><?php __('Undecoded'); ?></h3>
           <table>
@@ -467,12 +444,7 @@
           </tr>
          </table>
       </div>
-        </td>
-
-      </tr>
-
-    </tbody>
-  </table>
+  	</div>
 
 </div>
 

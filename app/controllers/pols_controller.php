@@ -74,25 +74,36 @@ class PolsController extends AppController {
         $this->set('pols', $this->Pol->find('all', array('conditions' => $filtr, 'order' => 'Pol.id DESC')));
         if ($this->Session->check('admin')) {
             $this->set('menu_left', 
-                       array('active' => '0', 'sections' => array(
-                                 array('name' => __('Case', true), 'sub' => array(
+                      array('active' => '0', 'sections' => array(
+                          array('name' => __('Case', true), 'sub' => array(
                                            array('name' => __('Cases', true), 'link' => '/pols')
                                            )
-                                     )
-                                 )
+                                ),
+                           array('name' => __('Plugin Manager',true), 'sub' => array(
+                                array('name' => __('Plugins',true), 'link' => '/plugins/index'),
+                                array('name' => __('Plugin Rules',true), 'link' => '/types_plugins/index'),
+                                array('name' => __('Cache',true), 'link' => '/cache_contents/index'))
+                                )
+
                            )
+                      )
                 );
         }
         else {
             $this->set('menu_left', 
-                   array('active' => '0', 'sections' => array(
+                array('active' => '0', 'sections' => array(
                              array('name' => __('Case', true), 'sub' => array(
                                        array('name' => __('Cases', true), 'link' => '/pols'),
                                        array('name' => __('New Case', true), 'link' => '/pols/add')
                                        )
-                                 )
-                             )
+                                 ),
+                            array('name' => __('Plugin Manager',true), 'sub' => array(
+                                array('name' => __('Plugins',true), 'link' => '/plugins/index'),
+                                array('name' => __('Plugin Rules',true), 'link' => '/types_plugins/index'),
+                                array('name' => __('Cache',true), 'link' => '/cache_contents/index'))
+                                )
                        )
+                   )
             );
         }
     }
