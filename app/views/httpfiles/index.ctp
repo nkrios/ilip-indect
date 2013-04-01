@@ -30,7 +30,11 @@
  <?php if ($httpfile['Httpfile']['first_visualization_user_id']) : ?>
   	<tr>
 		<td><?php echo $httpfile['Httpfile']['capture_date']; ?></td>
-		<td><?php echo $html->link($httpfile['Httpfile']['file_name'],'/httpfiles/file/' . substr($httpfile['Httpfile']['id'],0,50)); ?></td>
+		<td>
+			<?php echo $html->link( substr($httpfile['Httpfile']['file_name'],0,50),
+									'/httpfiles/file/'.$httpfile['Httpfile']['id'] ) 
+			?>
+		</td>
 		<td><?php echo $httpfile['Httpfile']['file_size']; ?></td>
 	    <td><?php echo $httpfile['Httpfile']['file_stat']; ?></td>
 		<td>
@@ -39,30 +43,37 @@
 			echo $form->select('relevance', $relevanceoptions, $httpfile['Httpfile']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true)));
 		?>
 		</td>
-		<td><?php echo $form->hidden('id', array('value' => $httpfile['Httpfile']['id']));echo $form->input ('comments', array ('default' => $httpfile['Httpfile']['comments'],'label' => false, 'size' => '90%'));
-			?></td>
+		<td><?php 
+			echo $form->hidden('id', array('value' => $httpfile['Httpfile']['id']));
+			echo $form->input ('comments', array ('default' => $httpfile['Httpfile']['comments'],'label' => false,'size' =>"35"));
+			?>
+			<?php echo $form->end(__('Save', true)); ?>
+		</td>
 	    <td class="pinfo"><a href="#" onclick="popupVetrina('/httpfiles/info/<?php echo $httpfile['Httpfile']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $httpfile['Httpfile']['id']); ?></div></td>
 	</tr>
-	<tr>
-		<td><?php echo $form->end(__('Save', true)); ?></td>
-  	</tr>
  <?php else : ?>
   	<tr>
 		<td><?php echo $httpfile['Httpfile']['capture_date']; ?></td>
-		<td><?php echo $html->link($httpfile['Httpfile']['file_name'],'/httpfiles/file/' . substr($httpfile['Httpfile']['id'],0,50)); ?></td>
+		<td><?php 
+				echo $html->link(substr($httpfile['Httpfile']['file_name'],0,50),
+										'/httpfiles/file/' . $httpfile['Httpfile']['id']) 
+				?>
+		</td>
 		<td><?php echo $httpfile['Httpfile']['file_size']; ?></td>
 	    <td><?php echo $httpfile['Httpfile']['file_stat']; ?></td>
-		<td><?php echo $form->create('Edit',array( 'url' => '/httpfiles/index'));
+		<td><?php 
+			echo $form->create('Edit',array( 'url' => '/httpfiles/index'));
+			echo $form->select('relevance', $relevanceoptions, $httpfile['Httpfile']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true)));
 		?>
-		<?php echo $form->select('relevance', $relevanceoptions, $httpfile['Httpfile']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true))); ?>
 		</td>
-		<td><?php echo $form->hidden('id', array('value' => $httpfile['Httpfile']['id']));echo $form->input ('comments', array ('default' => $httpfile['Httpfile']['comments'],'label' => false, 'size' => '90%'));
-			?></td>
+		<td><?php 
+			echo $form->hidden('id', array('value' => $httpfile['Httpfile']['id']));
+			echo $form->input ('comments', array ('default' => $httpfile['Httpfile']['comments'],'label' => false,'size' =>"35"));
+			?>
+			<?php echo $form->end(__('Save', true)); ?>
+		</td>
 	    <td class="pinfo" ><a href="#" onclick="popupVetrina('/httpfiles/info/<?php echo $httpfile['Httpfile']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $httpfile['Httpfile']['id']); ?></div></td>
 	</tr>
-	<tr>
-		<td><?php echo $form->end(__('Save', true)); ?></td>
-  	</tr>
  <?php endif ?>
 <?php endforeach; ?>
 </table>

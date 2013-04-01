@@ -342,7 +342,7 @@
           </div>
   
           <div class="info-block shadow-box-bottom">
-          <h3><?php echo $html->link(__('MMS',true),'/mmsindex'); ?></h3>
+          <h3><?php echo $html->link(__('MMS',true),'/mms/index'); ?></h3>
           <table>
             <tr>
             <th><?php __('Number'); ?></th>
@@ -368,7 +368,7 @@
 	<div>
 		<h3>Chat</h3>
           <div class="info-block shadow-box-bottom">
-          <h3><?php __('IRC/Paltalk Exp/Msn'); ?></h3>
+          <h3><?php echo $html->link(__('IRC/Paltalk Exp/Msn'),'/ircs/index'); ?></h3>
           <table>
             <tr>
               <th><?php __('Server'); ?></th>

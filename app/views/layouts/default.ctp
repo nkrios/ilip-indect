@@ -13,6 +13,7 @@
   <?php 
     echo $html->css('style');
     echo $html->css('mail');
+    echo $html->css('mailview');
     //echo $html->css('themes/ui-darkness/jquery-ui-custom.css');
     //echo $html->css('themes/ui-darkness/jquery-ui-1.10.0.custom.min.css');
     //echo $html->script('jquery.js');
@@ -125,14 +126,29 @@
       </ul>
     </nav>
 
-    
     <div id="navigation-bar">
-    	<span><?php echo $html->link(__('Sessions',true),'/sols/view/'.$this->Session->read('sol'))?></span>
-		<span>&rarr;</span>
-    	<span><?php echo $html->link(__('Session',true),'/sols/view/'.$this->Session->read('pol'))?></span>
+    	
+        <?php 
+        if($this->Session->check("pol")){
+
+            echo '<span>'.$html->link(__('Sessions',true),'/sols/index').'</span>';
+
+            if($this->Session->check("sol")){
+              echo '<span>&rarr;</span>';
+              echo '<span>'.$html->link(__('Session',true),'/sols/view/'.$this->Session->read('pol')).'</span>';
+
+                if($this->params['controller'] != 'sols'){
+                  echo '<span>&rarr;</span>';
+                  echo '<span>'.$html->link($this->params['controller'],
+                        '/'.$this->params['controller'].'/'.$this->params['action']).'</span>';
+
+                }
+            }
+
+        }else{}?>
+  	
     </div>
     
-
     <div id='content'>
       <?php
         echo $content_for_layout;
@@ -140,6 +156,15 @@
         echo $this->Session->flash();
       ?>
     </div>
+
+<!-- Log Session -->
+    <?php 
+    // print_r($this->Session->read());
+    //     echo 'POL session: '. $this->Session->check("pol");
+    //     echo '<br><br>';
+    //     print_r($this->params);
+    ?>
+  
 
 
   </div><!-- end Wrapper -->
