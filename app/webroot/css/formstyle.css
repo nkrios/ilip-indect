@@ -1,0 +1,78 @@
+/*Forms Generic style*/
+/*form{background-color: #f9f9f9}*/
+form div {margin:0.5em;display: inline-block; width: 80%}
+form h2{margin: 1em auto;  text-shadow: 0 0 2px #aaa;}
+form label{font-weight: bold;vertical-align: middle;color: #211795}
+
+form .radio{text-align: left}
+form .title{font-weight: bold;margin: 0.2em auto}
+
+form input[type=submit],.button {
+  cursor: pointer;
+  background-color:#e6e1e6;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e6e1e6), color-stop(1, #b3a1a1) );
+  background:-moz-linear-gradient( center top, #e6e1e6 5%, #b3a1a1 100% );
+  background:linear-gradient( center top, #e6e1e6 5%, #b3a1a1 100% );
+  border-radius:6px;
+  border:1px solid #a69ea6;
+  display:inline-block;
+  color:#7d67b8;
+  font-weight:bold;
+  padding:0.4em 1em;
+  margin:0 0.2em;
+  text-decoration:none;
+  text-shadow:1px 1px 2px #ccc;
+}form input[type=submit]:hover,.button:hover {
+  background-color:#b3a1a1;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b3a1a1), color-stop(1, #e6e1e6) );
+  background:-moz-linear-gradient( center top, #b3a1a1 5%, #e6e1e6 100% );
+  background:linear-gradient( center top, #b3a1a1 5%, #e6e1e6 100% );
+  color:#333;
+}form input[type=submit]:active,.button:active {
+  position:relative;
+  top:1px;
+}
+
+form input[type=checkbox],form input[type=radio],form select{
+  margin: 0;  vertical-align: middle;
+}
+
+form input[type=text],form input[type="password"], form textarea {
+  color: #090909;
+  background: #EEE;
+  border: 1px solid #CCC;
+  margin:0.2em;
+  box-shadow: 0 1px 2px #111;
+  display: inline-block;
+  width: 100%;
+}
+form textarea[readonly]{
+  width: 90%;
+  height: auto;
+}
+
+form input[type="text"]:focus,form input[type="password"]:focus,form textarea:focus{
+  background-color: #ECCFD2;
+}
+
+form input[type="password"]:hover,form input[type=text]:hover,form textarea:hover {
+  color: #000;
+  background: #B0C2E4;
+  border: 1px solid #888;
+}
+
+form#formtimeGraphForm{ padding: 1em;}
+
+div.generic_form{ width: 40%; margin: 0 auto;}
+div.generic_form p{text-align: justify;}
+div.generic_form p span{font-weight: bold;}
+div.generic_form > h1{font-size: 1.5em;margin-bottom: 1em}
+div.generic_form label{
+  font-weight: bold;
+  text-align: left;
+  display: inline-block;
+  font-size: 1em;
+  margin: 0 0.5em;
+  /*padding-top: 0.5em;*/
+}

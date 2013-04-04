@@ -1,5 +1,5 @@
 
-<script type='text/javascript'>
+<script>
 
 	var cX = 0; var cY = 0; var rX = 0; var rY = 0;
 	function UpdateCursorPosition(e){ cX = e.pageX; cY = e.pageY;}
@@ -65,11 +65,11 @@
 
 </script>
 
-<div id="help_off">
-
-  <?php echo $this->Session->flash(); ?>
+<div id="help_off" class="boxstyle_white">
 
   <?php 
+    echo $this->Session->flash();
+
   	//we don't want it to show because after adding the plugin manager the values are wrong. Show the content size left, instead
   	$pbar = false;
   ?>
@@ -147,11 +147,8 @@
       <table class="shadow-box-bottom">
 
         <tr>
-
-          <td>
-      
+          <td>      
           <?php if ($last_sol == 1): ?>
-
             <?php if (!$register): ?>
               <h4><?php echo $html->link(__('SFTP uploading', true), 'sftp://'.env('HOST').'/opt/xplico/pol_'.$sol['Pol']['id'].'/sol_'.$sol['Sol']['id'].'/new/'); ?> <?php __('big pcap files'); ?>.</h4>
             <?php endif; ?>
@@ -212,11 +209,16 @@
 
   <div id="statistic_panel">
 
-  	<div>
+  	<div class="shadow-box-bottom">
   		<h3>Graph</h3>
-        <div class="info-block shadow-box-bottom">
-          <h3><?php echo $html->link(__('Dns - Arp - Icmpv6', true), '/dns_messages/index'); ?></h3>
+        <div class="info-block">
+          
           <table>
+            <tr>
+              <th colspan="2" class="title">
+                <?php echo $html->link(__('Dns - Arp - Icmpv6', true), '/dns_messages/index'); ?>
+              </th>
+            </tr>
             <tr>
               <th><?php __('DNS res'); ?></th>
               <td><?php echo $dns_num; ?></td>
@@ -229,11 +231,15 @@
         </div>
   	</div>
 
-	<div>
+	<div class="shadow-box-bottom">
 		<h3>Web</h3>
-        <div class="info-block shadow-box-bottom">
-          <h3><?php echo $html->link(__('Feed (RSS & Atom)',true),'/feeds/index'); ?></h3>
+        <div class="info-block">
           <table>
+            <tr>
+              <th colspan="2" class="title">
+               <?php echo $html->link(__('Feed (RSS & Atom)',true),'/feeds/index'); ?>
+              </th>
+            </tr>
           <tr>
             <th><?php __('Number'); ?></th>
             <td><?php echo $feed_num; ?></td>
@@ -242,11 +248,15 @@
         </div>
   	</div>
 
-	<div>
+	<div class="shadow-box-bottom">
   		<h3>Mail</h3>
-        <div class="info-block shadow-box-bottom">
-          <h3><?php echo $html->link(__('Emails',true),'/emails/index'); ?></h3>
+        <div class="info-block ">
           <table>
+            <tr>
+              <th colspan="2" class="title">
+               <?php echo $html->link(__('Emails',true),'/emails/index'); ?>
+              </th>
+            </tr>
             <tr>
             <th><?php __('Received'); ?></th>
             <td><?php echo $eml_received ?></td>
@@ -262,9 +272,13 @@
           </table>
         </div>
 
-        <div class="info-block shadow-box-bottom">
-            <h3><?php echo $html->link(__('Web Mail',true),'/webmails/index'); ?></h3>
+        <div class="info-block ">
             <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('Web Mail',true),'/webmails/index'); ?>
+                </th>
+              </tr>
               <tr>
               <th><?php __('Total'); ?></th>
               <td><?php echo $webmail_num; ?></td>
@@ -281,38 +295,51 @@
         </div>
   	</div>
 
-	<div>
+	<div class="shadow-box-bottom">
 		<h3>VoIP</h3>
-        <div class="info-block shadow-box-bottom">  
-          <h3><?php echo $html->link(__('SIP',true),'/sips/index'); ?></h3>
+        <div class="info-block ">  
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('SIP',true),'/sips/index'); ?>
+                </th>
+              </tr>
             <tr>
             <th><?php __('Calls'); ?></th>
             <td><?php echo $sip_calls ?></td>
           </tr>
           </table>
         </div>
-        <div class="info-block shadow-box-bottom"> 
-            <h3><?php echo $html->link(__('RTP/VoIP',true),'/rtps/index'); ?></h3>
-            <table>
+        <div class="info-block "> 
+          <table>
+            <tr>
+              <th colspan="2" class="title">
+               <?php echo $html->link(__('RTP/VoIP',true),'/rtps/index'); ?>
+              </th>
+            </tr>
+          	<tr>
+            		<th><?php __('Video'); ?></th>
+            		<td><?php echo $rtp_video ?></td>
+            	</tr>
             	<tr>
-              		<th><?php __('Video'); ?></th>
-              		<td><?php echo $rtp_video ?></td>
-              	</tr>
-              	<tr>
-              		<th><?php __('Audio'); ?></th>
-              		<td><?php echo $rtp_audio ?></td>
-          		</tr>
-            </table>
-
+            		<th><?php __('Audio'); ?></th>
+            		<td><?php echo $rtp_audio ?></td>
+        		</tr>
+          </table>
         </div>
   	</div>
 
-  	<div>
+  	<div class="shadow-box-bottom">
 		<h3>Share</h3>
-          <div class="info-block shadow-box-bottom">
-            <h3><?php echo $html->link(__('FTP - TFTP - HTTP file',true),'/httpfiles/index'); ?></h3>
+          <div class="info-block ">
+
             <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('FTP - TFTP - HTTP file',true),'/httpfiles/index'); ?>
+                </th>
+              </tr>
+              <tr>
               <tr>
               <th><?php __('Connections'); ?></th>
               <td><?php echo $ftp_num." - ".$tftp_num; ?></td>
@@ -331,9 +358,14 @@
             </table>
           </div>
        
-          <div class="info-block shadow-box-bottom">
-            <h3><?php echo $html->link(__('Printed files',true),'/pjls/index'); ?></h3>
+          <div class="info-block ">
+
             <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('Printed files',true),'/pjls/index'); ?>
+                </th>
+              </tr>
               <tr>
               <th><?php __('Pdf'); ?></th>
               <td><?php echo $pjl_num; ?></td>
@@ -341,9 +373,14 @@
             </table>
           </div>
   
-          <div class="info-block shadow-box-bottom">
-          <h3><?php echo $html->link(__('MMS',true),'/mms/index'); ?></h3>
+          <div class="info-block ">
+
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('MMS',true),'/mms/index'); ?>
+                </th>
+              </tr>
             <tr>
             <th><?php __('Number'); ?></th>
             <td><?php echo $mms_num; ?></td>
@@ -365,11 +402,17 @@
           </div>
   	</div>
 
-	<div>
+	<div class="shadow-box-bottom">
 		<h3>Chat</h3>
-          <div class="info-block shadow-box-bottom">
-          <h3><?php echo $html->link(__('IRC/Paltalk Exp/Msn'),'/ircs/index'); ?></h3>
+          <div class="info-block ">
+
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('IRC/Paltalk Exp/Msn',true),'/ircs/index'); ?>
+                </th>
+              </tr>
+            <tr>
             <tr>
               <th><?php __('Server'); ?></th>
               <td><?php echo $irc_num; ?></td>
@@ -381,9 +424,14 @@
           </table>
          </div>
 
-          <div class="info-block shadow-box-bottom">
-          <h3><?php __('NNTP'); ?></h3>
+          <div class="info-block ">
+
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('NNTP',true),'/nntp_groups/index'); ?>
+                </th>
+              </tr>
             <tr>
             <th><?php __('Groups'); ?></th>
             <td><?php echo $nntp_grp; ?></td>
@@ -395,9 +443,14 @@
           </table>
           </div>
 
-          <div class="info-block shadow-box-bottom">
-            <h3><?php __('Facebook Chat / Paltalk'); ?></h3>
+          <div class="info-block ">
+
             <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('Facebook Chat / Paltalk',true),'/fbuchats/index'); ?>
+                </th>
+              </tr>
               <tr>
               <th><?php __('Users'); ?></th>
               <td><?php echo $fbc_users; ?></td>
@@ -410,11 +463,16 @@
           </div>
   	</div>
 
-  	<div>
+  	<div class="shadow-box-bottom">
 		  <h3>Shell</h3>
-      <div class="info-block shadow-box-bottom">        
-        <h3><?php __('Telnet'); ?></h3>
+      <div class="info-block ">        
+
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('Telnet',true),'/telnets/index'); ?>
+                </th>
+              </tr>
               <tr>
               <th><?php __('Connections'); ?></th>
               <td><?php echo $telnet_num; ?></td>
@@ -422,9 +480,14 @@
             </table>
           </div>
 
-          <div class="info-block shadow-box-bottom">
-          <h3><?php __('Syslog'); ?></h3>
+          <div class="info-block ">
+
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('Syslog',true),'/syslogs/index'); ?>
+                </th>
+              </tr>
             <tr>
             <th><?php __('Logs'); ?></th>
             <td><?php echo $syslog_num; ?></td>
@@ -433,11 +496,16 @@
          </div>
   	</div>
 
-  	<div>
+  	<div class="shadow-box-bottom">
 		<h3>Undecoded</h3>
-          <div class="info-block shadow-box-bottom">
-          <h3><?php __('Undecoded'); ?></h3>
+          <div class="info-block ">
+
           <table>
+              <tr>
+                <th colspan="2" class="title">
+                 <?php echo $html->link(__('Undecoded',true),'/unknows/index'); ?>
+                </th>
+              </tr>
             <tr>
             <th><?php __('Text flows'); ?></th>
             <td><?php echo $text_num; ?></td>

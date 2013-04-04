@@ -6,24 +6,26 @@
     }
 </script>
 
-<div class="generic">
-	<div class="search shadow-box-bottom">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('DNS'); ?></h2>
 
-	<?php echo $form->create('Search', array( 'url' => array('controller' => 'dns_messages', 'action' => 'index')));
-	      echo $form->input('search', array( 'type'=>'text','size' => '30', 'label'=>__('Search:', true), 'default' => $srchd));
-	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
-	 echo $form->end(__('Go', true));?>
-
-	  	<div class="src_first">
-		    <a href="/dns_messages/graph">   
-		       <img alt="DNS Statistics" title="<?php __('DNS Statistics'); ?>" src="/img/statistics.png" />
-		    </a>
-	  	</div>
-
+	<div class="search shadow-box-bottom divamiddle">
+		<?php echo $form->create('Search', array( 'url' => array('controller' => 'dns_messages', 'action' => 'index')));
+		      echo $form->input('search', array( 'type'=>'text','size' => '30', 'label'=>__('Search:', true), 'default' => $srchd));
+		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance,'label'=>__('Relevance: ', true)));
+		 echo $form->end(__('Go', true));?>
 	</div>
 
+	<!-- DNS Statistics link -->
+	<div class="src_first divamiddle shadow-box-bottom">
+		<h3><?php __('DNS Statistics'); ?></h3>
+	    <a href="/dns_messages/graph">   
+	       <img alt="DNS Statistics" title="<?php __('DNS Statistics'); ?>" src="/img/statistics.png" />
+	    </a>
+  	</div>
+
 	<!-- to-do : download these data in XLS format (or ODS) -->
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 		<tr>
 			<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 			<th><?php echo $paginator->sort(__('Host', true), 'hostname'); ?></th>

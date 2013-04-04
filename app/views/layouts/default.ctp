@@ -12,11 +12,12 @@
   <title>ILIP (Indect Lawful Interception Platform): <?php echo $title_for_layout;?></title>
   <?php 
     echo $html->css('style');
+    echo $html->css('menu');
     echo $html->css('mail');
     echo $html->css('mailview');
-    //echo $html->css('themes/ui-darkness/jquery-ui-custom.css');
+    echo $html->css('tablestyles');
+    echo $html->css('formstyle');
     //echo $html->css('themes/ui-darkness/jquery-ui-1.10.0.custom.min.css');
-    //echo $html->script('jquery.js');
     echo $html->script('jquery-1.9.1.min.js');
     // echo $html->script('jquery-ui-custom.min.js');
     //echo $html->script('jquery-ui-1.10.1.custom.min.js');
@@ -65,31 +66,31 @@
   </script>
 </head>
 
-<body>
+<body >
 
-  <div id="wrapper">
+  <header id='header' class="centered">
 
-    <header id='header'><!-- #header: holds the logo and top links -->
-
-      <div id="title">
-        <div>
-          <a href='http://www.indect-project.eu'><?php echo $html->image("Indect-logo-bare.jpg", array('alt'=>'INDECT', 'title'=>'INDECT','id'=>'logo_indect')); ?></a>
-          <a href='http://www.uc3m.es'><?php echo $html->image("uc3m_55.png", array('alt'=>'UC3M','title'=>'UC3M','id'=>'logo_uc3m')); ?></a>
-        </div>
-        
-        <h1>ILIP (Indect Lawful Interception Platform)</h1>
-
+      <div id="logos" class="divamiddle">
+          <a href='http://www.indect-project.eu'><?php echo $html->image("Indect-logo-bare.jpg", array('alt'=>'INDECT', 'title'=>'INDECT','id'=>'logo_indect','class'=>'divamiddle')); ?></a>
+          <a href='http://www.uc3m.es'><?php echo $html->image("uc3m_55.png", array('alt'=>'UC3M','title'=>'UC3M','id'=>'logo_uc3m','class'=>'divamiddle')); ?></a>
       </div>
 
-      <div id="session_info">
+      <h1 id="title" class="divamiddle">ILIP (Indect Lawful Interception Platform)</h1>
+
+      <div id="session_info" class="divamiddle">
 
         <?php if ($session->read('user')): ?>
 
-        <h2><?php __('User: '); ?><span><?php echo $html->link( $session->read('username'), '/users/cpassword') ?></span></h2>
+        <h2 class="divamiddle">
+          <!-- <?php __('User: '); ?> -->
+          <span class='divamiddle' style="background-color:rgba(200,200,200,0.3);padding:3px 6px;border-radius:10px;">
+            <img src="/img/user2.png" alt="User" class="divamiddle"><?php echo $html->link( $session->read('username'), '/users/cpassword') ?>
+          </span>
+        </h2>
 
         <?php endif; ?>
 
-        <div id='menu_login'>
+        <div id='menu_login' class='divamiddle'>
             
           <?php if ($session->read('user')): ?>
 
@@ -106,9 +107,11 @@
 
       </div>
 
-    </header><!-- #header end -->
+    </header>
 
-    <nav id='adminmenu' ><!-- navigation -->
+  <div id="wrapper" class="centered">
+
+    <nav id='adminmenu' class="centered">
       <ul class="menu">
         <?php foreach ($menu_left['sections'] as $section): ?>
             
@@ -127,32 +130,23 @@
     </nav>
 
     <div id="navigation-bar">
-    	
-        <?php 
-        if($this->Session->check("pol")){
-
+      <?php if($this->Session->check("pol")){
             echo '<span>'.$html->link(__('Sessions',true),'/sols/index').'</span>';
-
             if($this->Session->check("sol")){
               echo '<span>&rarr;</span>';
               echo '<span>'.$html->link(__('Session',true),'/sols/view/'.$this->Session->read('pol')).'</span>';
-
                 if($this->params['controller'] != 'sols'){
                   echo '<span>&rarr;</span>';
                   echo '<span>'.$html->link($this->params['controller'],
-                        '/'.$this->params['controller'].'/'.$this->params['action']).'</span>';
-
+                        '/'.$this->params['controller'].'/'.'index').'</span>';
                 }
-            }
-
-        }else{}?>
-  	
+              }
+          }else{}?>
     </div>
     
-    <div id='content'>
+    <div id='content' class="centered">
       <?php
         echo $content_for_layout;
-
         echo $this->Session->flash();
       ?>
     </div>
@@ -165,11 +159,9 @@
     //     print_r($this->params);
     ?>
   
-
-
   </div><!-- end Wrapper -->
 
-  <footer id="footer">
+  <footer id="footer" class="centered">
 
     <div id="footer_links">
       

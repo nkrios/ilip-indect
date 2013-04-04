@@ -1,0 +1,148 @@
+
+/* tables styles*/
+
+table {
+  width: 100%;
+  color:#555;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.8em;
+  display: inline-table;
+  margin: 0.5em auto;
+}
+table tr th,table tr td{
+  padding: 0.4em;
+  border: 1px solid #826DBC;
+  vertical-align: middle;
+}
+table tr th img,table tr td img{max-width: 20%;}
+table tr th {
+  background-color: #B2B5B9;
+  color: #616B76;
+  font-size: 1em;
+}
+/*table tr th:first-child{  border-top-left-radius: 5px;}
+table tr th:last-child{  border-top-right-radius: 5px;}
+table tr td:first-child{  border-bottom-left-radius: 5px;}
+table tr td:last-child{  border-bottom-right-radius: 5px;}*/
+table tr td:focus,table tr td:hover{
+  color: #000;
+  background: #8C8EDD;
+}
+table tr:focus,table tr:hover{
+  color: #333;
+  background: #A2ADC0;
+}
+
+/** message list styles */
+
+table#messagelist{}
+/*Table headers*/
+table#messagelist tr th.date{width: 10%;}
+table#messagelist tr th.info{width: 5%;}
+table#messagelist tr th.ip{width: 10%;}
+table#messagelist tr th.comments{width: 25%;}
+table#messagelist tr th.url{width: 30%;}
+table#messagelist tr th.actions{width: 10%;}
+table#messagelist tr th.type{  width: 15%;}
+table#messagelist tr th.plfl{  width: 10%;}
+table#messagelist tr th.relevance{  width: 5%;}
+table#messagelist tr th.size{  width: 5%;}
+table#messagelist tr th.from,table#messagelist tr th.to{width: 15%;}
+table#messagelist tr th.number{  width: 5%;}
+table#messagelist tr th.username{  width: 15%;}
+
+/*Table contents*/
+table#messagelist tr td{
+  text-overflow: ellipsis;
+}
+table#messagelist tr td.url{
+  text-align: left; 
+  white-space:nowrap; 
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+table#messagelist tr td.webimgs { 
+  vertical-align: bottom;
+  text-align: center;
+  width: 25%;
+  font-size: 11px;
+  color: #008000;
+}
+img.webimgs {
+  border: 1px solid black;
+}
+
+
+/* +++++++++++++++++  */
+table#messagelist col{
+  display: table-column;
+  text-align: left;
+}
+#messagelist tr th.email{
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+/*#messagelist tr th.room{width: 250px;}
+#messagelist tr th.method{ width: 55px;}
+#messagelist tr th.username{  width: 70px;}
+#messagelist tr.message{  background-color: #FFFFFF;}
+#messagelist tr.unread{
+  font-weight: bold;
+  background-color: #FFFFFF;
+}
+#messagelist tr.selected td,#messagelist tr.unfocused td{
+  font-weight: bold;
+  color: #FFFFFF;
+}
+#messagelist tr.selected td{background-color: #CC3333;}
+#messagelist tr.unfocused td{background-color: #929292;}
+#messagelist tr.selected td a.rcmContactAddress,#messagelist tr.unfocused td a.rcmContactAddress{
+  color: #FFFFFF;
+}
+#messagelist tr.deleted td a.rcmContactAddress,#messagelist tr.deleted td,#messagelist tr.deleted td a{
+  color: #CCCCCC;
+}*/
+
+
+#pluginsInfo{
+  text-align: right;
+}
+
+
+
+table.headers-table{
+  background-color: #D8DDE1;
+  table-layout: auto;
+  display: inline-block;
+  width: auto;
+  vertical-align: middle
+}
+
+table.headers-table th.header-title{
+  color: #666;
+  white-space: nowrap;
+}
+
+table.headers-table tr td.subject,
+table.headers-table tr td.date{width: 90%;}
+
+
+
+
+/*Paginator*/
+table#listpage th {
+  background: #A9A2A1;
+  color: black;
+  padding: 0.5em;
+}
+table#listpage tr th.next {
+  vertical-align: middle;
+  width: 10%;
+  cursor: pointer;
+}
+table#listpage tr th.next:hover{
+	background: #A9C2A1;
+}
