@@ -1,4 +1,4 @@
-<!-- Jesús Vallinot Sánchez-->
+
 <div class="generic">
 
 <?php 
@@ -31,7 +31,7 @@ La tabla streams (archivos de audio y texto) tiene 7 campos:
 -->
 
 <!--tabla que contendra el audio, nombre y alias de la conversacion-->
-<br/>
+
 <table>
 	<tr>
 		<th width="33%"><?php echo __('Audio',true); ?></th>

@@ -1,9 +1,10 @@
 
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('Webmails'); ?></h2>
 	<div class="search shadow-box-bottom">
-		<?php echo $form->create('Search', array( 'url' => array('controller' => 'webmails', 'action' => 'index')));
-		      echo $form->input('search',  array( 'type'=>'text','size' => '40', __('Search', true), 'default' => $srchd));
-		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
+		<?php echo $form->create('Search',array('url'=>array('controller'=>'webmails','action'=>'index')));
+		      echo $form->input('search',array('type'=>'text','label'=>__('Search: ', true),'default' => $srchd));
+		      echo $form->input('relevance',array('options'=>$relevanceoptions,'all','empty'=>__('-',true),'default'=>$relevance));
 		echo $form->end(__('Go', true));
 		?>
 	</div>

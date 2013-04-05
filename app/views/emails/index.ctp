@@ -1,5 +1,7 @@
 
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('Emails'); ?></h2>
+
 	<div class="search shadow-box-bottom">
 
 		<?php echo $form->create('Search', array( 'url' => array('controller' => 'emails', 'action' => 'index')));
@@ -10,7 +12,7 @@
 	</div>
 
 
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 		<tr>
 			<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 			<th class="subject"><?php echo $paginator->sort(__('Subject', true), 'subject'); ?></th>

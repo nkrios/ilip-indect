@@ -8,16 +8,15 @@
   }
 </script>
 
-<!-- <div class="generic"></div> -->
-
-<div class="graph">
+<div class="graph generic boxstyle_white">
+  <h2 class="shadow-box-bottom"><?php __('DNS Statistics'); ?></h2>
+  
   <div id="my_chart"></div> 
-</div>
 
-<!--   <div class="graph_select"> -->
-<div class="search" class="shadow-box-bottom">
-  <?php echo $form->create('formtime' ,array( 'url' => array('controller' => 'dns_messages','action' => 'graph')));
-        echo $form->radio('timeinterval', $time_list , array('separator' => ' ','legend' => false ));
-        echo $form->end(__('Change', true)); ?>
-</div>
+  <div class="search shadow-box-bottom">
+    <?php echo $form->create('formtime' ,array( 'url' => array('controller' => 'dns_messages','action' => 'graph')));
+          echo $form->radio('timeinterval', $time_list , array('separator' => '','legend' => false ));
+          echo $form->end(__('Change', true)); ?>
+  </div>
 
+</div>

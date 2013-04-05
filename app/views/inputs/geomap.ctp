@@ -6,10 +6,10 @@
     }
 </script>
 
-<div class="sols">
+<div class="generic boxstyle_white">
 	<h2><?php __('Geographical and temporal representation'); ?></h2>
+	
 	<table>
-
 		<tr>
 			<th><?php __('Pcap file'); ?></th>
 			<th><?php __('GeoMap file'); ?></th>

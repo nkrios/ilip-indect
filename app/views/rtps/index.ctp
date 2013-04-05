@@ -5,16 +5,18 @@
       return false;
     }
 </script>
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('RTP'); ?></h2>
+
 	<div class="search shadow-box-bottom">
 	<?php echo $form->create('Search',array( 'url' => array('controller' => 'rtps', 'action' => 'index')));
-	      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=> __('Search:', true), 'default' => $srchd));
+	      echo $form->input('search', array('type'=>'text', 'label'=> __('Search: ', true), 'default' => $srchd));
 	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 	      echo $form->end(__('Go', true));?>
 	</div>
 
 
-<table id="messagelist" class="shadow-box-bottom">
+<table class="shadow-box-bottom">
 <tr>
 	<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 	<th class="from"><?php echo $paginator->sort(__('From', true), 'from_addr'); ?></th>
@@ -63,6 +65,8 @@
   </tr>
 <?php endif ?>
 <?php endforeach; ?>
+</table>
+
 	<table id="listpage" class="shadow-box-bottom">
 		<tr>
 			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>

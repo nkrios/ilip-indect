@@ -2,7 +2,7 @@
 /*RESET CSS*/
 html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}
 header, footer, aside, nav, article, section, figure, hgroup { display: block; }  
-body,html{width: 100%;height: 100%;}
+body,html{min-width: 100%;min-height: 100%;}
 img,object,embed {max-width: 100%;}
 ul {list-style: none;}
 blockquote, q {quotes: none;}
@@ -29,8 +29,9 @@ sub {bottom: -0.25em;}
 pre, code, kbd, samp {font-family: monospace, sans-serif;}
 .clickable, input[type=button], input[type=submit], button {cursor: pointer;}
 button, input, select, textarea {margin: 0;}
-button {width: auto; overflow: visible;}
+button {width: auto;}
 html{  min-width: 1200px;}
+
 /*Here, it starts the fun*/
 /*Common styles*/
 .centered{margin:0 auto;}
@@ -55,6 +56,8 @@ body{
   margin: 0 auto;
   background-color: #333;
   color: #333;
+  /*overflow:hidden;*/
+  height:100%;
 }
 div#wrapper{
   background-color: #EEE;
@@ -138,17 +141,12 @@ header #session_info h2 #changepasswd a:hover{color: #454}
   margin: 0 auto;
   color: #333;
   width: 96%;
-  /*min-height: 100%;*/
+  min-height: 100%;
+  overflow-y: auto;
 }
 #content a{color:#506CA1;}
 #content a:hover{color: #152A65}
-/*#content h2{
-  font-size: 1.1em;
-  font-weight: bold;
-  margin: 0.2em;
-  padding: 0.2em 1em;
-  display:inline-block;
-}*/
+
 
 /*Footer*/
 footer {
@@ -212,7 +210,8 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 }
 .tip { color: #656565;  background-color: #ddd;}
 
-/* Specific elements styles*/
+
+/* Specific wrapper elements styles*/
 
 .generic_form h2,.generic h2,.pols > h2,.sols > h2, .solinfo h2,.pcap_input h2{
   border-radius: 5px;
@@ -224,20 +223,20 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   box-shadow: 0 1px 1px #333;
 }
 
-.sols form{
-  border:1px solid #aaa;
-  text-align: center;
-}
-
 /* Data acquisition / search */
+.search,.src_first{border: 1px solid #ccc}
 .search {
   margin: 0.5em auto;
   width: 50%;
   color: #900;
 }
-.src_first{
-  width: 40%;
-}.src_first img{width: 20%;}
+.search form{padding: 0.5em}
+.search div{width:auto;}
+.search input[type="text"]{width: auto}
+.search input[type="radio"]{margin: 0 0.1em 0 0.5em;}
+.search input[type="radio"] + label{margin:0 0.8em 0 0.1em;}
+.src_first{  width: 40%;}
+.src_first img{width: 20%;}
 .src_first img:hover{opacity: .8}
 .src_first h3{  margin: 0.6em;}
 
@@ -254,7 +253,6 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 .pcap_input div h4{text-align: left;}
 
 
-
 #statistic_panel > div{
   display: inline-block;
   text-align: center;
@@ -262,7 +260,6 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   padding:0.5em;
   margin:5px;
 }
-
 #statistic_panel div.info-block{
   display: inline-block;
   vertical-align: middle;
@@ -275,17 +272,13 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 #statistic_panel div.info-block table tr th{
   font-weight: bold;font-size: 0.9em;
 }
-
 #statistic_panel div.info-block table tr th.title{
   font-size: 1.1em;
   color: #000;
   background-color: #73a2f0;
   padding: 0.5em;
 }
-
 #statistic_panel div.info-block table tr th.title:hover{cursor: pointer;}
-
-
 
 
 /* selezione del grafico */
@@ -306,10 +299,6 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   padding: 2px 10px;
 }
 
-.src_second {
-  float: left;
-}
-
 .conf > h3 {
   margin-top: 0px;
   margin-bottom: 3px;
@@ -321,35 +310,14 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   border: 1px solid #425227;
   background-color: #A39240;
 }
-
 .sol > h4 { 
   margin: 0px;
   margin-top: 3px;
 }
-
 .confbox {
   width: 25%;
 }
 
-/*.sol .ui-progressbar {
-    height: 6px;
-    margin-top: 3px;
-    width: 60%;
-}
-.sol .ui-progressbar-value {
-    background-image: url(themes/ui-darkness/images/pbar-ani.gif);
-}*/
-
-/*.sol > h2 {
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-radius: 10px;
-  margin: 0.5em auto;
-  font-family: verdana, arial, sans-serif;
-  color: #000;
-  border: 1px solid #000;
-  background-color: #A39240;
-}*/
 #progressbar{float: left;}
 #progressbar_et {float: left;}
 .conf {  height: 280px;}

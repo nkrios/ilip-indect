@@ -10,7 +10,9 @@
     }
 </script>
 
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('ICMPv6'); ?></h2>
+
 	<div class="search shadow-box-bottom">		
 		<?php echo $form->create('Search', array( 'url' => array('controller' => 'icmpv6s', 'action' => 'index')));
 		      echo $form->input( 'search', array( 'type'=>'text','size' => '30', 'label'=> __('Search:', true), 'default' => $srchd));      
@@ -19,7 +21,7 @@
 	</div>
 
 <!-- to-do : download these data in XLS format (or ODS) -->
-<table id="messagelist" class="shadow-box-bottom">
+<table class="shadow-box-bottom">
 <tr>
 	<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 	<th><?php echo $paginator->sort(__('MAC', true), 'mac'); ?></th>

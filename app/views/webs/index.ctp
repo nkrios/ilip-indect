@@ -24,13 +24,15 @@
 	});	
 </script>
 
-<div class="generic">
-	<div class="search shadow-box-bottom">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('SITES'); ?></h2>
+	
+	<div class="search shadow-box-bottom" style="width:60%">
 
 	<!-- CODE FOR SELECTING WEB TYPE CONTENTS-->
 
-	<?php echo $form->create('Search', array('url' => array('controller' => 'webs', 'action' => 'index')));
-	      echo '<label>'.__('Web URLs:', true).'</label>';
+	<?php echo $form->create('Search',array('url'=>array('controller'=>'webs','action'=>'index')));
+	      echo '<h3>'.__('Web URLs:', true).'</h3>';
 	      echo $form->radio('type', array(
 	      	__('Html', true),
 	      	__('Image', true), 
@@ -39,8 +41,9 @@
 	      	__('Audio', true), 
 	      	__('JSON', true), 
 	      	__('All', true)) ,
-	      	array('separator' => ' ',  'legend' => false, 'default' => $checked )
+	      	array('separator'=> ' ','legend'=>false,'default'=>$checked)
 	      );
+	      echo '<br>';
 	      echo $form->input('search', array('type'=>'text','size' => '40', 'label' => __('Search:', true), 'default' => $srchd));
 	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 	      //echo $form->input('size', array('type'=>'hidden','size' => '10', 'label'=>'Minimum size to show', 'default' => $size));
@@ -48,7 +51,7 @@
 
 	</div>
 
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 		<thead>
 			<tr>
 				<!--<th class="id"><?php //echo $paginator->sort('Id', 'id'); ?></th>-->
@@ -59,7 +62,7 @@
 				<th class="size"><?php echo $paginator->sort(__('Size', true), 'rs_bd_size'); ?></th>
 				<th class="method"><?php echo $paginator->sort(__('Method', true), 'method'); ?></th>
 				<th class="relevance"><?php echo $paginator->sort(__('Rel.',true), 'relevance'); ?></th>
-				<th><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
+				<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
 				<th class="actions"><?php __('Actions');?></th>
 				<th class="info"><?php __('Info'); ?></th>
 			</tr>

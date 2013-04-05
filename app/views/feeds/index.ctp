@@ -5,16 +5,17 @@
       return false;
     }
 </script>
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('FEEDS'); ?></h2>
 	<div class="search shadow-box-bottom">
 		<?php echo $form->create('Search',array( 'url' => array('controller' => 'feeds', 'action' => 'index')));
-		      echo $form->input('search', array('type'=>'text','size' => '40','maxlength'=>'40', 'label'=> __('Search:', true), 'default' => $srchd));
+		      echo $form->input('search', array('type'=>'text','maxlength'=>'40', 'label'=> __('Search:', true), 'default' => $srchd));
 		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 		      echo $form->end(__('Go', true));?>
 
 	</div>
 
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 	<tr>
 		<th><?php echo $paginator->sort(__('Title', true), 'name'); ?></th>
 		<th class='url'><?php echo $paginator->sort(__('Site', true), 'site'); ?></th>

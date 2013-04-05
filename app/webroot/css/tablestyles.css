@@ -121,11 +121,6 @@ table.headers-table{
   vertical-align: middle
 }
 
-table.headers-table th.header-title{
-  color: #666;
-  white-space: nowrap;
-}
-
 table.headers-table tr td.subject,
 table.headers-table tr td.date{width: 90%;}
 

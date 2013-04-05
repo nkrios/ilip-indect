@@ -37,6 +37,7 @@ form input[type=submit],.button {
 form input[type=checkbox],form input[type=radio],form select{
   margin: 0;  vertical-align: middle;
 }
+form div.select label{margin: 0.2em 0.3em 0.2em 0.5em}
 
 form input[type=text],form input[type="password"], form textarea {
   color: #090909;
@@ -61,8 +62,6 @@ form input[type="password"]:hover,form input[type=text]:hover,form textarea:hove
   background: #B0C2E4;
   border: 1px solid #888;
 }
-
-form#formtimeGraphForm{ padding: 1em;}
 
 div.generic_form{ width: 40%; margin: 0 auto;}
 div.generic_form p{text-align: justify;}
