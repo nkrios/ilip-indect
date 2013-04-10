@@ -1,8 +1,4 @@
-<!--
-Copyright: Gianluca Costa & Andrea de Franceschi 2007-2010, http://www.xplico.org
- Version: MPL 1.1/GPL 2.0/LGPL 2.1
--->
-<div class="pol">
+<div class="generic">
 <h2><?php __('View Case'); ?></h2>
 
 <dl>

@@ -10,6 +10,7 @@ table {
   font-size: 0.8em;
   display: inline-table;
   margin: 0.5em auto;
+  
 }
 table tr th,table tr td{
   padding: 0.4em;
@@ -35,97 +36,94 @@ table tr:focus,table tr:hover{
   background: #A2ADC0;
 }
 
-/** message list styles */
-
-table#messagelist{}
 /*Table headers*/
-table#messagelist tr th.date{width: 10%;}
-table#messagelist tr th.info{width: 5%;}
-table#messagelist tr th.ip{width: 10%;}
-table#messagelist tr th.comments{width: 25%;}
-table#messagelist tr th.url{width: 30%;}
-table#messagelist tr th.actions{width: 10%;}
-table#messagelist tr th.type{  width: 15%;}
-table#messagelist tr th.plfl{  width: 10%;}
-table#messagelist tr th.relevance{  width: 5%;}
-table#messagelist tr th.size{  width: 5%;}
-table#messagelist tr th.from,table#messagelist tr th.to{width: 15%;}
-table#messagelist tr th.number{  width: 5%;}
-table#messagelist tr th.username{  width: 15%;}
-
+table tr th.date{width: 10%;}
+table tr th.info{width: 5%;}
+table tr th.ip{width: 10%;}
+table tr th.comments{width: 25%;}
+table tr th.url{width: 30%;}
+table tr th.actions{width: 10%;}
+table tr th.type{  width: 15%;}
+table tr th.plfl{  width: 10%;}
+table tr th.relevance{  width: 5%;}
+table tr th.size{  width: 5%;}
+table tr th.from,table tr th.to{width: 10%;}
+table tr th.number{  width: 5%;}
+table tr th.username{  width: 15%;}
+table tr th.subject{  width: 15%;}
 /*Table contents*/
-table#messagelist tr td{
-  text-overflow: ellipsis;
+table tr td{
+  text-overflow: ellipsis; 
 }
-table#messagelist tr td.url{
+table tr td.url{
   text-align: left; 
   white-space:nowrap; 
   overflow:hidden;
   text-overflow: ellipsis;
 }
-table#messagelist tr td.webimgs { 
+table tr td.webimgs { 
   vertical-align: bottom;
   text-align: center;
   width: 25%;
   font-size: 11px;
   color: #008000;
 }
+
+
+table#web_view,table#email_view{
+  width:60%;
+  display: inline-table;
+}
+table#web_view tr th{
+  width: 50%;
+}
+table#email_view tr th{
+  width:30%;
+}
+table#email_view tr td{
+
+}
+
+
 img.webimgs {
   border: 1px solid black;
 }
 
 
 /* +++++++++++++++++  */
-table#messagelist col{
+table col{
   display: table-column;
   text-align: left;
 }
-#messagelist tr th.email{
+ tr th.email{
   width: 250px;
   overflow: hidden;
   text-overflow: ellipsis
 }
-/*#messagelist tr th.room{width: 250px;}
-#messagelist tr th.method{ width: 55px;}
-#messagelist tr th.username{  width: 70px;}
-#messagelist tr.message{  background-color: #FFFFFF;}
-#messagelist tr.unread{
+/* tr th.room{width: 250px;}
+ tr th.method{ width: 55px;}
+ tr th.username{  width: 70px;}
+ tr.message{  background-color: #FFFFFF;}
+ tr.unread{
   font-weight: bold;
   background-color: #FFFFFF;
 }
-#messagelist tr.selected td,#messagelist tr.unfocused td{
+ tr.selected td, tr.unfocused td{
   font-weight: bold;
   color: #FFFFFF;
 }
-#messagelist tr.selected td{background-color: #CC3333;}
-#messagelist tr.unfocused td{background-color: #929292;}
-#messagelist tr.selected td a.rcmContactAddress,#messagelist tr.unfocused td a.rcmContactAddress{
+ tr.selected td{background-color: #CC3333;}
+ tr.unfocused td{background-color: #929292;}
+ tr.selected td a.rcmContactAddress, tr.unfocused td a.rcmContactAddress{
   color: #FFFFFF;
 }
-#messagelist tr.deleted td a.rcmContactAddress,#messagelist tr.deleted td,#messagelist tr.deleted td a{
+ tr.deleted td a.rcmContactAddress, tr.deleted td, tr.deleted td a{
   color: #CCCCCC;
 }*/
-
 
 #pluginsInfo{
   text-align: right;
 }
-
-
-
-table.headers-table{
-  background-color: #D8DDE1;
-  table-layout: auto;
-  display: inline-block;
-  width: auto;
-  vertical-align: middle
-}
-
-table.headers-table tr td.subject,
-table.headers-table tr td.date{width: 90%;}
-
-
-
 
 /*Paginator*/
 table#listpage th {

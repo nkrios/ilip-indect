@@ -438,7 +438,7 @@ class WebsController extends AppController {
                         fwrite($fp, $solid);
                         fclose($fp);
                         // salvo url del reference della pagina, se presente
-/* funziona ma e' disabilitata
+                /* funziona ma e' disabilitata
                         $fp = fopen($web['Web']['rq_header'], 'r');
                         while (false != ($line = fgets($fp, 4096))) {
                             if (stripos($line, "Referer:") !== false) {
@@ -453,7 +453,7 @@ class WebsController extends AppController {
                             }
                         }
                         fclose($fp);
-*/
+                */
                         // ridireziono sulla pagina principale
                         $this->redirect('http://'.$web['Web']['url']);
                     }

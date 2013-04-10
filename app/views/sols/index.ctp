@@ -1,4 +1,4 @@
-<div class="sols boxstyle_white">
+<div class="generic boxstyle_white">
 
 	<h2 class="shadow-box-bottom"><?php __('List of listening sessions of case: '); ?><span class="mark"><?php echo $pol_name; ?></span></h2>
 
@@ -26,6 +26,9 @@
 		</td>
 	</tr>
 	<?php endforeach; ?>
+      <tr>
+        <th colspan="5"><?php echo $this->Html->link(__('Add a New Session', true), array('action' => 'add'),array('class'=>'button')); ?></th>
+      </tr>
 	</table>
 
 </div>

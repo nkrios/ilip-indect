@@ -1,8 +1,5 @@
 /***** RoundCube|Mail mail task styles *****/
-
-
-#messagetoolbar
-{
+#messagetoolbar{
   position: absolute;
   top: 45px;
   left: 200px;
@@ -12,37 +9,31 @@
 /*  border: 1px solid #cccccc; */
 }
 
-#messagetoolbar a
-{
+#messagetoolbar a{
   padding-right: 10px;
 }
 
-#messagetoolbar select
-{
+#messagetoolbar select{
   font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
   color: #333333;
 }
 
-#messagetoolbar select.mboxlist
-{
+#messagetoolbar select.mboxlist{
   position: absolute;
   left: 375px;
   top: 10px;
 }
 
-#messagetoolbar select.mboxlist option
-{
+#messagetoolbar select.mboxlist option{
   padding-left: 15px;
 }
 
-#messagetoolbar select.mboxlist option[value="0"]
-{
+#messagetoolbar select.mboxlist option[value="0"]{
   padding-left: 2px;
 }
 
-#listcontrols
-{
+#listcontrols{
   position: absolute;
   left: 200px;
   bottom: 20px;
@@ -56,8 +47,7 @@
 #listcontrols a:visited,
 #mailboxcontrols a,
 #mailboxcontrols a:active,
-#mailboxcontrols a:visited
-{
+#mailboxcontrols a:visited{
   color: #999999;
   font-size: 11px;
   text-decoration: none;
@@ -68,19 +58,16 @@
 #listcontrols a.active:visited,
 #mailboxcontrols a.active,
 #mailboxcontrols a.active:active,
-#mailboxcontrols a.active:visited
-{
+#mailboxcontrols a.active:visited{
   color: #CC0000;
 }
 
 #listcontrols a.active:hover,
-#mailboxcontrols a.active:hover
-{
+#mailboxcontrols a.active:hover{
   text-decoration: underline;
 }
 
-#messagecountbar
-{
+#messagecountbar{
   position: absolute;
   bottom: 16px;
   right: 40px;
@@ -90,14 +77,12 @@
   white-space: nowrap;
 }
 
-#messagecountbar span
-{
+#messagecountbar span{
   font-size: 11px;
   color: #333333;
 }
 
-#messagepartcontainer
-{
+#messagepartcontainer{
   position: absolute;
   top: 80px;
   left: 20px;
@@ -105,8 +90,7 @@
   bottom: 20px;
 }
 
-#mailcontframe
-{
+#mailcontframe{
   /*position: absolute;*/
   top: 85px;
   left: 200px;
@@ -120,8 +104,7 @@
   height: expression((parseInt(document.documentElement.clientHeight)-125)+'px');
 }
 
-#mailpreviewframe
-{
+#mailpreviewframe{
   position: absolute;
   top: 305px;
   left: 200px;
@@ -134,24 +117,21 @@
   height: expression((parseInt(document.documentElement.clientHeight)-135-document.getElementById('mailcontframe').offsetHeight)+'px');
 }
 
-#messagecontframe
-{
+#messagecontframe{
   width: 100%;
   height: 100%;
   border: 0;
 }
 
 /*\*/
-html>body #messagecontframe
-{
+html>body #messagecontframe{
 /*  [height: 40%;*/
   height: 40%;
 /*  ]height: 100%;*/
 }
 /**/
 
-#messagepartframe
-{
+#messagepartframe{
   position: absolute;
   top: 0px;
   left: 0px;
@@ -164,30 +144,26 @@ html>body #messagecontframe
 }
 
 
-#partheader
-{
+#partheader{
   position: absolute;
   top: 10px;
   left: 220px;
   height: 40px;
 }
 
-#partheader table td
-{
+#partheader table td{
   padding-left: 2px;
   padding-right: 4px;
   vertical-align: middle;
   font-size: 11px;
 }
 
-#partheader table td.title
-{
+#partheader table td.title{
   color: #666666;
   font-weight: bold;
 }
 
-#rcmdraglayer
-{
+#rcmdraglayer{
   width: 300px;
   border: 1px solid #999999;
   background-color: #F9F9F9;
@@ -202,8 +178,7 @@ html>body #messagecontframe
 
 /** mailbox list styles */
 
-#mailboxlist-header
-{
+#mailboxlist-header{
   position: absolute;
   top: 85px;
   left: 20px;
@@ -219,8 +194,7 @@ html>body #messagecontframe
   font-weight: bold;  
 }
 
-#mailboxlist-container
-{
+#mailboxlist-container{
   position: absolute;
   top: 105px;
   left: 20px;
@@ -233,8 +207,7 @@ html>body #messagecontframe
   height: expression((parseInt(document.documentElement.clientHeight)-145)+'px');
 }
 
-#mailboxlist
-{
+#mailboxlist{
   width: 100%;
   height: auto;
   margin: 0px;
@@ -245,8 +218,7 @@ html>body #messagecontframe
   white-space: nowrap;
 }
 
-#mailboxlist li
-{
+#mailboxlist li{
  /* height: 18px; */
   font-size: 11px;
   background: url(images/icons/folder-closed.png) no-repeat;
@@ -255,33 +227,27 @@ html>body #messagecontframe
 /* IE 5.5  margin-left: -16px; */
 }
 
-#mailboxlist li.inbox
-{
+#mailboxlist li.inbox{
   background-image: url(images/icons/folder-inbox.png);
 }
 
-#mailboxlist li.drafts
-{
+#mailboxlist li.drafts{
   background-image: url(images/icons/folder-drafts.png);
 }
 
-#mailboxlist li.sent
-{
+#mailboxlist li.sent{
   background-image: url(images/icons/folder-sent.png);
 }
 
-#mailboxlist li.junk
-{
+#mailboxlist li.junk{
   background-image: url(images/icons/folder-junk.png);
 }
 
-#mailboxlist li.trash
-{
+#mailboxlist li.trash{
   background-image: url(images/icons/folder-trash.png);
 }
 
-#mailboxlist li a
-{
+#mailboxlist li a{
   display: block;
   padding-left: 32px;
   padding-top: 2px;
@@ -289,30 +255,25 @@ html>body #messagecontframe
   text-decoration: none;
 }
 
-#mailboxlist li, #mailboxlist li.unread
-{  
+#mailboxlist li, #mailboxlist li.unread{  
  /* background-image: url(images/mailbox_list.gif); */
 }
 
-#mailboxlist li.unread
-{
+#mailboxlist li.unread{
   font-weight: bold;
 }
 
-#mailboxlist li.selected
-{
+#mailboxlist li.selected{
   background-color: #929292;
   border-bottom: 1px solid #898989;
 }
 
-#mailboxlist li.selected a
-{
+#mailboxlist li.selected a{
   color: #FFF;
   font-weight: bold;
 }
 
-#mailboxlist li.droptarget
-{
+#mailboxlist li.droptarget{
   background-color: #FFFFA6;
 }
 
@@ -347,8 +308,7 @@ html>body #messagecontframe
 }
 
 
-#mailboxcontrols
-{
+#mailboxcontrols{
   position: absolute;
   left: 20px;
   width: 160px;
@@ -358,10 +318,7 @@ html>body #messagecontframe
   font-size: 11px;
 }
 
-
-
-#quicksearchbar
-{
+#quicksearchbar{
   position: absolute;
   top: 60px;
   right: 40px;
@@ -371,21 +328,18 @@ html>body #messagecontframe
   background: url('images/searchfield.gif') top left no-repeat;
 }
 
-#quicksearchbar a
-{
+#quicksearchbar a{
   position: absolute;
   top: 3px;
   right: 4px;
   text-decoration: none;
 }
 
-#quicksearchbar img
-{
+#quicksearchbar img{
   vertical-align: middle;
 }
 
-#quicksearchbox
-{
+#quicksearchbox{
   position: absolute;
   top: 2px;
   left: 20px;
@@ -403,8 +357,7 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
 /**/
 
 
-#rcversion
-{
+#rcversion{
   position: absolute;
   top: 67px;
   left: 20px;
@@ -420,14 +373,12 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   background-color: #b4eeb4;*/
 }
 
-#quotadisplay
-{
+#quotadisplay{
   color: #666666;
   font-size: 11px;
 }
 
-#quotadisplay img
-{
+#quotadisplay img{  
   vertical-align: middle;
   margin-left: 4px;
   border: 1px solid #666666;
@@ -438,22 +389,19 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
 
 /** message compose styles */
 
-#priority-selector
-{
+#priority-selector{
   position: absolute;
   left: 280px;
   top: 10px;
 }
 
-#receipt-selector
-{
+#receipt-selector{
   position: absolute;
   left: 450px;
   top: 10px;
 }
 
-#compose-container
-{
+#compose-container{
   position: absolute;
   top: 90px;
   left: 200px;
@@ -466,20 +414,15 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   height: expression((parseInt(document.documentElement.clientHeight)-170)+'px');
 }
 
-
-#compose-headers
-{
+#compose-headers{
   width: 100%;
 }
 
-#compose-headers td.top
-{
+#compose-headers td.top{
   vertical-align: top;
 }
 
-#compose-headers td.title,
-#compose-subject td.title
-{
+#compose-headers td.title,#compose-subject td.title{
   width: 80px !important;
   color: #666666;
   font-size: 11px;
@@ -488,40 +431,32 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   white-space: nowrap;
 }
 
-#compose-headers td.add-button
-{
+#compose-headers td.add-button{
   width: 40px !important;
   text-align: right;
   vertical-align: bottom;
 }
 
-#compose-headers td.add-button a
-{
+#compose-headers td.add-button a{
   color: #666666;
   font-size: 11px;
   text-decoration: none;
 }
 
-#compose-headers td textarea
-{
+#compose-headers td textarea{
   width: 100%;
   height: 40px;
 }
 
-#compose-headers td input
-{
+#compose-headers td input{
   width: 100%;
 }
 
-#compose-cc,
-#compose-bcc,
-#compose-replyto
-{
+#compose-cc,#compose-bcc,#compose-replyto{
   display: none;
 }
 
-#compose-body
-{
+#compose-body{
   margin-top: 5px;
   margin-bottom: 10px;
   width: 99%;
@@ -531,16 +466,14 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   font-family: "Courier New", Courier, monospace;
 }
 
-#compose-attachments
-{
+#compose-attachments{
   position: absolute;
   top: 100px;
   left: 20px;
   width: 160px;
 }
 
-#compose-attachments ul
-{
+#compose-attachments ul{
   margin: 0px;
   padding: 0px;
   border: 1px solid #CCCCCC;
@@ -549,8 +482,7 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   list-style-type: none;
 }
 
-#compose-attachments ul li
-{
+#compose-attachments ul li{
   height: 18px;
   font-size: 11px;
   padding-left: 2px;
@@ -561,14 +493,12 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   overflow: hidden;
 }
 
-#attachment-title
-{
+#attachment-title{
   background: url(images/icons/attachment.png) top left no-repeat;
   padding: 0px 0px 3px 22px;
 }
 
-#attachment-form
-{
+#attachment-form{
   position: absolute;
   top: 150px;
   left: 20px;
@@ -579,7 +509,6 @@ html>body #quicksearchbar[id$="quicksearchbar"]:not([class="none"]) #quicksearch
   background-color: #F9F9F9;
 }
 
-#attachment-form input.button
-{
+#attachment-form input.button{
   margin-top: 8px;
 }

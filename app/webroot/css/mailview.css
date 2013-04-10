@@ -1,15 +1,3 @@
-/** message view styles */
-#messageframe{
-  border: 1px solid #bbb;
-  background-color: #F8F1F8;
-  padding: 1em;
-  box-shadow: 0 0 4px #666;
-}
-div#web_view,div#contents_view{
-  width: auto;
-  margin: 1em auto;
-}
-
 .clickable{text-decoration: underline}
 
 div.messageheaderbox{

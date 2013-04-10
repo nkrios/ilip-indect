@@ -74,140 +74,141 @@
   	$pbar = false;
   ?>
    <?php if ($pbar) : ?>
-    	<script type="text/javascript">
-    	$(function() {
-    		$("#progressbar").progressbar({
-    			value: <?php echo $est_time_perc; ?>
-    		});
-    	});
+    	<script>
+      	$(function() {
+      		$("#progressbar").progressbar({
+      			value: <?php echo $est_time_perc; ?>
+      		});
+      	});
     	</script>
    <?php endif ?>
 
-   <div><!-- Upper block -->
+  <div><!-- Upper block -->
 
-  <div class="solinfo">
+    <div class="solinfo">
     
-    <h2 class="shadow-box-bottom"><?php __('Session Data'); ?></h2>
-     
-    <?php if ($pbar) : ?>
+      <h2 class="shadow-box-bottom"><?php __('Session Data'); ?></h2>
+       
+      <?php if ($pbar) : ?>
 
-       <div id="progressbar"></div>
-       <div id="progressbar_et"><?php __('E.T.'); ?>: <?php echo $est_time; ?> sec</div>
+         <div id="progressbar"></div>
+         <div id="progressbar_et"><?php __('E.T.'); ?>: <?php echo $est_time; ?> sec</div>
 
-    <?php elseif($dec_tot > 0) : //added to show the contents left instead of the progress bar?>
-      <div id="progressbar_et"><?php __('Data size being analyzed'); ?>: <?php echo $dec_tot; ?> bytes</div>       
-    
-    <?php endif ?>
-
-    <table class="shadow-box-bottom">
-      <tr>
-          <th><?php __('Case and Session name'); ?></th>
-          <td><?php echo $html->link($sol['Pol']['name'], '/pols/view/' .$sol['Pol']['id']).' -> '.$sol['Sol']['name']; ?></td>
-        </tr>
-        <tr>
-          <th><?php __('Cap. Start Time'); ?></th>
-          <td><?php echo $sol['Sol']['start_time']; ?></td>
-        </tr>
-        <tr>
-           <th><?php __('Cap. End Time'); ?></th>
-           <td><?php echo $sol['Sol']['end_time']; ?></td>
-        </tr>
-        <tr>
-          <th><?php __('Status'); ?></th>
-          <td><?php echo $sol['Sol']['status']; ?></td>
-        </tr>	
-        <tr>
-          <th><?php __('Hosts'); ?></th>
-          <td>
-            <?php if (empty($hosts)): ?>
-              <span>---</span>
-            <?php else : ?>
-              <span id='hosts'>
-                <?php 
-                  echo $form->create('host', array('url' => array('controller' => 'sols', 'action' => 'host')));
-                  $hosts[0] = __('View all hosts', true);
-                  echo $form->select('host', $hosts, $hosts[0]);
-                  echo $form->end(__('Filter', true));
-                ?>
-              </span>
-            <?php endif; ?>
-          </td>        
-      </tr>   
+      <?php elseif($dec_tot > 0) : //added to show the contents left instead of the progress bar?>
+        <div id="progressbar_et"><?php __('Data size being analyzed'); ?>: <?php echo $dec_tot; ?> bytes</div>       
       
-    </table>
-  
-  </div>
-
-  <div id='pcap_upload' class="pcap_input">
-
-    <?php if (!$live) : ?>
-
-      <h2 class="shadow-box-bottom"><?php __('Pcap set'); ?></h2>
+      <?php endif ?>
 
       <table class="shadow-box-bottom">
-
         <tr>
-          <td>      
-          <?php if ($last_sol == 1): ?>
-            <?php if (!$register): ?>
-              <h4><?php echo $html->link(__('SFTP uploading', true), 'sftp://'.env('HOST').'/opt/xplico/pol_'.$sol['Pol']['id'].'/sol_'.$sol['Sol']['id'].'/new/'); ?> <?php __('big pcap files'); ?>.</h4>
+            <th><?php __('Case and Session name'); ?></th>
+            <td><?php echo $html->link($sol['Pol']['name'], '/pols/view/' .$sol['Pol']['id']).' -> '.$sol['Sol']['name']; ?></td>
+          </tr>
+          <tr>
+            <th><?php __('Cap. Start Time'); ?></th>
+            <td><?php echo $sol['Sol']['start_time']; ?></td>
+          </tr>
+          <tr>
+             <th><?php __('Cap. End Time'); ?></th>
+             <td><?php echo $sol['Sol']['end_time']; ?></td>
+          </tr>
+          <tr>
+            <th><?php __('Status'); ?></th>
+            <td><?php echo $sol['Sol']['status']; ?></td>
+          </tr>	
+          <tr>
+            <th><?php __('Hosts'); ?></th>
+            <td>
+              <?php if (empty($hosts)): ?>
+                <span>---</span>
+              <?php else : ?>
+                <span id='hosts'>
+                  <?php 
+                    echo $this->Form->create('host', array('url' => array('controller' => 'sols', 'action' => 'host')));
+                    $hosts[0] = __('View all hosts', true);
+                    echo $this->Form->select('host', $hosts, $hosts[0]);
+                    echo $this->Form->end(array('label'=>'Filter','div' => array('class' => 'wauto')));
+                  ?>
+                </span>
+              <?php endif; ?>
+            </td>        
+        </tr>   
+        
+      </table>
+  
+    </div>
+
+    <div id='pcap_upload' class="pcap_input">
+
+      <?php if (!$live) : ?>
+
+        <h2 class="shadow-box-bottom"><?php __('Pcap set'); ?></h2>
+
+        <table class="shadow-box-bottom">
+
+          <tr>
+            <td>      
+            <?php if ($last_sol == 1): ?>
+              <?php if (!$register): ?>
+                <h4><?php echo $html->link(__('SFTP uploading', true), 'sftp://'.env('HOST').'/opt/xplico/pol_'.$sol['Pol']['id'].'/sol_'.$sol['Sol']['id'].'/new/'); ?> <?php __('big pcap files'); ?>.</h4>
+              <?php endif; ?>
+            </td>
+          <tr>
+            <td>
+
+              <h4><?php __('Add new pcap file'); ?>.</h4>
+                <?php
+                  echo $form->create(__('Sols', true), array('action' => 'pcap', 'type' => 'file'));
+                  echo $form->file('File', array('label' => __('File', true)));
+                  echo $form->end(array('label'=>'Upload','div' => array('class' => 'wauto')));
+                ?>
+
+              <?php else: ?>     
+                 <span><?php __('Not possible to add new pcap files.'); ?></span>
+              
+            <?php endif; ?>
+
+            <?php if ($register): ?>
+                  <button id="hon" type="button" style="float: right;"><?php __('Rules'); ?></button>
             <?php endif; ?>
           </td>
+        </tr>
         <tr>
           <td>
+            <h4><?php echo $html->link(__('List', true), '/inputs/index'); ?> <?php __('of all pcap files'); ?>.</h4>
 
-            <h4><?php __('Add new pcap file'); ?>.</h4>
-              <?php
-                echo $form->create(__('Sols', true), array('action' => 'pcap', 'type' => 'file'));
-                echo $form->file('File', array('label' => __('File', true)));
-                echo $form->end(__('Upload', true));
-              ?>
-
-            <?php else: ?>     
-               <span><?php __('Not possible to add new pcap files.'); ?></span>
+              <?php else : ?>
+              
+                <h2><?php __('Live'); ?></h2>
             
-          <?php endif; ?>
-
-          <?php if ($register): ?>
-                <button id="hon" type="button" style="float: right;"><?php __('Rules'); ?></button>
-          <?php endif; ?>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h4><?php echo $html->link(__('List', true), '/inputs/index'); ?> <?php __('of all pcap files'); ?>.</h4>
-
-            <?php else : ?>
+                <div>
+                  <?php if ($livestop) : ?>
+            	       <!-- To-do: display, just for info puropouses, the interface name that is currently sniffing.-->
+                    <?php __('Listening at interface'); ?>: <?php echo $interff; ?>
+                    <?php echo $form->create('/sol', array ('action' => 'livestop')); ?>
+                    <?php echo $form->end('Stop'); ?>
+                  <?php else : ?>
+                    <?php echo $form->create('sol', array ('action' => 'live'));?>
+                    <?php __('Interface'); ?>:
+                    <?php  echo $form->select('Interface.Type', array($interface,null,null,'Choose adaptor')); ?>
+                  <?php echo $form->end(__('Start', true)); ?>
+                </div>
             
-              <h2><?php __('Live'); ?></h2>
-          
-              <div>
-                <?php if ($livestop) : ?>
-          	       <!-- To-do: display, just for info puropouses, the interface name that is currently sniffing.-->
-                  <?php __('Listening at interface'); ?>: <?php echo $interff; ?>
-                  <?php echo $form->create('/sol', array ('action' => 'livestop')); ?>
-                  <?php echo $form->end('Stop'); ?>
-                <?php else : ?>
-                  <?php echo $form->create('sol', array ('action' => 'live'));?>
-                  <?php __('Interface'); ?>:
-                  <?php  echo $form->select('Interface.Type', array($interface,null,null,'Choose adaptor')); ?>
-                <?php echo $form->end(__('Start', true)); ?>
-              </div>
+            <?php endif ?>
           
           <?php endif ?>
-        
-        <?php endif ?>
 
-        </td>
-      </tr>
+          </td>
+        </tr>
 
-    </table>
+      </table>
 
-  </div>
+    </div>
 
   </div><!-- end of upper block -->
 
-  <div id="statistic_panel">
+  <div id="statistic_panel" class="generic">
+    <h2 class="shadow-box-bottom"><?php __('Statistic Panel'); ?></h2>
 
   	<div class="shadow-box-bottom">
   		<h3>Graph</h3>

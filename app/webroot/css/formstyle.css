@@ -4,6 +4,8 @@ form div {margin:0.5em;display: inline-block; width: 80%}
 form h2{margin: 1em auto;  text-shadow: 0 0 2px #aaa;}
 form label{font-weight: bold;vertical-align: middle;color: #211795}
 
+form div.wauto{width: auto}
+
 form .radio{text-align: left}
 form .title{font-weight: bold;margin: 0.2em auto}
 

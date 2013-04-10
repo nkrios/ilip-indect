@@ -1,4 +1,4 @@
-<div class="boxstyle_white pols">
+<div class="generic boxstyle_white">
 	
 	<h2 class="shadow-box-bottom"><?php __('Cases List'); ?></h2>
 
@@ -28,5 +28,8 @@
 			</td>
 		</tr>
 		<?php endforeach; ?>
+		<tr>
+        	<th colspan="5"><?php echo $this->Html->link(__('Add a New Case', true), array('action' => 'add'),array('class'=>'button')); ?></th>
+      </tr>
 	</table>
 </div>

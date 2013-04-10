@@ -1,5 +1,5 @@
 
-<script language="text/javascript">
+<script>
     function popupVetrina(whatopen) {
       newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
       return false;
@@ -37,32 +37,32 @@
 <?php if ($rtp['Rtp']['first_visualization_user_id']) : ?>
   <tr>
 	<td><?php echo $rtp['Rtp']['capture_date']; ?></td>
-        <td><?php echo $rtp['Rtp']['from_addr']; ?></td>
-        <td><?php echo $rtp['Rtp']['to_addr']; ?></td>
+    <td><?php echo $rtp['Rtp']['from_addr']; ?></td>
+    <td><?php echo $rtp['Rtp']['to_addr']; ?></td>
 	<td><?php echo $html->link($hms,'/rtps/view/' . $rtp['Rtp']['id']); ?></td>
 	<td><?php
 		if($rtp['Rtp']['relevance'] > 0){
 			echo $rtp['Rtp']['relevance'];
 		}
 	 ?></td>
-	<td><?php echo $rtp['Rtp']['comments']; ?></td>
-        <td class="pinfo"><a href="#" onclick="popupVetrina('/rtps/info/<?php echo $rtp['Rtp']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $rtp['Rtp']['id']); ?></div></td>
+	<td><?php echo substr($rtp['Rtp']['comments'],0,50).'...' ?></td>
+    <td class="pinfo"><a href="#" onclick="popupVetrina('/rtps/info/<?php echo $rtp['Rtp']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $rtp['Rtp']['id']); ?></div></td>
   </tr>
 <?php else : ?>
- <tr>
-	<td><?php echo $rtp['Rtp']['capture_date']; ?></td>
-        <td><?php echo $rtp['Rtp']['from_addr']; ?></td>
-        <td><?php echo $rtp['Rtp']['to_addr']; ?></td>
-	<td><?php echo $html->link($hms,'/rtps/view/' . $rtp['Rtp']['id']); ?></td>
-	<td><?php
-		if($rtp['Rtp']['relevance'] > 0){
-			echo $rtp['Rtp']['relevance'];
-		}
-	 ?></td>
-	<td><?php echo $rtp['Rtp']['comments']; ?></td>
-
-        <td class="pinfo"><a href="#" onclick="popupVetrina('/rtps/info/<?php echo $rtp['Rtp']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $rtp['Rtp']['id']); ?></div></td>
-  </tr>
+	<tr>
+		<td><?php echo $rtp['Rtp']['capture_date']; ?></td>
+	    <td><?php echo $rtp['Rtp']['from_addr']; ?></td>
+	    <td><?php echo $rtp['Rtp']['to_addr']; ?></td>
+		<td><?php echo $html->link($hms,'/rtps/view/' . $rtp['Rtp']['id']); ?></td>
+		<td><?php
+			if($rtp['Rtp']['relevance'] > 0){
+				echo $rtp['Rtp']['relevance'];
+			}
+		 ?></td>
+		<td><?php echo substr($rtp['Rtp']['comments'],0,50).'...' ?></td>
+		<td class="pinfo"><a href="#" onclick="popupVetrina('/rtps/info/<?php echo $rtp['Rtp']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $rtp['Rtp']['id']); ?></div>
+		</td>
+	</tr>
 <?php endif ?>
 <?php endforeach; ?>
 </table>

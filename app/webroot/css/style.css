@@ -213,7 +213,7 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 
 /* Specific wrapper elements styles*/
 
-.generic_form h2,.generic h2,.pols > h2,.sols > h2, .solinfo h2,.pcap_input h2{
+.generic_form h2,.generic h2,.solinfo h2,.pcap_input h2{
   border-radius: 5px;
   border:1px solid #aaa;
   margin: 0.5em auto;
@@ -227,7 +227,8 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 .search,.src_first{border: 1px solid #ccc}
 .search {
   margin: 0.5em auto;
-  width: 50%;
+  width: 55%;
+  /*width: auto;*/
   color: #900;
 }
 .search form{padding: 0.5em}
@@ -235,12 +236,10 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 .search input[type="text"]{width: auto}
 .search input[type="radio"]{margin: 0 0.1em 0 0.5em;}
 .search input[type="radio"] + label{margin:0 0.8em 0 0.1em;}
-.src_first{  width: 40%;}
+.src_first{  width: 35%;}
 .src_first img{width: 20%;}
 .src_first img:hover{opacity: .8}
 .src_first h3{  margin: 0.6em;}
-
-
 
 .solinfo,.pcap_input{
   display: inline-block;vertical-align: top;
@@ -429,4 +428,19 @@ a.player {
 
 object.html {
   width: 100%;
+}
+
+
+/** message view styles */
+#messageframe{
+  border: 1px solid #bbb;
+  background-color: #F8F1F8;
+  padding: 1em;
+  box-shadow: 0 0 4px #666;
+  margin:1em auto;
+}
+
+
+div#contents_view{
+  width: 35%;
 }

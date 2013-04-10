@@ -13,7 +13,7 @@
 
 	</div>
 
-	<table  class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 		<tr>	
 			<th><?php echo $paginator->sort(__('Id', true), 'id'); ?></th>
 			<th><?php echo $paginator->sort(__('Name', true), 'name'); ?></th>
@@ -36,7 +36,7 @@
 				?></td>
 				<td><?php echo $conversation['Conversation']['id']; ?></td>
 				<td><?php echo $conversation['Conversation']['name']; ?></td>
-				<td><?php echo $conversation['Conversation']['transcription_date']; ?><
+				<td><?php echo $conversation['Conversation']['transcription_date']; ?>
 				<td><?php
 					if($conversation['Conversation']['relevance'] > 0){
 						echo $conversation['Conversation']['relevance'];
@@ -51,7 +51,7 @@
 		<table id="listpage" class="shadow-box-bottom">
 			<tr>
 				<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-			       	<th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
+			    <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
 				<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
 			</tr>
 		</table>
