@@ -85,11 +85,11 @@ class FbuchatsController extends AppController {
 
 		    //using empty() considers '0' as empty and the value is lost!!!!
 		    if($this->data['Search']['relevance'] != '')
-			$rel = $this->data['Search']['relevance'];
+	           $rel = $this->data['Search']['relevance'];
 		    else
-			$rel = null;
+                $rel = null;
 		    $this->Session->write('relevance', $rel);
-            }
+        }
 
 	    //prepare the filter
             if (!empty($srch)) {
@@ -116,9 +116,9 @@ class FbuchatsController extends AppController {
             $msgs = $this->paginate('Fbuchat', $filter);
             $this->set('fb_users', $msgs);
             $this->set('srchd', $srch);
-	    $this->set('relevance', $rel);
+            $this->set('relevance', $rel);
             $this->set('menu_left', $this->Xplico->leftmenuarray(6) );
-	    $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
+            $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
         }
         
         function user($id = null) {
@@ -206,9 +206,9 @@ class FbuchatsController extends AppController {
             $this->Session->write('srch_fbchat', $srch);
             $this->set('chats', $msgs);
             $this->set('srchd', $srch);
-	    $this->set('relevance', $rel);
+            $this->set('relevance', $rel);
             $this->set('menu_left', $this->Xplico->leftmenuarray(6) );
-	    $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
+            $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
 	}
 
 	function view($id = null) {

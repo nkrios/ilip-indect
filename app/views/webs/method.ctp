@@ -2,7 +2,6 @@
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom"><?php echo 'URL: http://'.substr(htmlentities($message['Web']['url']),0,50).' ...'; ?></h2>
 
-	<!--<h6>File:&nbsp; <?php echo $message['Web']['rs_body']; ?> </h6>-->
 	<div>
 		<table id='web_view' class="shadow-box-bottom divamiddle">
 			<tbody>
@@ -56,7 +55,7 @@
 
 	</div>
 
-	<div id="messageframe">
+	<div class="messageframe">
 		<div>
 		    <!-- <h3><?php __('Contents'); ?></h3> -->
 			<div id="displ"></div>

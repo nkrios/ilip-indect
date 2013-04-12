@@ -1,25 +1,28 @@
 
-<div class="generic">
+<div class="generic boxstyle_white">
+
+	<h2 class="shadow-box-bottom"><?php echo 'Nntp ' ?></h2>
 	
 	<div class="search shadow-box-bottom">
+
 	<?php echo $form->create('Search', array( 'url' => '/nntp_groups/alist'));
-	      echo $form->input('search', array('type'=>'text','size' => '40', 'label' => __('Search:', true), 'default' => $srchd));
-	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-- Choose relevance --',true),'default'=>$relevance));
+	      echo $form->input('search', array('type'=>'text', 'label' => __('Search: ', true), 'default' => $srchd));
+	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 	      echo $form->end(__('Go', true));?>
 	</div>
 
-	<table class="headers-table" class="shadow-box-bottom">
+	<table id="email_view" class="shadow-box-bottom">
 		<tbody>
 		<tr>
-			<th class="header-title"><?php echo __('Title',true); ?></th>
+			<th><?php echo __('Title',true); ?></th>
 			<td class="date"><?php echo $nntp_group['Nntp_group']['name']; ?></td>
 		</tr>
 		<tr>
-			<th class="header-title"><?php echo __('Relevance',true); ?></th>
+			<th><?php echo __('Relevance',true); ?></th>
 			<td class="date"><?php echo $nntp_group['Nntp_group']['relevance']?></td>
 		</tr>
 		<tr>
-			<th class="header-title"><?php echo __('Comments',true); ?></th>
+			<th><?php echo __('Comments',true); ?></th>
 			<td class="date"><?php
 				echo $form->create('Edit_Nntp',array( 'url' => '/nntp_groups/alist/'.$nntp_group['Nntp_group']['id']));
 				echo $form->input('comments', array ('default' => $nntp_group['Nntp_group']['comments'],'label' => false, 'size' => '100%'));
@@ -30,7 +33,7 @@
 		</tbody>
 	</table>
 
-	 <table id="messagelist" class="shadow-box-bottom">
+	 <table class="shadow-box-bottom">
 		 <tr>
 			<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 			<th class="subject"><?php echo $paginator->sort(__('Subject', true), 'subject'); ?></th>

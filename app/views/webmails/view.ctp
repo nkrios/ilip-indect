@@ -24,7 +24,7 @@
 				<th ><?php __('Recipient:'); ?></th>
 				<td class="to"><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['to']))?></td>
 			</tr>
-			<?php if (isset($mailObj['Date'])) :  ?>
+			<?php if (isset($mailObj['Date'])) : ?>
 			<tr>
 				<th ><?php __('Date:'); ?></th>
 				<td class="date"><?php echo $mailObj['Date']; ?></td>
@@ -52,7 +52,7 @@
 		</div>
 	</div>
 
-	<div id="messageframe">
+	<div class="messageframe">
 		<!-- <h3><?php __('Contents'); ?></h3> -->
 		<div>
 			<?php if ($mailObj['Type'] == 'html') : ?>

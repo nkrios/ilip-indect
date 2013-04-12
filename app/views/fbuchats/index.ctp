@@ -1,13 +1,14 @@
 
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php __('Facebook'); ?></h2>
 	<div class="search shadow-box-bottom">
 		<?php echo $form->create('Search', array( 'url' => array('controller' => 'fbuchats', 'action' => 'index')));
-		      echo $form->input('search', array( 'type'=>'text','size' => '40', 'label'=>__('Search:', true), 'default' => $srchd));
+		      echo $form->input('search', array( 'type'=>'text', 'label'=>__('Search:', true), 'default' => $srchd));
 		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 		 echo $form->end(__('Go', true));?>
 	</div>
 
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 		<tr>
 			<th><?php echo $paginator->sort(__('Users', true), 'user'); ?></th>
 			<th><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>

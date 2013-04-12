@@ -16,22 +16,22 @@
 		<table id='email_view' class="shadow-box-bottom divamiddle">
 			<tbody>
 				<tr>
-					<th ><?php __('Date:'); ?>&nbsp;</th>
+					<th ><?php __('Date:'); ?></th>
 					<td class="date" ><?php echo $sip['Sip']['capture_date']; ?></td>
 					<td></td>
 				</tr>
 				<tr>
-					<th ><?php __('From:'); ?>&nbsp;</th>
+					<th ><?php __('From:'); ?></th>
 					<td class="from" ><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $sip['Sip']['from_addr'])); ?></td>
 					<td><a href="#" onclick="popupVoip('/sips/caller_play/<?php echo $sip['Sip']['id']?>','scrollbar=auto'); return false"><?php __('play'); ?></a></td>
 				</tr>
 				<tr>
-					<th ><?php __('To:'); ?>&nbsp;</th>
+					<th ><?php __('To:'); ?></th>
 					<td class="to" ><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $sip['Sip']['to_addr'])); ?></td>
 					<td><a href="#" onclick="popupVoip('/sips/called_play/<?php echo $sip['Sip']['id']?>','scrollbar=auto'); return false"><?php __('play'); ?></a></td>
 				</tr>
 				<tr>
-					<th ><?php __('Duration:'); ?>&nbsp;</th>
+					<th ><?php __('Duration:'); ?></th>
 					<?php
 					 /* time in HH:MM:SS */
 					 $h = (int)($sip['Sip']['duration']/3600);
@@ -43,11 +43,11 @@
 					<td></td>
 				</tr>
 				<tr>
-					<th ><?php __('Commands:'); ?>&nbsp;</th>
+					<th ><?php __('Commands:'); ?></th>
 					<td class="date" ><a href="#" onclick="popupVetrina('/sips/cmds/<?php echo $sip['Sip']['id']?>','scrollbar=auto'); return false">cmd.txt</a></td>
 					<td></td>
 				</tr>
-					<th ><?php __('Info:'); ?>&nbsp;</th>
+					<th ><?php __('Info:'); ?></th>
 					<td class="date pinfo" ><a href="#" onclick="popupVetrina('/sips/info/<?php echo $sip['Sip']['id']?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/'); ?></div></td>
 					<td></td>
 				</tr>
@@ -90,7 +90,7 @@
 
 	</div>
 
-	<div id="messageframe">
+	<div class="messageframe">
 
 		<!-- <h3><?php __('Contents'); ?></h3> -->
 		<div class="voip_flash">

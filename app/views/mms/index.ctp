@@ -1,20 +1,22 @@
 
-<script language="text/javascript">
+<script>
     function popupVetrina(whatopen) {
       newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
       return false;
     }
 </script>
 
-<div class="generic">
+<div class="generic boxstyle_white">
+	<h2 class="shadow-box-bottom"><?php echo 'MMS' ?></h2>
+
 	<div class="search shadow-box-bottom">
 		<?php echo $form->create('Search',array( 'url' => array('controller' => 'mms', 'action' => 'index')));
-	      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=> __('Search:', true), 'default' => $srchd));
+	      echo $form->input('search', array('type'=>'text', 'label'=> __('Search:', true), 'default' => $srchd));
 	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 	      echo $form->end(__('Go', true));?>
 	</div>
 
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 	<tr>
 		<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 		<th class="from"><?php echo $paginator->sort(__('From', true), 'from_num'); ?></th>
@@ -39,8 +41,8 @@
 	<?php else : ?>
 		<tr>
 			<td><?php echo $mm['Mm']['capture_date']; ?></td>
-		        <td><?php echo $mm['Mm']['from_num']; ?></td>
-		        <td><?php echo $mm['Mm']['to_num']; ?></td>
+		    <td><?php echo $mm['Mm']['from_num']; ?></td>
+		    <td><?php echo $mm['Mm']['to_num']; ?></td>
 			<td><?php echo $html->link($mm['Mm']['contents'],'/mms/view/' . $mm['Mm']['id']); ?></td>
 		    <td><?php 
 				if ((0 < $mm['Mm']['relevance']) && ($mm['Mm']['relevance'] <= max($relevanceoptions)) ) {

@@ -7,7 +7,7 @@
 	<div class="search shadow-box-bottom">
 
 	<?php echo $form->create('Search',array( 'url' => array('controller' => 'conversations', 'action' => 'index')));
-	      echo $form->input('search', array('type'=>'text', 'label'=> __('Search:', true), 'default' => $srchd));
+	      echo $form->input('search', array('type'=>'text', 'label'=> __('Search: ', true), 'default' => $srchd));
 	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 	      echo $form->end(__('Go', true));?>
 

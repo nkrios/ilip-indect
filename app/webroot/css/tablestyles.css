@@ -100,9 +100,7 @@ table col{
   overflow: hidden;
   text-overflow: ellipsis
 }
-/* tr th.room{width: 250px;}
- tr th.method{ width: 55px;}
- tr th.username{  width: 70px;}
+/* 
  tr.message{  background-color: #FFFFFF;}
  tr.unread{
   font-weight: bold;

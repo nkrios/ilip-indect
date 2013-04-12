@@ -1,29 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=620,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-
-    $(function() {
-		// setup overlay actions to buttons
-		$("button[rel]").overlay({
-			// use the Apple effect for overlay
-			effect: 'apple',
-			expose: '#789',		
-			onLoad: function(content) {
-				// find the player contained inside this overlay and load it
-				this.getOverlay().find("a.player").flowplayer(0).load();
-			},			
-			onClose: function(content) {
-				$f().unload();
-			}
-		});				
-		
-		// install flowplayers
-		$("a.player").flowplayer("/files/flowplayer-3.2.2.swf");
-	});	
-</script>
-
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom"><?php __('Sites'); ?></h2>
 	
@@ -43,7 +17,7 @@
 		      	array('separator'=> ' ','legend'=>false,'default'=>$checked)
 		      );
 		      echo '<br>';
-		      echo $form->input('search', array('type'=>'text','size' => '40', 'label' => __('Search: ', true), 'default' => $srchd));
+		      echo $form->input('search', array('type'=>'text', 'label' => __('Search: ', true), 'default' => $srchd));
 		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'label' => __('Relevance: ', true),'default'=>$relevance));
 		      //echo $form->input('size', array('type'=>'hidden','size' => '10', 'label'=>'Minimum size to show', 'default' => $size));
 		echo $form->end(__('Go', true));?>
@@ -169,3 +143,29 @@
 	</table>
 
 </div>
+
+<script>
+    function popupVetrina(whatopen) {
+      newWindow = window.open(whatopen, 'popup_vetrina', 'width=620,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
+      return false;
+    }
+
+    $(function() {
+		// setup overlay actions to buttons
+		$("button[rel]").overlay({
+			// use the Apple effect for overlay
+			effect: 'apple',
+			expose: '#789',		
+			onLoad: function(content) {
+				// find the player contained inside this overlay and load it
+				this.getOverlay().find("a.player").flowplayer(0).load();
+			},			
+			onClose: function(content) {
+				$f().unload();
+			}
+		});				
+		
+		// install flowplayers
+		$("a.player").flowplayer("/files/flowplayer-3.2.2.swf");
+	});	
+</script>

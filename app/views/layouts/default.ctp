@@ -1,3 +1,21 @@
+<?php if (!isset($menu_left)) {
+  $menu_left = array(
+    'active' => '0',
+    'sections' => array(
+      array(
+        'name' => __('Info', true),
+        'sub' => array(
+          array('name' => __('About', true), 'link' => '/users/about'),
+          array('name' => __('Wiki', true), 'link' => 'http://wiki.xplico.org'),
+          array('name' => __('Forum', true), 'link' => 'http://forum.xplico.org'),
+          array('name' => __('Licenses', true), 'link' => '/users/licenses')
+          )
+        )
+      )
+    );
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,56 +35,27 @@
     echo $html->css('mailview');
     echo $html->css('tablestyles');
     echo $html->css('formstyle');
-    //echo $html->css('themes/ui-darkness/jquery-ui-1.10.0.custom.min.css');
+
     echo $html->script('jquery-1.9.1.min.js');
-    // echo $html->script('jquery-ui-custom.min.js');
-    //echo $html->script('jquery-ui-1.10.1.custom.min.js');
     echo $html->script('http_get.js');
-    // echo $html->script('jquery.tools-1.2.7.min.js');
     // echo $html->script('flowplayer-3.2.2.min.js');
     echo $html->script('swfobject.js');
   ?>
 
-  <?php if (!isset($menu_left)) {
-    $menu_left = array(
-      'active' => '0',
-      'sections' => array(
-        array(
-          'name' => __('Info', true),
-          'sub' => array(
-            array('name' => __('About', true), 'link' => '/users/about'),
-            array('name' => __('Wiki', true), 'link' => 'http://wiki.xplico.org'),
-            array('name' => __('Forum', true), 'link' => 'http://forum.xplico.org'),
-            array('name' => __('Licenses', true), 'link' => '/users/licenses')
-            )
-          )
-        )
-      );
-    }
-  ?>
-  <script type="text/javascript">
+  <script>
     function Lang(){
 	   if ($(this).val() != "Choose another language") {
 	     window.location.href='/users/login/'+$(this).val();
 	   }
     }
   	$(function() {
-  	 $("#lang").change(Lang);
-    	// 	$("#accordion").accordion({
-    	// 	    autoHeight: false,
-    	// 	    collapsible: true,
-    	// 	    active: <?php echo $menu_left['active']; ?>,
-    	//             icons: {
-     //    			header: "ui-icon-circle-arrow-e",
-     //   				headerSelected: "ui-icon-circle-arrow-s"
-    	// 		}
-    	// 	});
+      $("#lang").change(Lang);
       $("#devel_image").click(function(){$(this).slideUp()});
   	 });
   </script>
 </head>
 
-<body >
+<body>
 
   <header id='header' class="centered">
 
@@ -116,13 +105,11 @@
         <?php foreach ($menu_left['sections'] as $section): ?>
             
               <li><a href="#"><?php echo $section['name']; ?></a>
-
                 <ul>
                   <?php foreach ($section['sub'] as $submenu): ?>
                     <li><?php echo $html->link($submenu['name'], $submenu['link']) ?></li>
                   <?php endforeach; ?>
                 </ul>
-
               </li>
 
         <?php endforeach; ?>

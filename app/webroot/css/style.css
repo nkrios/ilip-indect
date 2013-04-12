@@ -309,13 +309,8 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   border: 1px solid #425227;
   background-color: #A39240;
 }
-.sol > h4 { 
-  margin: 0px;
-  margin-top: 3px;
-}
-.confbox {
-  width: 25%;
-}
+
+.confbox {  width: 25%;}
 
 #progressbar{float: left;}
 #progressbar_et {float: left;}
@@ -323,35 +318,43 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 .confsmall {  height: 180px;}
 .conf input[type="submit"] {  margin: auto;}
 
-.small {
-  font-size: 13px;
+
+/** message view styles */
+.messageframe{
+  border: 1px solid #bbb;
+  background-color: #F8F1F8;
+  padding: 1em;
+  box-shadow: 0 0 4px #666;
+  margin:1em auto;
 }
 
+div#contents_view{
+  width: 35%;
+}
+
+
+
+/*styles candidates to delete*/
 .ipcap {
   border: 1px solid #D1D9C4;
   background-color: #FFFF99;
   display: none;
 }
-
-.iweb {
-  display: none;
-}
-
+.iweb {  display: none;}
 .ipcap p {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-td.pinfo:hover .iweb {
+td.pinfo:hover .iweb{
   display: block;
 }
 
-td.pinfo:hover .ipcap {
+td.pinfo:hover .ipcap{
   display: block;
 }
 
-.voip_flash
-{ 
+.voip_flash{ 
   margin: auto;
   width: 100%;
   text-align: center;
@@ -362,19 +365,7 @@ td.pinfo:hover .ipcap {
   text-align: center;
 }
 
-#iserm a img:hover {
-  opacity: 1;
-}
-
-
-
-/*form div.input { 
-  float: left;
-}*/
-
-form div.date{
-  margin-left: 0em;
-}
+#iserm a img:hover {  opacity: 1;}
 
 table tr.altRow td {
   background: #f4f4f4;
@@ -389,12 +380,8 @@ table td.actions {
   border-bottom: 2px solid #ccc;
 }
 
-
 /* scaffold show */
-div.related {
-  display: block;
-}
-
+div.related {  display: block;}
 
 /* overlay */ 
 div.overlay, #overlay {
@@ -425,22 +412,4 @@ a.player {
   margin-left: 8px;
   margin-right: 8px;
 }
-
-object.html {
-  width: 100%;
-}
-
-
-/** message view styles */
-#messageframe{
-  border: 1px solid #bbb;
-  background-color: #F8F1F8;
-  padding: 1em;
-  box-shadow: 0 0 4px #666;
-  margin:1em auto;
-}
-
-
-div#contents_view{
-  width: 35%;
-}
+object.html {  width: 100%;}

@@ -14,7 +14,7 @@
 
 			<tbody>
 				<tr>
-				<td class="header-title"><?php __('Subject:'); ?></td>
+				<td><?php __('Subject:'); ?></td>
 				<?php if (isset($mailObj['Subject'])): ?>
 				<?php if (strpos($email['Email']['subject'], '=?') != 0): ?>
 				<td class="subject"><?php echo htmlentities($mailObj['Subject']); ?></td>
@@ -24,43 +24,43 @@
 				<?php else: ?>
 				<td class="subject"></td>
 				<?php endif; ?>
-				<td class="header-title"><?php __('Relevance:'); ?></td>
+				<td><?php __('Relevance:'); ?></td>
 				<td class="date pinfo">
 					<?php echo $form->create('Email',    array ('action' => 'view'));?>
 				        <?php   echo $form->select('relevance', $relevanceoptions, $email['Email']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('None', true)));     ?>
 				</td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('Sender:'); ?></td>
+				<td><?php __('Sender:'); ?></td>
 				<td class="from"><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['from']))?></td>
-				<td class="header-title" rowspan="7"><?php __('Comments'); ?></td>
+				<td rowspan="7"><?php __('Comments'); ?></td>
 				<td class="date pinfo" rowspan="7">
 				        <?php echo $form->input ('comments', array ('label' => false, 'rows' => '5', 'cols' => '47', 'maxlength'=>'3000')       );        ?>
 					<?php echo $form->end(__('Save', true));?>
 				</td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('Recipient:'); ?></td>
+				<td><?php __('Recipient:'); ?></td>
 				<td class="to"><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['to']))?></td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('Date:'); ?></td>
+				<td><?php __('Date:'); ?></td>
 				<td class="date"><?php echo $mailObj['Date']?></td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('Username:'); ?></td>
+				<td><?php __('Username:'); ?></td>
 				<td class="date"><?php echo $email['Email']['username']?></td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('Password:'); ?></td>
+				<td><?php __('Password:'); ?></td>
 				<td class="date"><?php echo $email['Email']['password']?></td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('EML file:'); ?></td>
+				<td><?php __('EML file:'); ?></td>
 				<td class="date"><?php echo $html->link('email.eml', '/emails/eml') ?></td>
 				</tr>
 				<tr>
-				<td class="header-title"><?php __('Info:'); ?></td>
+				<td><?php __('Info:'); ?></td>
 				<td class="date pinfo"><a href="#" onclick="popupVetrina('/emails/info','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/'); ?></div></td>
 				</tr>
 			</tbody>
@@ -93,7 +93,7 @@
 						<tbody>
 						<?php $i = 1; foreach($mailObj['Attachments'] as $attachment) : ?>
 							<tr>
-						    	<td class="header-title"><?php __('Attached'); echo ' '.$attachment['Type'] ?></td>
+						    	<td><?php __('Attached'); echo ' '.$attachment['Type'] ?></td>
 						    	<?php if (isset($attachment['FileName'])) : ?>
 						    	<?php if (strpos($attachment['FileName'], '=?') != 0): ?>
 						    	<td class="date"><?php echo $html->link(htmlentities($attachment['FileName']), '/emails/content'.strrchr($attachment['DataFile'], '/')) ?></td>

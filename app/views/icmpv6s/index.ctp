@@ -15,8 +15,8 @@
 
 	<div class="search shadow-box-bottom">		
 		<?php echo $form->create('Search', array( 'url' => array('controller' => 'icmpv6s', 'action' => 'index')));
-		      echo $form->input( 'search', array( 'type'=>'text','size' => '30', 'label'=> __('Search:', true), 'default' => $srchd));      
-		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'label'=> __('Relevance:', true),'default'=>$relevance));
+		      echo $form->input( 'search', array( 'type'=>'text', 'label'=> __('Search: ', true), 'default' => $srchd));      
+		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'label'=> __('Relevance: ', true),'default'=>$relevance));
 		 echo $form->end(__('Go', true));?>
 	</div>
 

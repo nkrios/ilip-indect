@@ -1,18 +1,6 @@
 
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-
-    function popupVoip(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=370,height=110,toolbar=no,resizable=no,menubar=no');
-      return false;
-    }
-</script>
-
 <div class="generic boxstyle_white">
-<h2 class="shadow-box-bottom"><?php __('RTP'); ?></h2>
+	<h2 class="shadow-box-bottom"><?php __('RTP'); ?></h2>
 
 	<div>
 		<table id='email_view' class="shadow-box-bottom divamiddle">
@@ -85,9 +73,9 @@
 		    <?php echo $this->Form->end(__('Save', true)); ?>
 		</div>
 
-</div>
+	</div>
 
-	<div id="messageframe">
+	<div class="messageframe">
 	    <!-- <h3><?php __('Contents'); ?></h3> -->
 			<div class="voip_flash">
 				<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="220" id="sound">
@@ -101,6 +89,17 @@
 				</object>
 			</div>
 	</div>
-</div>
 
 </div>
+
+<script>
+    function popupVetrina(whatopen) {
+      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
+      return false;
+    }
+
+    function popupVoip(whatopen) {
+      newWindow = window.open(whatopen, 'popup_vetrina', 'width=370,height=110,toolbar=no,resizable=no,menubar=no');
+      return false;
+    }
+</script>

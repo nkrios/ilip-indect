@@ -1,15 +1,18 @@
 
-<div class="generic">
+<div class="generic boxstyle_white">
+
+	<h2 class="shadow-box-bottom"><?php __('TFTP Files'); ?></h2>
+
 	<div class="search shadow-box-bottom">
 
 	<?php echo $form->create('Search',array( 'url' => array('controller' => 'tftps', 'action' => 'index')));
-	      echo $form->input('search', array('type'=>'text','size' => '40', 'label'=>__('Search:', true), 'default' => $srchd));
+	      echo $form->input('search', array('type'=>'text', 'label'=>__('Search: ', true), 'default' => $srchd));
 	      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 	      echo $form->end(__('Go', true));?>
 
 	</div>
 
-	<table id="messagelist" class="shadow-box-bottom">
+	<table class="shadow-box-bottom">
 		<tr>
 			<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
 			<th class="from"><?php echo $paginator->sort(__('Url', true), 'url'); ?></th>
