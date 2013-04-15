@@ -1,9 +1,9 @@
 
 <div class="generic boxstyle_white">
-	<h2 class="shadow-box-bottom"><?php __('Facebook'); ?></h2>
+	<h2 class="shadow-box-bottom">Facebook Chats</h2>
 	<div class="search shadow-box-bottom">
 		<?php echo $form->create('Search', array( 'url' => array('controller' => 'fbuchats', 'action' => 'index')));
-		      echo $form->input('search', array( 'type'=>'text', 'label'=>__('Search:', true), 'default' => $srchd));
+		      echo $form->input('search', array( 'type'=>'text', 'label'=>__('Search: ', true), 'default' => $srchd));
 		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
 		 echo $form->end(__('Go', true));?>
 	</div>

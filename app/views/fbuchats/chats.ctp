@@ -1,4 +1,7 @@
-
+<?php 
+function unicode2html($string) {
+    return preg_replace('/\\\\u([0-9a-z]{4})/', '&#x$1;', $string);
+} ?>
 <script>
     function popupVetrina(whatopen) {
       newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
@@ -6,7 +9,7 @@
     }
 </script>
 <div class="generic boxstyle_white">
-	<h2 class="shadow-box-bottom"><?php echo 'Facebook chat: '.htmlentities($chats[0]['Fbchat']['user']) ?></h2>
+	<h2 class="shadow-box-bottom"><?php echo 'Facebook chat: '.unicode2html($chats[0]['Fbchat']['user']) ?></h2>
 
 	<div class="search shadow-box-bottom">
 
@@ -32,12 +35,12 @@
 	  <?php $h = (int)($chat['Fbchat']['duration']/3600);
 	        $m = (int)($chat['Fbchat']['duration']/60 - $h*60);
 	        $s = (int)$chat['Fbchat']['duration']%60;
-	        $friend = $chats[0]['Fbchat']['friend'];
+	        $friend = unicode2html($chats[0]['Fbchat']['friend']);
 	   ?>
 	 <?php if ($chat['Fbchat']['first_visualization_user_id']) : ?>
 	  <tr>
 		<td rowspan='2'><?php echo $chat['Fbchat']['capture_date']; ?></td>
-		<td rowspan='2'><?php echo $chats[0]['Fbchat']['user']; ?></td>
+		<td rowspan='2'><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>
 		<td rowspan='2'><a href="#" onclick="popupVetrina('/fbuchats/view/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php echo $friend; ?></a></td>
 		<td rowspan='2'><?php echo $h.":".$m.":".$s; ?></td>
 		<td rowspan='2'><?php echo $chat['Fbchat']['data_size']; ?></td>
@@ -60,7 +63,7 @@
 	 <?php else : ?>
 	  <tr>
 	        <td rowspan='2'><?php echo $chat['Fbchat']['capture_date']; ?></td>
-	        <td rowspan='2'><?php echo $chats[0]['Fbchat']['user']; ?></td>
+	        <td rowspan='2'><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>
 	        <td rowspan='2'><a href="#" onclick="popupVetrina('/fbuchats/view/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php echo $friend; ?></a></td>
 	        <td rowspan='2'><?php echo $h.":".$m.":".$s; ?></td>
 	        <td rowspan='2'><?php echo $chat['Fbchat']['data_size']; ?></td>
@@ -91,5 +94,3 @@
     </tr>
   </table>
 </div>
-
-<?php print_r(json_decode($chats[0]['Fbchat']['user'])) ?>

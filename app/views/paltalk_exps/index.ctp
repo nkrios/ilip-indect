@@ -1,4 +1,4 @@
-<script language="text/javascript">
+<script>
     function popupVetrina(whatopen) {
       newWindow = window.open(whatopen, 'popup_vetrina', 'width=620,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
       return false;
@@ -8,7 +8,7 @@
 <div class="generic">
   <div class="search shadow-box-bottom">
   <?php echo $form->create('Search',array( 'url' => array('controller' => 'msn_chats', 'action' => 'index')));
-        echo $form->input('search', array('type'=>'text','size' => '40', 'label' => __('Search:', true), 'default' => $srchd));
+        echo $form->input('search', array('type'=>'text', 'label' => __('Search: ', true), 'default' => $srchd));
         echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
        echo $form->end(__('Go', true));?>
   </div>

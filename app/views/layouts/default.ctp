@@ -1,4 +1,7 @@
-<?php if (!isset($menu_left)) {
+<?php 
+
+
+if (!isset($menu_left)) {
   $menu_left = array(
     'active' => '0',
     'sections' => array(
