@@ -25,12 +25,12 @@
 	<?php foreach ($emails as $email): ?>
 	<?php if ($email['Webmail']['first_visualization_user_id']) : ?>
 		<tr>
-			<td><?php echo $email['Webmail']['capture_date']; ?></td>
-		        <?php if ($email['Webmail']['subject'] == "") : ?>
+			<td><?php echo $html->link($email['Webmail']['capture_date'],'/webmails/view/' . $email['Webmail']['id']) ?></td>
+		<?php if ($email['Webmail']['subject'] == "") : ?>
 		    <td><?php echo $html->link("--",'/webmails/view/' . $email['Webmail']['id']); ?></td>
-		        <?php else : ?>
+		<?php else : ?>
 			<td><?php echo $html->link(htmlentities($email['Webmail']['subject']), '/webmails/view/' . $email['Webmail']['id']); ?></td>
-		        <?php endif; ?>
+		<?php endif; ?>
 			<td><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $email['Webmail']['sender'])); ?></td>
 			<td><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $email['Webmail']['receivers'])); ?></td>
 			<td><?php echo $email['Webmail']['service']; ?></td>
@@ -39,11 +39,19 @@
 				  echo $email['Webmail']['relevance'];
 				}?>
 			</td>
-			<td><?php echo substr($email['Webmail']['comments'],0,30). '...'; ?></td>
+			<td title="<?php echo htmlentities($email['Webmail']['comments']) ?>">
+				<?php
+	    		if( strlen(htmlentities($email['Webmail']['comments'])) > 50 ){
+	    		 	echo substr(htmlentities($email['Webmail']['comments']),0,50).'...'; 
+	    		}else{
+	    			echo htmlentities($email['Webmail']['comments']); 
+	    		}
+	    		?>
+			</td>
 	  	</tr>
 	 <?php else : ?>
 		<tr>
-			<td><?php echo $email['Webmail']['capture_date']; ?></td>
+			<td><?php echo $html->link($email['Webmail']['capture_date'],'/webmails/view/' . $email['Webmail']['id']) ?></td>
 		        <?php if ($email['Webmail']['subject'] == "") : ?>
 		    <td><?php echo $html->link("--",'/webmails/view/' . $email['Webmail']['id']); ?></td>
 		        <?php else : ?>
@@ -54,19 +62,21 @@
 			<td><?php echo $email['Webmail']['service']; ?></td>
 			<td><?php echo $email['Webmail']['data_size']; ?></td>
 			<td><?php echo $email['Webmail']['relevance']; ?></td>
-			<td><?php echo substr($email['Webmail']['comments'],0,30). '...'; ?></td>
+			<td title="<?php echo htmlentities($email['Webmail']['comments']) ?>">
+				<?php
+	    		if( strlen(htmlentities($email['Webmail']['comments'])) > 50 ){
+	    		 	echo substr(htmlentities($email['Webmail']['comments']),0,50).'...'; 
+	    		}else{
+	    			echo htmlentities($email['Webmail']['comments']); 
+	    		}
+	    		?>
+			</td>
 		</tr>
 	 <?php endif; ?>
 	<?php endforeach; ?>
 	</table>
 
-	<table id="listpage" class="shadow-box-bottom">
-		<tr>
-			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-		       	<th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-			<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-		</tr>
-	</table>
+<?php echo $this->element('paginator'); ?>
 
 <!--Export to .csv-->
 <?php

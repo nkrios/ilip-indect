@@ -168,29 +168,38 @@ class TftpsController extends AppController {
 		    $this->Session->write('relevance', $rel);
             }
 
-		//check if we are coming from the actual view after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $tftp_file = $this->Tftp_file->read(null, $this->data['Edit']['id']);
-                  $tftp_file['Tftp_file']['relevance']=$this->data['Edit']['relevance'];
-                  $tftp_file['Tftp_file']['comments']=$this->data['Edit']['comments'];
-                  $this->Tftp_file->save($ftp_file);
+        //check if we are coming from the actual index after changing a value
+        if (!empty($this->data['EditCom'])) {
 
-		if($tftp['Tftp']['relevance'] < $tftp_file['Tftp_file']['relevance']){
-			$tftp['Tftp']['relevance'] = $tftp_file['Tftp_file']['relevance'];
-	                $this->Tftp->save($ftp);
-		}
-		else if($tftp['Tftp']['relevance'] > $tftp_file['Tftp_file']['relevance']){
-			$tftp['Tftp']['relevance'] = $tftp_file['Tftp_file']['relevance'];
-			//check all the relevances to update the parent ftp relevance to the maximum
-                        $tftp_files = $this->Tftp_file->find('all', array('conditions' => $filter));
-			foreach($tftp_files as $aux){
-				if($aux['Tftp_file']['relevance'] > $tftp['Tftp']['relevance']){
-					$tftp['Tftp']['relevance'] = $aux['Tftp_file']['relevance'];
-				}
-			}
-	                $this->Tftp->save($ftp);
-		}
+            $tftp_file = $this->Tftp_file->read(null, $this->data['EditCom']['id']);
+            $tftp_file['Tftp_file']['comments']=$this->data['EditCom']['comments'];
+            $this->Httpfile->save($email);
+
+        }else if (!empty($this->data['EditRel'])) {
+
+            $tftp_file = $this->Tftp_file->read(null, $this->data['EditRel']['id']);
+            $tftp_file['Tftp_file']['relevance']=$this->data['EditRel']['relevance'];
+            $this->Httpfile->save($tftp_file);
+
+            if($tftp['Tftp']['relevance'] < $tftp_file['Tftp_file']['relevance']){
+                $tftp['Tftp']['relevance'] = $tftp_file['Tftp_file']['relevance'];
+                        $this->Tftp->save($tftp);
             }
+            else if($tftp['Tftp']['relevance'] > $tftp_file['Tftp_file']['relevance']){
+                $tftp['Tftp']['relevance'] = $tftp_file['Tftp_file']['relevance'];
+                //check all the relevances to update the parent ftp relevance to the maximum
+                $tftp_files = $this->Tftp_file->find('all', array('conditions' => $filter));
+                foreach($tftp_files as $aux){
+                    if($aux['Tftp_file']['relevance'] > $tftp['Tftp']['relevance']){
+                        $tftp['Tftp']['relevance'] = $aux['Tftp_file']['relevance'];
+                    }
+                }
+                $this->Tftp->save($tftp);
+            }
+
+        }
+
+       
 	    if (!empty($this->data['Edit_Tftp'])) {
                   $tftp['Tftp']['comments']=$this->data['Edit_Tftp']['comments'];
                   $this->Tftp->save($ftp);

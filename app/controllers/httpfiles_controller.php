@@ -103,12 +103,15 @@ class HttpfilesController extends AppController {
 	    }
 
 		//check if we are coming from the actual index after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $email = $this->Httpfile->read(null, $this->data['Edit']['id']);
-                  $email['Httpfile']['relevance']=$this->data['Edit']['relevance'];
-                  $email['Httpfile']['comments']=$this->data['Edit']['comments'];
-                  $this->Httpfile->save($email);
-            }
+      if (!empty($this->data['EditRel'])) {
+        $email = $this->Httpfile->read(null, $this->data['EditRel']['id']);
+        $email['Httpfile']['relevance']=$this->data['EditRel']['relevance'];
+        $this->Httpfile->save($email);
+      }else if (!empty($this->data['EditCom'])) {
+        $email = $this->Httpfile->read(null, $this->data['EditCom']['id']);
+        $email['Httpfile']['comments']=$this->data['EditCom']['comments'];
+        $this->Httpfile->save($email);
+      }
 	  $this->data = null;
 	    //set parameters for the view
             $msgs = $this->paginate('Httpfile', $filter);

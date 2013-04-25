@@ -28,9 +28,9 @@ if (!isset($menu_left)) {
   <meta name='keywords' content='ilip,decoder,internet,ip,traffic,interception,pcap'>
 
   <?php if (isset($refresh_time)):  ?>
-      <!-- <meta http-equiv="refresh" content="<?php echo $refresh_time ?>"> -->
+      <meta http-equiv="refresh" content="<?php echo $refresh_time ?>">
   <?php endif; ?>
-  <title>ILIP (Indect Lawful Interception Platform): <?php echo $title_for_layout;?></title>
+  <title>Indect Lawful Interception Platform (ILIP) : <?php echo $title_for_layout;?></title>
   <?php 
     echo $html->css('style');
     echo $html->css('menu');
@@ -41,40 +41,31 @@ if (!isset($menu_left)) {
 
     echo $html->script('jquery-1.9.1.min.js');
     echo $html->script('http_get.js');
-    // echo $html->script('flowplayer-3.2.2.min.js');
+    echo $html->script('flowplayer-3.2.2.min.js');
     echo $html->script('swfobject.js');
+  
   ?>
-
-  <script>
-    function Lang(){
-	   if ($(this).val() != "Choose another language") {
-	     window.location.href='/users/login/'+$(this).val();
-	   }
-    }
-  	$(function() {
-      $("#lang").change(Lang);
-      $("#devel_image").click(function(){$(this).slideUp()});
-  	 });
-  </script>
+  <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 </head>
 
 <body>
 
-  <header id='header' class="centered">
+  <header class="centered">
+
+    <div id="main-header">
 
       <div id="logos" class="divamiddle">
           <a href='http://www.indect-project.eu'><?php echo $html->image("Indect-logo-bare.jpg", array('alt'=>'INDECT', 'title'=>'INDECT','id'=>'logo_indect','class'=>'divamiddle')); ?></a>
           <a href='http://www.uc3m.es'><?php echo $html->image("uc3m_55.png", array('alt'=>'UC3M','title'=>'UC3M','id'=>'logo_uc3m','class'=>'divamiddle')); ?></a>
       </div>
 
-      <h1 id="title" class="divamiddle">ILIP (Indect Lawful Interception Platform)</h1>
+      <h1 id="title" class="divamiddle">Indect Lawful Interception Platform (ILIP)</h1>
 
       <div id="session_info" class="divamiddle">
 
         <?php if ($session->read('user')): ?>
 
         <h2 class="divamiddle">
-          <!-- <?php __('User: '); ?> -->
           <span class='divamiddle' style="background-color:rgba(200,200,200,0.3);padding:3px 6px;border-radius:10px;">
             <img src="/img/user2.png" alt="User" class="divamiddle"><?php echo $html->link( $session->read('username'), '/users/cpassword') ?>
           </span>
@@ -99,56 +90,52 @@ if (!isset($menu_left)) {
 
       </div>
 
+    </div>
+
+      <nav id='adminmenu' class="centered">
+        <ul class="menu">
+          <?php foreach ($menu_left['sections'] as $section): ?>
+              
+                <li><a href="#"><?php echo $section['name']; ?></a>
+                  <ul>
+                    <?php foreach ($section['sub'] as $submenu): ?>
+                      <li><?php echo $html->link($submenu['name'], $submenu['link']) ?></li>
+                    <?php endforeach; ?>
+                  </ul>
+                </li>
+
+          <?php endforeach; ?>
+        </ul>
+      </nav>
+
+      <div id="navigation-bar">
+        <?php if($this->Session->check("pol")){
+              echo '<span>'.$html->link(__('Sessions',true),'/sols/index').'</span>';
+              if($this->Session->check("sol")){
+                echo '<span>&rarr;</span>';
+                echo '<span>'.$html->link(__('Session',true),'/sols/view/'.$this->Session->read('pol')).'</span>';
+                  if($this->params['controller'] != 'sols'){
+                    echo '<span>&rarr;</span>';
+                    echo '<span>'.$html->link($this->params['controller'],
+                          '/'.$this->params['controller'].'/'.'index').'</span>';
+                  }
+                }
+            }else{
+              
+            }?>
+      </div>
+
     </header>
 
   <div id="wrapper" class="centered">
-
-    <nav id='adminmenu' class="centered">
-      <ul class="menu">
-        <?php foreach ($menu_left['sections'] as $section): ?>
-            
-              <li><a href="#"><?php echo $section['name']; ?></a>
-                <ul>
-                  <?php foreach ($section['sub'] as $submenu): ?>
-                    <li><?php echo $html->link($submenu['name'], $submenu['link']) ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              </li>
-
-        <?php endforeach; ?>
-      </ul>
-    </nav>
-
-    <div id="navigation-bar">
-      <?php if($this->Session->check("pol")){
-            echo '<span>'.$html->link(__('Sessions',true),'/sols/index').'</span>';
-            if($this->Session->check("sol")){
-              echo '<span>&rarr;</span>';
-              echo '<span>'.$html->link(__('Session',true),'/sols/view/'.$this->Session->read('pol')).'</span>';
-                if($this->params['controller'] != 'sols'){
-                  echo '<span>&rarr;</span>';
-                  echo '<span>'.$html->link($this->params['controller'],
-                        '/'.$this->params['controller'].'/'.'index').'</span>';
-                }
-              }
-          }else{}?>
-    </div>
     
-    <div id='content' class="centered">
+    <div id='content'>
       <?php
         echo $content_for_layout;
         echo $this->Session->flash();
       ?>
     </div>
 
-<!-- Log Session -->
-    <?php 
-    // print_r($this->Session->read());
-    //     echo 'POL session: '. $this->Session->check("pol");
-    //     echo '<br><br>';
-    //     print_r($this->params);
-    ?>
-  
   </div><!-- end Wrapper -->
 
   <footer id="footer" class="centered">
@@ -206,6 +193,66 @@ if (!isset($menu_left)) {
     </div>
 
   </footer>
+
+  <script>
+    function Lang(){
+     if ($(this).val() != "Choose another language") {
+       window.location.href='/users/login/'+$(this).val();
+     }
+    }
+    $(function(){
+      $("#lang").change(Lang);
+      $("#devel_image").click(function(){$(this).slideUp()});
+    });
+
+    function popupVetrina(whatopen) {
+      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
+      return false;
+    }
+    function popupVoip(whatopen) {
+      newWindow = window.open(whatopen, 'popup_vetrina', 'width=370,height=110,toolbar=no,resizable=no,menubar=no');
+      return false;
+    }
+
+    $('.pinfo').mouseover(function (){
+      $(this).children('.ipcap').css('display','inline-block')
+    });
+
+    $('.pinfo').mouseout(function (){
+      $(this).children('.ipcap').hide()
+    });
+
+
+    //Submit data when element loses the focus
+    $("form textarea").blur(function () {
+      console.log('table input blur')
+      sendData($(this))
+      // return false;
+    });
+    $("form select").blur(function () {
+      console.log('table select blur')
+      sendData($(this))
+      // return false;
+    });
+
+    function sendData(elemOfForm){
+      var frm = elemOfForm.parents('form');
+      console.log(elemOfForm.parents('form'))
+      console.log(frm.attr('action'))
+      $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                console.log('ok');
+            },
+            error: function() {
+              console.log('error');
+            }
+        });
+        return false;
+    }
+</script>
 
 </body>
 </html>

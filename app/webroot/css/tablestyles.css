@@ -37,23 +37,30 @@ table tr:focus,table tr:hover{
 }
 
 /*Table headers*/
-table tr th.date{width: 10%;}
-table tr th.info{width: 5%;}
-table tr th.ip{width: 10%;}
+table tr th.info,
+table tr th.relevance,
+table tr th.number,
+table tr th.size,
+table tr th.method{width: 5%;}
 table tr th.comments{width: 25%;}
 table tr th.url{width: 30%;}
-table tr th.actions{width: 10%;}
-table tr th.type{  width: 15%;}
-table tr th.plfl{  width: 10%;}
-table tr th.relevance{  width: 5%;}
-table tr th.size{  width: 5%;}
-table tr th.from,table tr th.to{width: 10%;}
-table tr th.number{  width: 5%;}
-table tr th.username{  width: 15%;}
-table tr th.subject{  width: 15%;}
+table tr th.actions,
+table tr th.type,
+table tr th.plfl,
+table tr th.from,
+table tr th.to,
+table tr th.ip{width: 15%;}
+table tr th.username,
+table tr th.subject,
+table tr th.date{width: 10%;}
+
 /*Table contents*/
 table tr td{
   text-overflow: ellipsis; 
+}
+table tr td textarea{
+  padding:0.1em 0.2em;
+  width:90%;
 }
 table tr td.url{
   text-align: left; 
@@ -71,8 +78,9 @@ table tr td.webimgs {
 
 
 table#web_view,table#email_view{
-  width:60%;
+  width:50%;
   display: inline-table;
+  text-align: left;
 }
 table#web_view tr th{
   width: 50%;
@@ -129,10 +137,13 @@ table#listpage th {
   color: black;
   padding: 0.5em;
 }
-table#listpage tr th.next {
-  vertical-align: middle;
+table#listpage tr th.next{
   width: 10%;
+}
+table#listpage tr th.next a{
+  padding: 0.5em 3em;
   cursor: pointer;
+  vertical-align: middle;
 }
 table#listpage tr th.next:hover{
 	background: #A9C2A1;

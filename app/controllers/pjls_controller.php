@@ -100,12 +100,20 @@ class PjlsController extends AppController {
 	    }
 
 		//check if we are coming from the actual view after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $pjl = $this->Pjl->read(null, $this->data['Edit']['id']);
-                  $pjl['Pjl']['relevance']=$this->data['Edit']['relevance'];
-                  $pjl['Pjl']['comments']=$this->data['Edit']['comments'];
-                  $this->Pjl->save($pjl);
-            }
+        if (!empty($this->data['EditCom'])) {
+
+            $pjl = $this->Pjl->read(null, $this->data['Edit']['id']);
+            $pjl['Pjl']['comments']=$this->data['Edit']['comments'];
+            $this->Pjl->save($pjl);
+
+        }else if (!empty($this->data['EditRel'])) {
+
+            $pjl = $this->Pjl->read(null, $this->data['Edit']['id']);
+            $pjl['Pjl']['relevance']=$this->data['Edit']['relevance'];
+            $this->Pjl->save($pjl);
+        }
+
+
 		$this->data = null;
 	    //set parameters for the view
             $msgs = $this->paginate('Pjl', $filter);

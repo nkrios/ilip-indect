@@ -1,9 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom"><?php __('Webmail to'); ?> <?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['to']))?></h2>
@@ -43,17 +37,15 @@
 		</table>
 
 		<div id="contents_view" class="generic boxstyle_white divamiddle">
-			<!-- <h3><?php __('Edit'); ?></h3> -->
 		    <?php echo $this->Form->create('Edit', array('url' => '/webmails/view/'.$email['Webmail']['id']));
 			    echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $email['Webmail']['relevance'] ,'empty'=>'-'));
-			    echo $this->Form->input('comments', array('type'=>'string', 'default' => $email['Webmail']['comments']));
+			    echo $this->Form->input('comments', array('type'=>'string','rows'=>'3', 'default' => $email['Webmail']['comments']));
 			?>
-		    <?php echo $this->Form->end(__('Save', true)); ?>
+		    <?php echo $this->Form->end(); ?>
 		</div>
 	</div>
 
 	<div class="messageframe">
-		<!-- <h3><?php __('Contents'); ?></h3> -->
 		<div>
 			<?php if ($mailObj['Type'] == 'html') : ?>
 			<object class="html" type="text/html" data="/webmails/content/<?php echo strrchr($mailObj['DataFile'], '/'); ?>">

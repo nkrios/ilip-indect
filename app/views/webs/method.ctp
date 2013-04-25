@@ -1,6 +1,6 @@
 
 <div class="generic boxstyle_white">
-	<h2 class="shadow-box-bottom"><?php echo 'URL: http://'.substr(htmlentities($message['Web']['url']),0,50).' ...'; ?></h2>
+	<h2 class="shadow-box-bottom"><?php echo 'URL: http://'.substr(htmlentities($message['Web']['url']),0,50).'...'; ?></h2>
 
 	<div>
 		<table id='web_view' class="shadow-box-bottom divamiddle">
@@ -45,19 +45,18 @@
 		</table>
 
 		<div id="contents_view" class="generic boxstyle_white divamiddle">			
-		    <!-- <h3><?php __('Edit'); ?></h3> -->
-		    <?php echo $this->Form->create('Edit', array('url' => '/webs/method/'.$message['Web']['id']));
-			    echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $message['Web']['relevance'] ,'empty'=>'-','label'=>'Relevance: '));
-			    echo $this->Form->input('comments', array('type'=>'string','rows'=>'3','default' => $message['Web']['comments']));
+		    <?php 
+		    echo $this->Form->create('Edit', array('url' => '/webs/method/'.$message['Web']['id']));
+			echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $message['Web']['relevance'] ,'empty'=>'-','label'=>'Relevance: '));
+			echo $this->Form->input('comments', array('type'=>'string','rows'=>'3','default' => $message['Web']['comments']));
+			echo $this->Form->end(); 
 			?>
-		    <?php echo $this->Form->end(__('Save', true)); ?>
 		</div>
 
 	</div>
 
 	<div class="messageframe">
 		<div>
-		    <!-- <h3><?php __('Contents'); ?></h3> -->
 			<div id="displ"></div>
 			<textarea  id="contenuto" readonly="readonly" style="text-align: left" rows="10" cols="75"></textarea>
 		</div>

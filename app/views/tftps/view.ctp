@@ -1,9 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="search shadow-box-bottom">
 	<h2 class="shadow-box-bottom"><?php echo 'TFTP - URL: '.$tftp['Tftp']['url'] ?></h2>
@@ -65,33 +59,30 @@
 		</tr>
 		<?php foreach ($tftp_file as $data_file): ?>
 		<tr>
-			<td rowspan='2'><?php echo $data_file['Tftp_file']['capture_date']; ?></td>
-			<td rowspan='2'><?php echo $html->link($data_file['Tftp_file']['filename'], 'data_file/' . $data_file['Tftp_file']['id']); ?></td>
-			<td rowspan='2'><?php echo $data_file['Tftp_file']['file_size']; ?></td>
-			<td rowspan='2'><?php if ($data_file['Tftp_file']['dowloaded']) echo 'down'; else echo 'up'; ?></td>
+			<td><?php echo $data_file['Tftp_file']['capture_date']; ?></td>
+			<td><?php echo $html->link($data_file['Tftp_file']['filename'], 'data_file/' . $data_file['Tftp_file']['id']); ?></td>
+			<td><?php echo $data_file['Tftp_file']['file_size']; ?></td>
+			<td><?php if ($data_file['Tftp_file']['dowloaded']) echo 'down'; else echo 'up'; ?></td>
 			<td>
 			<?php 
-			echo $form->create('Edit',array( 'url' => '/tftps/view/'.$tftp['Tftp']['tftp_id']));
-			echo $form->select('relevance', $relevanceoptions, $data_file['Tftp_file']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true))); ?></td>
-			<td><?php
-				echo $form->hidden('id', array('value' => $data_file['Tftp_file']['id']));
-				echo $form->input ('comments', array ('default' => $data_file['Tftp_file']['comments'],'label' => false), 'size' => '90%' );
+				echo $form->create('EditRel',array( 'url' => '/tftps/view/'.$tftp['Tftp']['tftp_id']));
+				echo $this->Form->input('relevance', array('options' =>$relevanceoptions, 'default'=>$data_file['Tftp_file']['relevance'],'type'=>'select','empty' => __('-', true),'label'=>false));
+				echo $this->Form->hidden('id', array('value' => $data_file['Ftp_file']['id']));
+				echo $this->Form->end();
 			?>
 			</td>
-
-			<td class="pinfo" rowspan='2'><a href="#" onclick="popupVetrina('/tftps/info_data/<?php echo $data_file['Tftp_file']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/'.$data_file['Tftp_file']['id']); ?></div></td>
-		</tr>
-		<tr>
-			<td colspan='2'><?php echo $form->end(__('Save', true)); ?></td>
+			<td>
+			<?php
+				echo $this->Form->create('EditCom','url' => '/tftps/view/'.$tftp['Tftp']['tftp_id']));
+				echo $this->Form->textarea('comments', array ('default' => $tftp['Tftp']['tftp_id']['comments'],'label' => false));
+				echo $this->Form->hidden('id', array('value' => $tftp['Tftp']['tftp_id']));
+				echo $this->Form->end();
+			?>
+			</td>
+			<td class="pinfo"><a href="#" onclick="popupVetrina('/tftps/info_data/<?php echo $data_file['Tftp_file']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/'.$data_file['Tftp_file']['id']); ?></div></td>
 		</tr>
 		<?php endforeach; ?>
 		</table>
 
-	<table id="listpage" class="shadow-box-bottom">
-		<tr>
-			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-		       	<th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-			<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-		</tr>
-	</table>
+<?php echo $this->element('paginator'); ?>
 </div>

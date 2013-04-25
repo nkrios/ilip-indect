@@ -65,41 +65,29 @@
 
 
 		<div id="contents_view" class="generic boxstyle_white divamiddle">
-		    <!-- <h3><?php __('Edit'); ?></h3> -->
+
 		    <?php echo $this->Form->create('Edit', array('url' => '/rtps/view/'.$rtp['Rtp']['id']));
 			    echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $rtp['Rtp']['relevance'] ,'empty'=>'-'));
-			    echo $this->Form->input('comments', array('type'=>'string','default' => $rtp['Rtp']['comments']));
+			    echo $this->Form->input('comments', array('type'=>'string','rows'=>'4','default' => $rtp['Rtp']['comments']));
 			?>
-		    <?php echo $this->Form->end(__('Save', true)); ?>
+		    <?php echo $this->Form->end(); ?>
 		</div>
 
 	</div>
 
 	<div class="messageframe">
-	    <!-- <h3><?php __('Contents'); ?></h3> -->
-			<div class="voip_flash">
-				<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="220" id="sound">
-					<param name="allowScriptAccess" value="sameDomain"></param>
-					<param name="allowFullScreen" value="false"></param>
-					<param name="movie" value="/files/xplico_voip_mix.swf"></param>
-					<param name="quality" value="high"></param>
-					<param name="bgcolor" value="#8C63A2"></param>
-					<param name=FlashVars  value="audio_url=<?php echo '/rtps/mix/'.$rtp['Rtp']['id']; ?>"></param>
-					<embed src="/files/xplico_voip_mix.swf" quality="high" bgcolor="#8C63A2" width="100%" height="220"  FlashVars="audio_url=<?php echo '/rtps/mix/'.$rtp['Rtp']['id']; ?>" name="sound" wmode="window" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_en"></embed>
-				</object>
-			</div>
+
+		<div class="voip_flash">
+			<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="220" id="sound">
+				<param name="allowScriptAccess" value="sameDomain"></param>
+				<param name="allowFullScreen" value="false"></param>
+				<param name="movie" value="/files/xplico_voip_mix.swf"></param>
+				<param name="quality" value="high"></param>
+				<param name="bgcolor" value="#8C63A2"></param>
+				<param name=FlashVars  value="audio_url=<?php echo '/rtps/mix/'.$rtp['Rtp']['id']; ?>"></param>
+				<embed src="/files/xplico_voip_mix.swf" quality="high" bgcolor="#8C63A2" width="100%" height="220"  FlashVars="audio_url=<?php echo '/rtps/mix/'.$rtp['Rtp']['id']; ?>" name="sound" wmode="window" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_en"></embed>
+			</object>
+		</div>
 	</div>
 
 </div>
-
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-
-    function popupVoip(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=370,height=110,toolbar=no,resizable=no,menubar=no');
-      return false;
-    }
-</script>

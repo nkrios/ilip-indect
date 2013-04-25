@@ -102,21 +102,21 @@
       <table class="shadow-box-bottom">
         <tr>
             <th><?php __('Case and Session name'); ?></th>
-            <td><?php echo $html->link($sol['Pol']['name'], '/pols/view/' .$sol['Pol']['id']).' -> '.$sol['Sol']['name']; ?></td>
-          </tr>
-          <tr>
+            <td><?php echo $html->link($sol['Pol']['name'], '/pols/view/' .$sol['Pol']['id']).' &rarr; '.$sol['Sol']['name']; ?></td>
+        </tr>
+        <tr>
             <th><?php __('Cap. Start Time'); ?></th>
             <td><?php echo $sol['Sol']['start_time']; ?></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
              <th><?php __('Cap. End Time'); ?></th>
              <td><?php echo $sol['Sol']['end_time']; ?></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <th><?php __('Status'); ?></th>
             <td><?php echo $sol['Sol']['status']; ?></td>
-          </tr>	
-          <tr>
+        </tr>	
+        <tr>
             <th><?php __('Hosts'); ?></th>
             <td>
               <?php if (empty($hosts)): ?>

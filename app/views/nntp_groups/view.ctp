@@ -1,11 +1,4 @@
 
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
-
 <div class="generic boxstyle_white">
 
 	<h2><?php echo __('Article from ').$html->link($mailObj['from'], '/nntp_groups/grp/'.$article['Nntp_article']['nntp_group_id']);?></h2>
@@ -16,27 +9,27 @@
 
 			<tbody>
 				<tr>
-					<th class="header-title"><?php __('Subject:'); ?></th>
+					<th><?php __('Subject:'); ?></th>
 					<td class="subject"><?php echo $mailObj['Subject']?></td>
 				</tr>
 				<tr>
-					<th class="header-title"><?php __('Sender:'); ?></th>
+					<th><?php __('Sender:'); ?></th>
 					<td class="from"><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['from'])) ?> </td>
 				</tr>
 				<tr>
-					<th class="header-title"><?php __('Recipient:'); ?></th>
+					<th><?php __('Recipient:'); ?></th>
 					<td class="to"><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['to'])) ?></td>
 				</tr>
 				<tr>
-					<th class="header-title"><?php __('Date:'); ?></th>
+					<th><?php __('Date:'); ?></th>
 					<td class="date"><?php echo $mailObj['Date']?></td>
 				</tr>
 				<tr>
-					<th class="header-title"><?php __('EML file:'); ?></th>
+					<th><?php __('EML file:'); ?></th>
 					<td class="date"><?php echo $html->link('article.eml', '/nntp_groups/eml') ?></td>
 				</tr>
 				<tr>
-					<th class="header-title"><?php __('Info:'); ?></th>
+					<th><?php __('Info:'); ?></th>
 					<td class="date pinfo"><a href="#" onclick="popupVetrina('/nntp_groups/info','scrollbar=auto'); return false"><?php __('info.xml'); ?></a><div class="ipcap"><?php echo $html->link('pcap', 'pcap/'); ?></div>
 					</td>
 				</tr>
@@ -47,8 +40,8 @@
 		    <?php 
 		    echo $this->Form->create('Edit', array('url' => '/nntp_groups/view/'.$article['Nntp_article']['id']));			 
 			echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $article['Nntp_article']['relevance'] ,'empty'=>'-'));
-			echo $this->Form->input('comments', array('type'=>'textarea','default' => $article['Nntp_article']['comments']));
-			echo $this->Form->end(__('Save', true));
+			echo $this->Form->textarea('comments', array('rows'=>'4','default' => $article['Nntp_article']['comments']));
+			echo $this->Form->end();
 			?>
 			    
 		</div>
@@ -70,7 +63,7 @@
 			  <tbody>
 			  <?php foreach($mailObj['Attachments'] as $attachment) : ?>
 			    <tr>
-			    <td class="header-title">Attached <?php echo $attachment['Type'] ?></td>
+			    <td>Attached <?php echo $attachment['Type'] ?></td>
 			    <?php if (isset($attachment['FileName'])) : ?>
 			    <td class="date"><?php echo $html->link($attachment['FileName'], '/nntp_groups/content'.strrchr($attachment['DataFile'], '/')) ?></td>
 			    <?php elseif (isset($attachment['Description'])) : ?>

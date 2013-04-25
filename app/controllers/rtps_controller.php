@@ -197,16 +197,16 @@ class RtpsController extends AppController {
 
 		//save changes
 		//check if we are coming from the actual index after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $rtp['Rtp']['relevance']=$this->data['Edit']['relevance'];
-                  $rtp['Rtp']['comments']=$this->data['Edit']['comments'];
-                  $this->Rtp->save($sip);
-		  $this->data = null;
-            }
-            $this->set('rtp', $rtp);
-            $this->set('conversation', $conversation);
-	    $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
+	    if (!empty($this->data['Edit'])){
+            $rtp['Rtp']['relevance']=$this->data['Edit']['relevance'];
+            $rtp['Rtp']['comments']=$this->data['Edit']['comments'];
+            $this->Rtp->save($rtp);
+            $this->data = null;
         }
+        $this->set('rtp', $rtp);
+        $this->set('conversation', $conversation);
+	    $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
+    }
 
         function caller_play($id = null) {
             if (!$id) {

@@ -1,20 +1,14 @@
 
-<script>
-   function popupVetrina(whatopen){
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=620,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-   }
-</script>
-
 <div class="generic boxstyle_white">
    <h2 class="shadow-box-bottom"><?php __('Images'); ?></h2>
-   <div class="search shadow-box-bottom">
+   
+   <div class="search shadow-box-bottom" style="width:60%">
 
    <?php 
         echo $form->create('Search',array( 'url' => array('controller' => 'webs', 'action' => 'images')));
         echo $form->input('search', array('type'=>'text','label'=>__('Search: ', true), 'default' => $srchd));
         echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','label'=>__('Relevance: ', true),'empty'=>__('-',true),'default'=>$relevance));
-        echo $form->input('size', array('size' => '10'));
+        echo $form->input('size', array('size' => '5'));
         echo $form->end(__('Go', true));?>
    </div>
 
@@ -129,11 +123,6 @@
     <?php endfor; ?>
     </table>
 
-   <table id="listpage" class="shadow-box-bottom">
-      <tr>
-         <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-         <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-         <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-      </tr>
-   </table>
+<?php echo $this->element('paginator'); ?>
+
 </div>

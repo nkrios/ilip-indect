@@ -1,13 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-    function popupVoip(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=370,height=110,toolbar=no,resizable=no,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom"><?php __('SIP'); ?></h2>
@@ -80,19 +70,17 @@
 		</table>
 
 		<div id="contents_view" class="generic boxstyle_white divamiddle">
-		    <!-- <h3><?php __('Edit'); ?></h3> -->
-		    <?php echo $this->Form->create('Edit', array('url' => '/sips/view/'.$sip['Sip']['id']));
-			    echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $sip['Sip']['relevance'] ,'empty'=>'-'));
-			    echo $this->Form->input('comments', array('type'=>'string', 'default' => $sip['Sip']['comments']));
-			?>
-		    <?php echo $this->Form->end(__('Save', true)); ?>		    
+		    <?php 
+		    echo $this->Form->create('Edit', array('url' => '/sips/view/'.$sip['Sip']['id']));
+			echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $sip['Sip']['relevance'] ,'empty'=>'-'));
+			echo $this->Form->input('comments', array('type'=>'string','rows'=>'4', 'default' => $sip['Sip']['comments']));
+			echo $this->Form->end();
+			?>	    
 		</div>
 
 	</div>
 
 	<div class="messageframe">
-
-		<!-- <h3><?php __('Contents'); ?></h3> -->
 		<div class="voip_flash">
 			<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="220" id="sound" align="middle">
 					<param name="allowScriptAccess" value="sameDomain"></param>

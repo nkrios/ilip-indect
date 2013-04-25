@@ -169,32 +169,39 @@ class MmsController extends AppController {
                 }
 
 		//check if we are coming from the actual view after changing a value
-                if (!empty($this->data['Edit'])) {
-                   $mms_content = $this->Mmscontent->read(null, $this->data['Edit']['id']);
-                   $mms_content['Mmscontent']['relevance']=$this->data['Edit']['relevance'];
-                   $mms_content['Mmscontent']['comments']=$this->data['Edit']['comments'];
-                   $this->Mmscontent->save($mms_content);
+        if (!empty($this->data['EditCom'])) {
 
-		   if($mm['Mm']['relevance'] < $mms_content['Mmscontent']['relevance']){
-			$mm['Mm']['relevance'] = $mms_content['Mmscontent']['relevance'];
-	                $this->Mm->save($mm);
-		   }
-		   else if($mm['Mm']['relevance'] > $mms_content['Mmscontent']['relevance']){
-			$mm['Mm']['relevance'] = $mms_content['Mmscontent']['relevance'];
-			//check all the relevances to update the parent ftp relevance to the maximum
-                        $mms_contents = $this->Mmscontent->find('all', array('conditions' => $filter));
-			foreach($mms_contents as $aux){
-				if($aux['Mmscontent']['relevance'] > $mm['Mm']['relevance']){
-					$mm['Mm']['relevance'] = $aux['Mmscontent']['relevance'];
-				}
-			}
-	                $this->Mm->save($mm);
-		   }
+            $mms_content = $this->Mmscontent->read(null, $this->data['EditCom']['id']);
+            $mms_content['Mmscontent']['comments']=$this->data['EditCom']['comments'];
+            $this->Mmscontent->save($mms_content);
+
+        }else if (!empty($this->data['EditRel'])) {
+
+            $mms_content = $this->Mmscontent->read(null, $this->data['EditRel']['id']);
+            $mms_content['Mmscontent']['relevance']=$this->data['EditRel']['relevance'];
+            $this->Mmscontent->save($mms_content);
+
+            if($mm['Mm']['relevance'] < $mms_content['Mmscontent']['relevance']){
+                $mm['Mm']['relevance'] = $mms_content['Mmscontent']['relevance'];
+                $this->Mm->save($mm);
+            }else if($mm['Mm']['relevance'] > $mms_content['Mmscontent']['relevance']){
+                $mm['Mm']['relevance'] = $mms_content['Mmscontent']['relevance'];
+                //check all the relevances to update the parent ftp relevance to the maximum
+                $mms_contents = $this->Mmscontent->find('all', array('conditions' => $filter));
+                foreach($mms_contents as $aux){
+                    if($aux['Mmscontent']['relevance'] > $mm['Mm']['relevance']){
+                        $mm['Mm']['relevance'] = $aux['Mmscontent']['relevance'];
+                    }
                 }
-                if (!empty($this->data['Edit_Mm'])) {
-                    $mm['Mm']['comments']=$this->data['Edit_Mm']['comments'];
-                    $this->Mm->save($mm);
-                }
+                $this->Mm->save($mm);
+            }
+        }
+
+
+            if (!empty($this->data['Edit_Mm'])) {
+                $mm['Mm']['comments']=$this->data['Edit_Mm']['comments'];
+                $this->Mm->save($mm);
+            }
 //	        $this->data = null;
 
                 //prepare the filter with the searching conditions

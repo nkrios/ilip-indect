@@ -257,25 +257,21 @@ class UsersController extends AppController
 
 	  //check only the first time (there is no data in the form)
 	  //if there is a valid and trusted certificate
-    /*
-    if( empty($this->data) && $_SERVER['SSL_CLIENT_VERIFY'] == 'SUCCESS' ){
-		  //get the userID data in the certificate
-		  $cert_data=openssl_x509_parse($_SERVER['SSL_CLIENT_CERT']);
-		  //$this->set(compact('cert_data');
-		  if( isset($cert_data['subject']['UID']) ){
-			 $user_login = $cert_data['subject']['UID'];
-			 $cert="valid";
-			 $login=TRUE;
-		  }
-		  else{
-			 $cert="no_valid";
+          if( empty($this->data) && $_SERVER['SSL_CLIENT_VERIFY'] == 'SUCCESS' ){
+		//get the userID data in the certificate
+		$cert_data=openssl_x509_parse($_SERVER['SSL_CLIENT_CERT']);
+		//$this->set(compact('cert_data');
+		if( isset($cert_data['subject']['UID']) ){
+			$user_login = $cert_data['subject']['UID'];
+			$cert="valid";
+			$login=TRUE;
+		}
+		else{
+			$cert="no_valid";
 	                //$this->Session->write('certificate_error', 1);
         	        //$this->redirect('/users/certificate_error/');
-		  }
-    }//end if( empty($this->data) && $_SERVER['SSL_CLIENT_VERIFY'] == 'SUCCESS' ){
-
-*/
-
+		}
+          }//end if( empty($this->data) && $_SERVER['SSL_CLIENT_VERIFY'] == 'SUCCESS' ){
 
 
 	  //if there is no user_login, then certificate:
@@ -285,27 +281,27 @@ class UsersController extends AppController
 	  //Actually:
 	  // 'generous' should not happen as requested client certificates are those from trusted CAs
 	  // 'failed' should not happen as apache rejects the certificate
-    if( !$user_login ){
-		  //login and password fields have been filled up
-		  if (!empty ($this->data['User']['userlogin']) && !empty ($this->data['User']['password'])) {
-			 $user_login = $this->data['User']['userlogin'];
-		  }
-		  //either login or password fields have not been filled up
-		  else if ( empty ($this->data['User']['userlogin']) || empty ($this->data['User']['password']) ) {
-			 if( $cert == "no_valid" ){
+          if( !$user_login ){
+		//login and password fields have been filled up
+		if (!empty ($this->data['User']['userlogin']) && !empty ($this->data['User']['password'])) {
+			$user_login = $this->data['User']['userlogin'];
+		}
+		//either login or password fields have not been filled up
+		else if ( empty ($this->data['User']['userlogin']) || empty ($this->data['User']['password']) ) {
+			if( $cert == "no_valid" ){
         			$this->Session->setFlash(__('The provided certificate for '.$cert_data['subject']['CN'].' is not valid. Please fill up all the data', true));
-			 }
-			 else{
+			}
+			else{
 				$this->Session->setFlash(__('Please fill up all the data.', true));
 			}
 		}
-   //}//end if($cert==FALSE)
+          }//end if($cert==FALSE)
 
 	  //if there is user_login
-          /*
           if( $user_login ){
 	    ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
 	    $ds = ldap_connect("ldap://163.117.166.34");  // must be a valid LDAP server!
+//	    $ds = ldap_connect("ldap://192.168.1.138");  // must be a valid LDAP server!
             if (!$ds || !isset($ds)) {
                  $this->Session->setFlash(__('There was an error during the authorization process!', true));
             }
@@ -356,7 +352,6 @@ class UsersController extends AppController
                                 ldap_close($ds);
 
 				if( $info['count'] != 0 ){
-          */
 			                //check ilip database
 			                $results = $this->User->findByUserlogin($user_login);
 			                if($results){
@@ -370,7 +365,11 @@ class UsersController extends AppController
 			                    $this->User->id = $results['User']['id'];
 			                    $this->User->saveField('last_login', date("Y-m-d H:i:s"));
 			                    $this->User->saveField('login_num', $results['User']['login_num'] + 1);
+
+						//ask for login/password from xplico
+					// if ($results && $results['User']['password'] == md5($this->data['User']['password']) && $results['User']['em_checked'] == 1) {
 					/*
+			                    #check if admin in xplico
 			                    if ($results['User']['group_id'] == 1) {
 			                        // admin privilages
 			                        $this->Session->write('admin', 1);
@@ -380,16 +379,14 @@ class UsersController extends AppController
 			                        $this->redirect('/pols/index');
 			                    }
 					*/
-			                    #check if admin
-                          /*
-                          if( isset($info[0]['usertype']) && ($info[0]['usertype'][0]=="admin") ){
-                              $this->Session->write('admin', 1);
-                              $this->redirect('/admins');
-                          }
-                          else{*/
-                              $this->redirect('/pols/index');
-                          }
-                         /* 
+			                    #check if admin in ldap
+			                    if( isset($info[0]['usertype']) && ($info[0]['usertype'][0]=="admin") ){
+			                        $this->Session->write('admin', 1);
+			                        $this->redirect('/admins');
+			                    }
+			                    else{
+			                        $this->redirect('/pols/index');
+			                    }
 					}//end of if($results)
 					//user is not in the application
 			                else{
@@ -415,7 +412,7 @@ class UsersController extends AppController
 		}//end else (if (!ldap_set_option($ds,LDAP_OPT_PROTOCOL_VERSION,3)))
 
             }//end else (if (!$ds || !isset($ds)))
-*/
+
           }//end if(isset($user_login))
 
 	}//end else (if ($isXplicoRunning == 0))

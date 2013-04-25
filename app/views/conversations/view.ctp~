@@ -34,9 +34,9 @@ La tabla streams (archivos de audio y texto) tiene 7 campos:
 
 <table>
 	<tr>
-		<th ><?php echo __('Audio',true); ?></th>
-		<th ><?php echo __('Conversation name',true); ?></th>
-		<th ><?php echo __('Conversation Alias',true); ?></th>
+		<th width="33%"><?php echo __('Audio',true); ?></th>
+		<th width="33%"><?php echo __('Conversation name',true); ?></th>
+		<th width="33%"><?php echo __('Conversation Alias',true); ?></th>
 	</tr>
 	<tr>
 		<td>
@@ -51,9 +51,9 @@ La tabla streams (archivos de audio y texto) tiene 7 campos:
 <!--tabla que contendra el audio, identificador sip y alias de cada interlocutor-->
 <table>
 	<tr>
-		<th ><?php echo __('Audio',true); ?></th>
-		<th ><?php echo __('Speaker',true); ?></th>
-		<th ><?php echo __('Alias',true); ?></th>
+		<th width="33%"><?php echo __('Audio',true); ?></th>
+		<th width="33%"><?php echo __('Speaker',true); ?></th>
+		<th width="33%"><?php echo __('Alias',true); ?></th>
 	</tr>
 	<!--AUDIO-->
 	<tr>
@@ -82,10 +82,10 @@ La tabla streams (archivos de audio y texto) tiene 7 campos:
 
 <!--tabla que contendra la transcripcion de la conversacion desglosada frase por frase, indicando: interlocutor, timestamps de inicio y de final, texto-->
 <table>
-	<th><?php echo __('Speaker',true); ?></th>
-	<th><?php echo __('Start',true); ?></th>
-	<th><?php echo __('End',true); ?></th>
-	<th><?php echo __('Text',true); ?></th>
+	<th width="15%"><?php echo __('Speaker',true); ?></th>
+	<th width="5%"><?php echo __('Start',true); ?></th>
+	<th width="5%"><?php echo __('End',true); ?></th>
+	<th width="75%"><?php echo __('Text',true); ?></th>
 
 	<!--guardo cada parte de cada frase para poder pasarselo luego al controlador-->
 	<?php for($i=0; $i < $lines; $i++){ 				

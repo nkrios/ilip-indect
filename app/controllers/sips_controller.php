@@ -160,15 +160,15 @@ class SipsController extends AppController {
 
 		//save changes
 		//check if we are coming from the actual index after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $sip['Sip']['relevance']=$this->data['Edit']['relevance'];
-                  $sip['Sip']['comments']=$this->data['Edit']['comments'];
-                  $this->Sip->save($sip);
-		  $this->data = null;
+            if (!empty($this->data['Edit'])) {
+                $sip['Sip']['relevance']=$this->data['Edit']['relevance'];
+                $sip['Sip']['comments']=$this->data['Edit']['comments'];
+                $this->Sip->save($sip);
+                $this->data = null;
             }
             $this->set('sip', $sip);
             $this->set('conversation', $conversation);
-	    $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
+    	    $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
         }
 
         function caller_play($id = null) {

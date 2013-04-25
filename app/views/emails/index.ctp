@@ -20,7 +20,7 @@
 			<th class="size"><?php echo $paginator->sort(__('Size', true), 'data_size'); ?></th>
 			<th class="relevance"><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>
 			<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			
 			<!--	<th class="relevance"><?php echo $paginator->sort('relevance'); ?></th>
 				<a href="/relevance.html" 
 				onclick="window.open('/relevance.html','popup','width=500,height=500,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); 
@@ -32,24 +32,32 @@
 		if ($email['Email']['first_visualization_user_id']) : ?>
 			<tr>
 				<td><?php echo $email['Email']['capture_date']; ?></td>
-			    <?php if ($email['Email']['subject'] == '' || $email['Email']['subject'] == ' ') : ?>
-			    <td><?php echo $html->link("--",'/emails/view/' . $email['Email']['id']); ?></td>
-			    <?php else : ?>
-			    <?php if (strpos($email['Email']['subject'], '=?') != 0): ?>
-				<td><?php echo $html->link(htmlentities($email['Email']['subject']), '/emails/view/' . $email['Email']['id']); ?></td>
-			    <?php else : ?>
-			    <td><?php echo $html->link($email['Email']['subject'], '/emails/view/' . $email['Email']['id']); ?></td>
-			    <?php endif; ?>
-			    <?php endif; ?>
+			    	<?php if ($email['Email']['subject'] == '' || $email['Email']['subject'] == ' ') : ?>
+			    		<td><?php echo $html->link("--",'/emails/view/' . $email['Email']['id']); ?></td>
+			   		<?php else : ?>
+			    		<?php if (strpos($email['Email']['subject'], '=?') != 0): ?>
+							<td><?php echo $html->link(htmlentities($email['Email']['subject']), '/emails/view/' . $email['Email']['id']); ?></td>
+			    		<?php else : ?>
+			    			<td><?php echo $html->link($email['Email']['subject'], '/emails/view/' . $email['Email']['id']); ?></td>
+			    		<?php endif; ?>
+			    	<?php endif; ?>
 				<td><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $email['Email']['sender'])); ?></td>
 				<td><?php echo str_replace('>', '&gt;', str_replace('<', '&lt;', $email['Email']['receivers'])); ?></td>
 				<td><?php echo $email['Email']['data_size']; ?></td>
-				<td><?php 
-					if ( $email['Email']['relevance'] > 0) {
+				<td>
+					<?php if ( $email['Email']['relevance'] > 0) {
 						echo $email['Email']['relevance'];
 					}?>
 				</td>
-				<td><?php echo substr($email['Email']['comments'],0,30). '...'; ?></td>
+				<td title="<?php echo htmlentities($email['Email']['comments']) ?>">
+					<?php
+		    		if( strlen(htmlentities($email['Email']['comments'])) > 50 ){
+		    		 	echo substr(htmlentities($email['Email']['comments']),0,50).'...'; 
+		    		}else{
+		    			echo htmlentities($email['Email']['comments']); 
+		    		}
+		    		?>
+		    	</td>
 			</tr>
 		<?php else : ?>
 			<tr>
@@ -70,24 +78,26 @@
 					echo $email['Email']['relevance'];
 					}?>
 				</td>
-				<td><?php echo substr($email['Email']['comments'],0,30). '...'; ?></td>
+				<td title="<?php echo htmlentities($email['Email']['comments']) ?>">
+					<?php
+		    		if( strlen(htmlentities($email['Email']['comments'])) > 50 ){
+		    		 	echo substr(htmlentities($email['Email']['comments']),0,50).'...'; 
+		    		}else{
+		    			echo htmlentities($email['Email']['comments']); 
+		    		}
+		    		?>
+				</td>
 			</tr>
 		<?php endif ?>
 		<?php endforeach; ?>
 
 	</table>
 
-	<table id="listpage" class="shadow-box-bottom">
-		<tr>
-			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-		    <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-			<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-		</tr>
-	</table>
+	<?php 
+		echo $this->element('paginator'); 
 
-	<?php
-	   echo $form->create('ParserCSV',array( 'url' => array('controller' => 'emails', 'action' => 'export')));
-	   echo $form->end(__('Export to .csv file', true));
+	   	echo $form->create('ParserCSV',array( 'url' => array('controller' => 'emails', 'action' => 'export')));
+	   	echo $form->end(__('Export to .csv file', true));
 	?>
 
 </div>

@@ -1,9 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="generic boxstyle_white">
 
@@ -12,7 +6,7 @@
 	<div class="search">
 		<?php 
 		echo $form->create('Search',array( 'url' => '/feeds/view/'.$feed['Feed']['id']));
-	    echo $form->input('search', array('type'=>'text','size' => '40','maxlength'=>'40', 'label'=> __('Search: ', true), 'default' => $srchd));
+	    echo $form->input('search', array('type'=>'text','maxlength'=>'40', 'label'=> __('Search: ', true), 'default' => $srchd));
 	    echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','label'=> __('Relevance: ', true),'empty'=>__('-',true),'default'=>$relevance));
 	    echo $form->end(__('Go', true));
 	    ?>

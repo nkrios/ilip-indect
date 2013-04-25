@@ -2,12 +2,7 @@
 function unicode2html($string) {
     return preg_replace('/\\\\u([0-9a-z]{4})/', '&#x$1;', $string);
 } ?>
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
+
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom"><?php echo 'Facebook chat: '.unicode2html($chats[0]['Fbchat']['user']) ?></h2>
 
@@ -20,24 +15,26 @@ function unicode2html($string) {
 	 ?>
 	</div>
 
-	 <table class="shadow-box-bottom">
-	 <tr>
-		<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
-		<th class="subject"><?php echo $paginator->sort(__('User', true), 'user'); ?></th>
-		<th class="subject"><?php echo $paginator->sort(__('Friend', true), 'friend'); ?></th>
-		<th class="subject"><?php echo $paginator->sort(__('Duration [hh:mm:ss]', true), 'duration'); ?></th>
-		<th class="size"><?php echo $paginator->sort(__('Size', true), 'data_size'); ?></th>
-		<th class="relevance"><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>
-		<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
-	    <th class="info"><?php __('Info'); ?></th>
-	 </tr>
-	 <?php foreach ($chats as $chat): ?>
-	  <?php $h = (int)($chat['Fbchat']['duration']/3600);
+	<table class="shadow-box-bottom">
+		<tr>
+			<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
+			<th class="subject"><?php echo $paginator->sort(__('User', true), 'user'); ?></th>
+			<th class="subject"><?php echo $paginator->sort(__('Friend', true), 'friend'); ?></th>
+			<th class="subject"><?php echo $paginator->sort(__('Duration [hh:mm:ss]', true), 'duration'); ?></th>
+			<th class="size"><?php echo $paginator->sort(__('Size', true), 'data_size'); ?></th>
+			<th class="relevance"><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>
+			<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
+		    <th class="info"><?php __('Info'); ?></th>
+		 </tr>
+	 <?php foreach ($chats as $chat): 
+	   		$h = (int)($chat['Fbchat']['duration']/3600);
 	        $m = (int)($chat['Fbchat']['duration']/60 - $h*60);
 	        $s = (int)$chat['Fbchat']['duration']%60;
 	        $friend = unicode2html($chats[0]['Fbchat']['friend']);
-	   ?>
-	 <?php if ($chat['Fbchat']['first_visualization_user_id']) : ?>
+	   
+	  if ($chat['Fbchat']['first_visualization_user_id']) :
+
+	  	?>
 	  <tr>
 		<td rowspan='2'><?php echo $chat['Fbchat']['capture_date']; ?></td>
 		<td rowspan='2'><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>

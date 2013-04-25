@@ -1,9 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="generic boxstyle_white">
   <h2 class="shadow-box-bottom"><?php __('Nntp'); ?></h2>
@@ -24,18 +18,20 @@
     </tr>
   <?php foreach ($nntp_groups as $grp): ?>
     <tr>
-    	<td><?php echo $html->link($grp['Nntp_group']['name'],'/nntp_groups/grp/' . $grp['Nntp_group']['id']); ?></td>
-      <td><?php echo $grp['Nntp_group']['relevance']; ?></td>
-    	<td><?php echo $grp['Nntp_group']['comments'];?></td>
+        <td><?php echo $html->link($grp['Nntp_group']['name'],'/nntp_groups/grp/' . $grp['Nntp_group']['id']); ?></td>
+        <td><?php echo $grp['Nntp_group']['relevance']; ?></td>
+    	<td title="<?php echo htmlentities($grp['Nntp_group']['comments']) ?>">
+            <?php
+            if( strlen(htmlentities($grp['Nntp_group']['comments'])) > 100 ){
+                echo substr(htmlentities($grp['Nntp_group']['comments']),0,100).'...'; 
+            }else{
+                echo htmlentities($grp['Nntp_group']['comments']); 
+            }
+            ?>
+        </td>
     </tr>
   <?php endforeach; ?>
   </table>
 
-  <table id="listpage" class="shadow-box-bottom">
-    <tr>
-      <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-            <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-      <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-    </tr>
-  </table>
+<?php echo $this->element('paginator'); ?>
 </div>

@@ -1,10 +1,4 @@
 
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom"><?php __('Feeds'); ?></h2>
 	<div class="search shadow-box-bottom">
@@ -18,11 +12,10 @@
 
 	<table class="shadow-box-bottom">
 	<tr>
-		<th><?php echo $paginator->sort(__('Title', true), 'name'); ?></th>
+		<th class="username"><?php echo $paginator->sort(__('Title', true), 'name'); ?></th>
 		<th class='url'><?php echo $paginator->sort(__('Site', true), 'site'); ?></th>
 		<th class='relevance'><?php echo $paginator->sort(__('Rel.',true), 'relevance'); ?></th>
-		<th class='comments'><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
+		<th class='comments'><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>		
 	</tr>
 	<?php foreach ($feeds as $feed): ?>
 	  <tr>
@@ -33,17 +26,18 @@
 	 			echo $feed['Feed']['relevance'];
 			}?>
 		</td>
-		<td><?php echo $feed['Feed']['comments']; ?></td>
-		<td><?php echo $html->link('View/Edit','/feeds/view/' . $feed['Feed']['id']); ?></td>
+		<td>
+			<?php
+	    	if( strlen(htmlentities($feed['Feed']['comments'])) > 50 ){
+    		 	echo substr(htmlentities($feed['Feed']['comments']),0,50).'...'; 
+    		}else{
+    			echo htmlentities($feed['Feed']['comments']); 
+    		}?>
+		</td>
+		
 	  </tr>
 	<?php endforeach; ?>
 	</table>
 
-	<table id="listpage" class="shadow-box-bottom">
-		<tr>
-			<th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-		       	<th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-			<th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-		</tr>
-	</table>
+<?php echo $this->element('paginator'); ?>
 </div>

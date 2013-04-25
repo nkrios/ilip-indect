@@ -1,11 +1,14 @@
+<?php function unicode2html($string) {
+    return preg_replace('/\\\\u([0-9a-z]{4})/', '&#x$1;', $string);
+} ?>
 
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom">Facebook Chats</h2>
 	<div class="search shadow-box-bottom">
-		<?php echo $form->create('Search', array( 'url' => array('controller' => 'fbuchats', 'action' => 'index')));
-		      echo $form->input('search', array( 'type'=>'text', 'label'=>__('Search: ', true), 'default' => $srchd));
-		      echo $form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
-		 echo $form->end(__('Go', true));?>
+		<?php echo $this->Form->create('Search', array( 'url' => array('controller' => 'fbuchats', 'action' => 'index')));
+		      echo $this->Form->input('search', array( 'type'=>'text', 'label'=>__('Search: ', true), 'default' => $srchd));
+		      echo $this->Form->input('relevance', array('options'=>$relevanceoptions, 'all','empty'=>__('-',true),'default'=>$relevance));
+		 echo $this->Form->end(__('Go', true));?>
 	</div>
 
 	<table class="shadow-box-bottom">
@@ -16,27 +19,26 @@
 		</tr>
 	<?php foreach ($fb_users as $user): ?>
 	  	<tr>
-	        <td><a href="<?php echo '/fbuchats/user/' . $user['Fbuchat']['id']; ?>"><script type="text/javascript"> var txt="<?php echo $user['Fbuchat']['user']; ?>"; document.write(txt); </script></a>
+	        <td><a href="<?php echo '/fbuchats/user/'.$user['Fbuchat']['id']; ?>"><?php echo unicode2html($user['Fbuchat']['user']) ?></a>
 	        </td>
-		    <td><?php 
-				echo $form->create('Edit',array( 'url' => '/fbuchats/index/'));
-				echo $form->select('relevance', $relevanceoptions, $user['Fbuchat']['relevance'] ,array('empty'=> __('-', true),'default'=>$relevance)); ?>
-			</td>
 			<td><?php
-				echo $form->hidden('id', array('value' => $user['Fbuchat']['id']));
-				echo $form->input ('comments', array ('default' => $user['Fbuchat']['comments'],'label' => false, 'size' =>'90%')       );
-				
-				echo $form->end(__('Save', true)); ?>
+				echo $this->Form->create('EditRel',array('url' => '/fbuchats/index/'.$user['Fbuchat']['id']));
+				echo $this->Form->select('relevance', $relevanceoptions, $user['Fbuchat']['relevance'] ,array('empty'=> __('-', true),'default'=>$relevance));
+				echo $this->Form->hidden('id', array('value' => $user['Fbuchat']['id']));
+				echo $this->Form->end();
+				?>	    	
+		    </td>
+			<td><?php 
+				echo $this->Form->create('EditCom',array('url' => '/fbuchats/index/'.$user['Fbuchat']['id']));
+				echo $this->Form->textarea('comments', array ('default' => $user['Fbuchat']['comments'],'rows'=>'2','label' => false));
+				echo $this->Form->hidden('id', array('value' => $user['Fbuchat']['id']));
+				echo $this->Form->end();
+				?>	
 			</td>
 	  </tr>
 	<?php endforeach; ?>
 	</table>
 
-  <table id="listpage" class="shadow-box-bottom">
-    <tr>
-      <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-            <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-      <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-    </tr>
-  </table>
+<?php echo $this->element('paginator'); ?>
 </div>
+

@@ -272,15 +272,16 @@ class NntpGroupsController extends AppController {
                 }
                 $this->Session->write('narticleid', $id);
 
-		//save changes
-		//check if we are coming from the actual index after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $article['Nntp_article']['relevance']=$this->data['Edit']['relevance'];
-                  $article['Nntp_article']['comments']=$this->data['Edit']['comments'];
-                  $this->Nntp_article->save($article);
+            //check if we are coming from the actual view after changing a value
 
-                $this->Nntp_group->recursive = -1;
-		$group = $this->Nntp_group->read(null, $article['Nntp_article']['nntp_group_id']);
+        if (!empty($this->data['Edit'])) {
+            $article = $this->Nntp_group->read(null, $this->data['Edit']['id']);
+            $article['Nntp_article']['comments']=$this->data['Edit']['comments'];
+            $article['Nntp_article']['relevance']=$this->data['Edit']['relevance'];
+            $this->Nntp_article->save($article);
+
+            $this->Nntp_group->recursive = -1;
+            $group = $this->Nntp_group->read(null, $article['Nntp_article']['nntp_group_id']);
 
 		   if($group['Nntp_group']['relevance'] < $article['Nntp_article']['relevance']){
 			$group['Nntp_group']['relevance'] = $article['Nntp_article']['relevance'];
@@ -288,18 +289,20 @@ class NntpGroupsController extends AppController {
 		   }
 		   else if($group['Nntp_group']['relevance'] > $article['Nntp_article']['relevance']){
 			$group['Nntp_group']['relevance'] = $article['Nntp_article']['relevance'];
-			//check all the relevances to update the parent  relevance to the maximum
+                //check all the relevances to update the parent  relevance to the maximum
 		        $filter['Nntp_article.nntp_group_id'] = $article['Nntp_article']['nntp_group_id'];
-                        $nntp_articles = $this->Nntp_article->find('all', array('conditions' => $filter));
-			foreach($nntp_articles as $aux){
-				if($aux['Nntp_article']['relevance'] > $group['Nntp_group']['relevance']){
-					$group['Nntp_group']['relevance'] = $aux['Nntp_article']['relevance'];
-				}
-			}
-	                $this->Nntp_group->save($group);
+                $nntp_articles = $this->Nntp_article->find('all', array('conditions' => $filter));
+    			foreach($nntp_articles as $aux){
+    				if($aux['Nntp_article']['relevance'] > $group['Nntp_group']['relevance']){
+    					$group['Nntp_group']['relevance'] = $aux['Nntp_article']['relevance'];
+    				}
+    			}
+                $this->Nntp_group->save($group);
 		   }
-            }
-		  $this->data = null;
+        }
+
+		
+        $this->data = null;
 
                 $this->set('article', $article);
                 

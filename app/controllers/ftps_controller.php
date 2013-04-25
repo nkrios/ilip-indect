@@ -173,29 +173,36 @@ class FtpsController extends AppController {
 		    $this->Session->write('relevance', $rel);
             }
 
-	    //check if we are coming from the actual view after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $ftp_file = $this->Ftp_file->read(null, $this->data['Edit']['id']);
-                  $ftp_file['Ftp_file']['relevance']=$this->data['Edit']['relevance'];
-                  $ftp_file['Ftp_file']['comments']=$this->data['Edit']['comments'];
-                  $this->Ftp_file->save($ftp_file);
 
-		if($ftp['Ftp']['relevance'] < $ftp_file['Ftp_file']['relevance']){
-			$ftp['Ftp']['relevance'] = $ftp_file['Ftp_file']['relevance'];
-	                $this->Ftp->save($ftp);
-		}
-		else if($ftp['Ftp']['relevance'] > $ftp_file['Ftp_file']['relevance']){
-			$ftp['Ftp']['relevance'] = $ftp_file['Ftp_file']['relevance'];
-			//check all the relevances to update the parent ftp relevance to the maximum
-                        $ftp_files = $this->Ftp_file->find('all', array('conditions' => $filter));
-			foreach($ftp_files as $aux){
-				if($aux['Ftp_file']['relevance'] > $ftp['Ftp']['relevance']){
-					$ftp['Ftp']['relevance'] = $aux['Ftp_file']['relevance'];
-				}
-			}
-	                $this->Ftp->save($ftp);
-		}
-            }
+	    //check if we are coming from the actual view after changing a value
+	    if (!empty($this->data['EditRel'])) {
+            $ftp_file = $this->Ftp_file->read(null, $this->data['EditRel']['id']);
+            $ftp_file['Ftp_file']['relevance']=$this->data['EditRel']['relevance'];
+            $this->Ftp_file->save($ftp_file);
+
+    		if($ftp['Ftp']['relevance'] < $ftp_file['Ftp_file']['relevance']){
+    	       $ftp['Ftp']['relevance'] = $ftp_file['Ftp_file']['relevance'];
+    	       $this->Ftp->save($ftp);
+    		}
+    		else if($ftp['Ftp']['relevance'] > $ftp_file['Ftp_file']['relevance']){
+    			$ftp['Ftp']['relevance'] = $ftp_file['Ftp_file']['relevance'];
+    			//check all the relevances to update the parent ftp relevance to the maximum
+                $ftp_files = $this->Ftp_file->find('all', array('conditions' => $filter));
+    			foreach($ftp_files as $aux){
+    				if($aux['Ftp_file']['relevance'] > $ftp['Ftp']['relevance']){
+    					$ftp['Ftp']['relevance'] = $aux['Ftp_file']['relevance'];
+    				}
+    			}
+                $this->Ftp->save($ftp);
+    		}
+        }else if(!empty($this->data['EditCom'])){
+            $ftp_file = $this->Ftp_file->read(null, $this->data['EditCom']['id']);
+            $ftp_file['Ftp_file']['comments']=$this->data['EditCom']['comments'];
+            $this->Ftp_file->save($ftp_file);
+        }
+
+
+
 	    if (!empty($this->data['Edit_Ftp'])) {
                   $ftp['Ftp']['comments']=$this->data['Edit_Ftp']['comments'];
                   $this->Ftp->save($ftp);

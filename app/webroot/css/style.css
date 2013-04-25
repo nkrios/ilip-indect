@@ -3,7 +3,7 @@
 html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}
 header, footer, aside, nav, article, section, figure, hgroup { display: block; }  
 body,html{min-width: 100%;min-height: 100%;}
-img,object,embed {max-width: 100%;}
+img,object,embed {max-width: 100%;}object.html{width: 100%;}
 ul {list-style: none;}
 blockquote, q {quotes: none;}
 blockquote:before, blockquote:after, q:before, q:after {content: ''; content: none;}
@@ -54,7 +54,7 @@ body{
   font-size: 1em;
   text-align: center;
   margin: 0 auto;
-  background-color: #333;
+  background-color: #eee;
   color: #333;
   /*overflow:hidden;*/
   height:100%;
@@ -63,13 +63,15 @@ div#wrapper{
   background-color: #EEE;
   margin-bottom: 2.5em;
   min-height: 100%;
-  max-width:1500px;
+  height: auto;
 }
 
-header{border-bottom: 2px solid #333}
+header{
+  border-bottom: 2px solid #333;
+  height: auto;
+}
 header, footer{
   width: 100%;
-  height: 4em;
   background: #464646;
   background-image: linear-gradient(bottom, rgb(44,63,138) 30%, rgb(56,77,173) 74%, rgb(54,75,194) 89%);
   background-image: -o-linear-gradient(bottom, rgb(44,63,138) 30%, rgb(56,77,173) 74%, rgb(54,75,194) 89%);
@@ -132,6 +134,7 @@ header #session_info h2 > span{color: #CCFFFF;}
 header #session_info h2 #changepasswd a{font-size: 0.8em;color: #c2c2c2;background-color: #7D82DA;padding: 1px;border:1px solid #66E;}
 header #session_info h2 #changepasswd a:hover{color: #454}
 
+#main-header{height: 4.5em}
 
 /* Main Content wrapper */
 #content {
@@ -257,7 +260,7 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   text-align: center;
   background-color: rgba(200,200,200,0.5);
   padding:0.5em;
-  margin:5px;
+  margin:3px;
 }
 #statistic_panel div.info-block{
   display: inline-block;
@@ -328,31 +331,29 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   margin:1em auto;
 }
 
-div#contents_view{
-  width: 35%;
+div#contents_view{  width: 45%;}
+.pinfo > a{
+  display: inline-block;
+  padding: 0 0.3em;
 }
-
-
-
-/*styles candidates to delete*/
-.ipcap {
-  border: 1px solid #D1D9C4;
-  background-color: #FFFF99;
+.ipcap{
+  background-color: #C4D198;
   display: none;
+  padding: 0em 0.2em;
+  width:3em;
+  text-align: center;
+   box-shadow: 0 0 2px #111;
+}.ipcap a {
+  margin: 0;padding: 0;
 }
-.iweb {  display: none;}
+.iweb{display: none;}
 .ipcap p {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-td.pinfo:hover .iweb{
-  display: block;
-}
 
-td.pinfo:hover .ipcap{
-  display: block;
-}
+/*styles candidates to delete*/
 
 .voip_flash{ 
   margin: auto;
@@ -367,12 +368,6 @@ td.pinfo:hover .ipcap{
 
 #iserm a img:hover {  opacity: 1;}
 
-table tr.altRow td {
-  background: #f4f4f4;
-}
-table td.actions {
-  white-space: nowrap;
-}
 #cakeSqlLog td {
   text-align: left;
   padding: 4px 8px;
@@ -401,15 +396,8 @@ div.overlay div.close, #overlay div.close {
   height: 35px;
   cursor: pointer;
 }
-
 a.player {    
   display: block;
   /*height: 450px; vedi div.overlay*/
   height: 300px;
 }
-
-#SearchLabel {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-object.html {  width: 100%;}

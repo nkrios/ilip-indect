@@ -1,11 +1,4 @@
 
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
-
 <div class="generic boxstyle_white">
 	<h2><?php __('Email to'); echo str_replace('>', '&gt;', str_replace('<', '&lt;', $mailObj['to']))?></h2>
 
