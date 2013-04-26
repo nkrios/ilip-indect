@@ -92,12 +92,21 @@ class MsnChatsController extends AppController {
             }
 
 	    //check if we are coming from the actual index after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $msn = $this->Msn_chat->read(null, $this->data['Edit']['id']);
-                  $msn['Msn_chat']['relevance']=$this->data['Edit']['relevance'];
-                  $msn['Msn_chat']['comments']=$this->data['Edit']['comments'];
-                  $this->Msn_chat->save($msn);
-            }
+        if (!empty($this->data['EditCom'])) {
+
+            $msn = $this->Msn_chat->read(null, $this->data['EditCom']['id']);
+            $msn['Msn_chat']['comments']=$this->data['EditCom']['comments'];
+            $this->Msn_chat->save($msn);
+
+        }else if (!empty($this->data['EditRel'])) {
+
+            $msn = $this->Msn_chat->read(null, $this->data['EditRel']['id']);
+            $msn['Msn_chat']['relevance']=$this->data['EditRel']['relevance'];
+            $this->Msn_chat->save($msn);
+
+        }
+
+
 	    $this->data = null;
 
 	    //prepare the filter

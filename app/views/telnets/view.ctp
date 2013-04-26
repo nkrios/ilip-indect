@@ -1,9 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=520,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="generic boxstyle_white">
 	<h2><?php __('Telnet to'); ?> <?php echo $telnet['Telnet']['hostname']; ?></h2>
@@ -35,15 +29,15 @@
 
 		    <?php echo $this->Form->create('Edit', array('url' => '/telnets/view/'.$telnet['Telnet']['id']));
 			    echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $telnet['Telnet']['relevance'] ,'empty'=>'-'));
-			    echo $this->Form->input('comments', array('type'=>'string','default' => $telnet['Telnet']['comments']));
+			    echo $this->Form->textarea('comments', array('type'=>'string','rows' => 3,'default' => $telnet['Telnet']['comments']));
 			?>
-		    <?php echo $this->Form->end(__('Save', true)); ?>
+		    <?php echo $this->Form->end(); ?>
 		</div>
 
 	</div>
 
 	<div class="messageframe">
-		<textarea cols="81" rows="16" readonly="readonly" ><?php echo file_get_contents($telnet['Telnet']['cmd']); ?></textarea>
+		<textarea cols="81" rows="16" readonly="readonly" ><?php echo utf8_encode(file_get_contents($telnet['Telnet']['cmd'])); ?></textarea>
 	</div>
 
 </div>

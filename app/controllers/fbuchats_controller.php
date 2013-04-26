@@ -97,22 +97,27 @@ class FbuchatsController extends AppController {
                 $filter[0]['OR']['Fbuchat.comments LIKE'] = "%$srch%";
             }
 
-	    if (!empty($rel)) {
-		    $filter[1]['OR']['Fbuchat.relevance >='] = $rel;
-		    $filter[1]['OR']['Fbuchat.relevance =='] = '0';
-		    $filter[1]['OR']['Fbuchat.relevance'] = null;
-	    }
+    	    if (!empty($rel)) {
+    		    $filter[1]['OR']['Fbuchat.relevance >='] = $rel;
+    		    $filter[1]['OR']['Fbuchat.relevance =='] = '0';
+    		    $filter[1]['OR']['Fbuchat.relevance'] = null;
+    	    }
 
-		//check if we are coming from the actual view after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $fbu = $this->Fbuchat->read(null, $this->data['Edit']['id']);
-                  $fbu['Fbuchat']['relevance']=$this->data['Edit']['relevance'];
-                  $fbu['Fbuchat']['comments']=$this->data['Edit']['comments'];
-                  $this->Fbuchat->save($fbu);
+    		//check if we are coming from the actual view after changing a value
+    	    if (!empty($this->data['EditRel'])) {
+                $fbu = $this->Fbuchat->read(null, $this->data['EditRel']['id']);
+                $fbu['Fbuchat']['relevance']=$this->data['EditRel']['relevance'];
+                $this->Fbuchat->save($fbu);
+
+            }else if (!empty($this->data['EditCom'])) {
+                $fbu = $this->Fbuchat->read(null, $this->data['EditCom']['id']);
+                $fbu['Fbuchat']['comments']=$this->data['EditCom']['comments'];
+                $this->Fbuchat->save($fbu);
             }
-		$this->data = null;
 
-	    //set parameters for the view
+        	$this->data = null;
+
+	       //set parameters for the view
             $msgs = $this->paginate('Fbuchat', $filter);
             $this->set('fb_users', $msgs);
             $this->set('srchd', $srch);
@@ -174,10 +179,10 @@ class FbuchatsController extends AppController {
             }
 
 	    //prepare the filter
-            if (!empty($srch)) {
-                $filter[0]['OR']['Fbuchat.friend LIKE'] = "%$srch%";
-                $filter[0]['OR']['Fbuchat.comments LIKE'] = "%$srch%";
-            }
+        if (!empty($srch)) {
+            $filter[0]['OR']['Fbuchat.friend LIKE'] = "%$srch%";
+            $filter[0]['OR']['Fbuchat.comments LIKE'] = "%$srch%";
+        }
 
 	    if (!empty($rel)) {
 		    $filter[1]['OR']['Fbuchat.relevance >='] = $rel;
@@ -185,100 +190,108 @@ class FbuchatsController extends AppController {
 		    $filter[1]['OR']['Fbuchat.relevance'] = null;
 	    }
 
-		//check if we are coming from the actual view after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $fbchat = $this->Fbchat->read(null, $this->data['Edit']['id']);
-                  $fbchat['Fbchat']['relevance']=$this->data['Edit']['relevance'];
-                  $fbchat['Fbchat']['comments']=$this->data['Edit']['comments'];
-                  $this->Fbchat->save($fbchat);
+  		//check if we are coming from the actual view after changing a value
+        if (!empty($this->data['EditCom'])) {
 
-	            $fbu = $this->Fbuchat->read(null, $fb_user_id);
-		if($fbu['Fbuchat']['relevance'] < $fbchat['Fbchat']['relevance']){
-			$fbu['Fbuchat']['relevance'] = $fbchat['Fbchat']['relevance'];
-	                $this->Fbuchat->save($fbu);
-		}
+            $fbchat = $this->Fbchat->read(null, $this->data['EditCom']['id']);
+            $fbchat['Fbchat']['comments']=$this->data['EditCom']['comments'];
+            $this->Fbchat->save($fbchat);
+
+        }else if (!empty($this->data['EditRel'])) {
+
+            $fbchat = $this->Fbchat->read(null, $this->data['EditRel']['id']);
+            $fbchat['Fbchat']['relevance']=$this->data['EditRel']['relevance'];
+            $this->Fbchat->save($fbchat);
+
+            $fbu = $this->Fbuchat->read(null, $fb_user_id);
+            if($fbu['Fbuchat']['relevance'] < $fbchat['Fbchat']['relevance']){
+                $fbu['Fbuchat']['relevance'] = $fbchat['Fbchat']['relevance'];
+                $this->Fbuchat->save($fbu);
             }
+
+        }
+
 		$this->data = null;
 
-            $filter['Fbchat.fbuchat_id'] = $fb_user_id;
-            $this->paginate['order'] =  array('Fbchat.capture_date' => 'desc');
-            $msgs = $this->paginate('Fbchat', $filter);
-            $this->Session->write('srch_fbchat', $srch);
-            $this->set('chats', $msgs);
-            $this->set('srchd', $srch);
-            $this->set('relevance', $rel);
-            $this->set('menu_left', $this->Xplico->leftmenuarray(6) );
-            $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
+        $filter['Fbchat.fbuchat_id'] = $fb_user_id;
+        $this->paginate['order'] =  array('Fbchat.capture_date' => 'desc');
+        $msgs = $this->paginate('Fbchat', $filter);
+        $this->Session->write('srch_fbchat', $srch);
+        $this->set('chats', $msgs);
+        $this->set('srchd', $srch);
+        $this->set('relevance', $rel);
+        $this->set('menu_left', $this->Xplico->leftmenuarray(6) );
+        $this->set('relevanceoptions',$this->Xplico->relevanceoptions());
 	}
 
 	function view($id = null) {
-                if (!$id) {
-                    exit();
-                }
-                $this->Fbchat->recursive = -1;
-                $chat = $this->Fbchat->read(null, $id);
-                $this->layout = 'fbchat';
-                $this->autoRender = TRUE;
-                /* in the template there is a JavaScript */
-                $this->set('user', $chat['Fbchat']['user']);
-                $this->set('friend', $chat['Fbchat']['friend']);
-                $this->set('ct', $chat['Fbchat']['capture_date']);
-                $talk = '';
-                $fp = fopen($chat['Fbchat']['chat'], 'r');
-                while (false != ($line = fgets($fp, 4096))) {
-                    $line = trim($line, "\r\n\0");
-                    if (stripos($line, '[')  !== false) {
-                        $talk = $talk.'<label> <script type="text/javascript"> var txt="'.$line.'"; document.write(txt); </script>'."</label>\n";
-                    }
-                    else {
-                        $talk = $talk.'<p> <script type="text/javascript"> var txt="'.$line.'"; document.write(txt); </script>'."</p>\n";
-                    }
-                }
-                fclose($fp);
-                // register visualization
-                if (!$chat['Fbchat']['first_visualization_user_id']) {
-                    $uid = $this->Session->read('userid');
-                    $chat['Fbchat']['first_visualization_user_id'] = $uid;
-                    $chat['Fbchat']['viewed_date'] = date("Y-m-d H:i:s");
-                    $this->Fbchat->save($chat);
-                }
-                
-                $this->set('chat', $talk);
+        if (!$id) {
+            exit();
         }
-
-        function info($id = null) {
-            if (!$id) {
-                $this->redirect('/users/login');
+        $this->Fbchat->recursive = -1;
+        $chat = $this->Fbchat->read(null, $id);
+        $this->layout = 'fbchat';
+        $this->autoRender = TRUE;
+        /* in the template there is a JavaScript */
+        $this->set('user', $chat['Fbchat']['user']);
+        $this->set('friend', $chat['Fbchat']['friend']);
+        $this->set('ct', $chat['Fbchat']['capture_date']);
+        $talk = '';
+        $fp = fopen($chat['Fbchat']['chat'], 'r');
+        while (false != ($line = fgets($fp, 4096))) {
+            $line = trim($line, "\r\n\0");
+            if (stripos($line, '[')  !== false) {
+                $talk = $talk.'<label> <script type="text/javascript"> var txt="'.$line.'"; document.write(txt); </script>'."</label>\n";
             }
             else {
-                $this->Fbchat->recursive = -1;
-                $article = $this->Fbchat->read(null, $id);
-                $this->autoRender = false;
-                header("Content-Disposition: filename=info".$id.".xml");
-                header("Content-Type: application/xhtml+xml; charset=utf-8");
-                header("Content-Length: " . filesize($article['Fbchat']['flow_info']));
-                readfile($article['Fbchat']['flow_info']);
-                exit();
+                $talk = $talk.'<p> <script type="text/javascript"> var txt="'.$line.'"; document.write(txt); </script>'."</p>\n";
             }
         }
+        fclose($fp);
+        // register visualization
+        if (!$chat['Fbchat']['first_visualization_user_id']) {
+            $uid = $this->Session->read('userid');
+            $chat['Fbchat']['first_visualization_user_id'] = $uid;
+            $chat['Fbchat']['viewed_date'] = date("Y-m-d H:i:s");
+            $this->Fbchat->save($chat);
+        }
+        
+        $this->set('chat', $talk);
+    }
 
-        function pcap($id = null) {
-            if (!$id) {
-                $this->redirect('/users/login');
-            }
-            else {
-                $this->Fbchat->recursive = -1;
-                $article = $this->Fbchat->read(null, $id);
-                $file_pcap = "/tmp/fbchat_".time()."_".$id.".pcap";
-                $this->Xml2Pcap->doPcap($file_pcap, $article['Fbchat']['flow_info']);
-                $this->autoRender = false;
-                header("Content-Disposition: filename=fbchat_".$id.".pcap");
-                header("Content-Type: binary");
-                header("Content-Length: " . filesize($file_pcap));
-                @readfile($file_pcap);
-                unlink($file_pcap);
-                exit();
-            }
+    function info($id = null) {
+        if (!$id) {
+            $this->redirect('/users/login');
         }
+        else {
+            $this->Fbchat->recursive = -1;
+            $article = $this->Fbchat->read(null, $id);
+            $this->autoRender = false;
+            header("Content-Disposition: filename=info".$id.".xml");
+            header("Content-Type: application/xhtml+xml; charset=utf-8");
+            header("Content-Length: " . filesize($article['Fbchat']['flow_info']));
+            readfile($article['Fbchat']['flow_info']);
+            exit();
+        }
+    }
+
+    function pcap($id = null) {
+        if (!$id) {
+            $this->redirect('/users/login');
+        }
+        else {
+            $this->Fbchat->recursive = -1;
+            $article = $this->Fbchat->read(null, $id);
+            $file_pcap = "/tmp/fbchat_".time()."_".$id.".pcap";
+            $this->Xml2Pcap->doPcap($file_pcap, $article['Fbchat']['flow_info']);
+            $this->autoRender = false;
+            header("Content-Disposition: filename=fbchat_".$id.".pcap");
+            header("Content-Type: binary");
+            header("Content-Length: " . filesize($file_pcap));
+            @readfile($file_pcap);
+            unlink($file_pcap);
+            exit();
+        }
+    }
 }
 ?>

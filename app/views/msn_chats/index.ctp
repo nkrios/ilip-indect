@@ -1,9 +1,3 @@
-<script>
-    function popupVetrina(whatopen) {
-      newWindow = window.open(whatopen, 'popup_vetrina', 'width=620,height=550,scrollbars=yes,toolbar=no,resizable=yes,menubar=no');
-      return false;
-    }
-</script>
 
 <div class="generic boxstyle_white">
 	<h2 class="shadow-box-bottom">MSN Chats</h2>
@@ -33,53 +27,55 @@
 	?>
 	<?php if ($msn['Msn_chat']['first_visualization_user_id']) : ?>
 	  <tr>
-		<td rowspan='2'><?php echo $msn['Msn_chat']['capture_date']; ?></td>
-		<td rowspan='2'><?php echo $msn['Msn_chat']['end_date']; ?></td>
-	        <td rowspan='2'><a href="#" title="<?php echo htmlentities($msn['Msn_chat']['chat']); ?>" onclick="popupVetrina('/msn_chats/chat/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php echo htmlentities($msn['Msn_chat']['chat']); ?></a></td>
-	        <td rowspan='2'><?php echo $duration; ?></td>
-		<td><?php 
-			echo $form->create('Edit',array( 'url' => '/msns/index'));
-			echo $form->select('relevance', $relevanceoptions, $msn['Msn_chat']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true)));
-		?>
-		</td><td><?php
-			echo $form->hidden('id', array('value' => $msn['Msn_chat']['id']));
-			echo $form->input('comments', array ('default' => $msn['Msn_chat']['comments'],'label' => false, 'size' => '90%'));
-		?></td>
-	        <td class="pinfo" rowspan='2'><a href="#" onclick="popupVetrina('/msn_chats/info/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $msn['Msn_chat']['id']); ?></div></td>
+		<td><?php echo $msn['Msn_chat']['capture_date']; ?></td>
+		<td><?php echo $msn['Msn_chat']['end_date']; ?></td>
+	        <td><a href="#" title="<?php echo htmlentities($msn['Msn_chat']['chat']); ?>" onclick="popupVetrina('/msn_chats/chat/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php echo htmlentities($msn['Msn_chat']['chat']); ?></a></td>
+	        <td><?php echo $duration; ?></td>
+
+			<td><?php 
+				echo $this->Form->create('EditRel',array( 'url' => '/msns/index/'.$msn['Msn_chat']['id']));
+				echo $this->Form->input('relevance',array('options' =>$relevanceoptions, 'default'=>$msn['Msn_chat']['relevance'],'type'=>'select','empty' => '-', 'label'=>false));
+				echo $form->hidden('id', array('value' => $msn['Msn_chat']['id']));
+				echo $this->Form->end();
+				?>	    	
+		    </td>
+			<td><?php 
+				echo $this->Form->create('EditCom',array( 'url' => '/msns/index/'.$msn['Msn_chat']['id']));	
+				echo $this->Form->textarea('comments',array('type'=>'string','rows'=>'2','default' => $msn['Msn_chat']['comments'],'label' => false));
+				echo $form->hidden('id', array('value' => $msn['Msn_chat']['id']));
+				echo $this->Form->end();
+				?>
+			</td>
+
+	        <td class="pinfo"><a href="#" onclick="popupVetrina('/msn_chats/info/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $msn['Msn_chat']['id']); ?></div></td>
 	  </tr>
-	<tr>
-		<td colspan='2'><?php echo $form->end(__('Save', true)); ?>
-		</td>
-	 </tr>
 	<?php else : ?>
 	 <tr>
-		<td rowspan='2'><?php echo $msn['Msn_chat']['capture_date']; ?></td>
-	        <td rowspan='2'><?php echo $msn['Msn_chat']['end_date']; ?></td>
-	        <td rowspan='2'><a href="#" title="<?php echo htmlentities($msn['Msn_chat']['chat']); ?>" onclick="popupVetrina('/msn_chats/chat/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php echo htmlentities($msn['Msn_chat']['chat']); ?></a></td>
-	        <td rowspan='2'><?php echo $duration; ?></td>
-		<td><?php 
-			echo $form->create('Edit',array( 'url' => '/msns/index'));
-			echo $form->select('relevance', $relevanceoptions, $msn['Msn_chat']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true)));
-		?>
-		</td><td><?php
-			echo $form->hidden('id', array('value' => $msn['Msn_chat']['id']));
-			echo $form->input('comments', array ('default' => $msn['Msn_chat']['comments'],'label' => false, 'size' => '90%'));
-		?></td>
-	        <td class="pinfo" rowspan='2'><a href="#" onclick="popupVetrina('/msn_chats/info/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $msn['Msn_chat']['id']); ?></div></td>
-	</tr>
-	<tr>
-		<td colspan='2'><?php echo $form->end(__('Save', true)); ?>
-		</td>
+		<td><?php echo $msn['Msn_chat']['capture_date']; ?></td>
+	        <td><?php echo $msn['Msn_chat']['end_date']; ?></td>
+	        <td><a href="#" title="<?php echo htmlentities($msn['Msn_chat']['chat']); ?>" onclick="popupVetrina('/msn_chats/chat/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php echo htmlentities($msn['Msn_chat']['chat']); ?></a></td>
+	        <td><?php echo $duration; ?></td>
+
+			<td><?php 
+				echo $this->Form->create('EditRel',array( 'url' => '/msns/index/'.$msn['Msn_chat']['id']));
+				echo $this->Form->input('relevance',array('options' =>$relevanceoptions, 'default'=>$msn['Msn_chat']['relevance'],'type'=>'select','empty' => '-', 'label'=>false));
+				echo $form->hidden('id', array('value' => $msn['Msn_chat']['id']));
+				echo $this->Form->end();
+				?>	    	
+		    </td>
+			<td><?php 
+				echo $this->Form->create('EditCom',array( 'url' => '/msns/index/'.$msn['Msn_chat']['id']));	
+				echo $this->Form->textarea('comments',array('type'=>'string','rows'=>'2','default' => $msn['Msn_chat']['comments'],'label' => false));
+				echo $form->hidden('id', array('value' => $msn['Msn_chat']['id']));
+				echo $this->Form->end();
+				?>
+			</td>
+			
+	        <td class="pinfo"><a href="#" onclick="popupVetrina('/msn_chats/info/<?php echo $msn['Msn_chat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $msn['Msn_chat']['id']); ?></div></td>
 	</tr>
 	<?php endif ?>
 	<?php endforeach; ?>
 	</table>
 
-  <table id="listpage" class="shadow-box-bottom">
-    <tr>
-      <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-            <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-      <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-    </tr>
-  </table>
+<?php echo $this->element('paginator'); ?>
 </div>

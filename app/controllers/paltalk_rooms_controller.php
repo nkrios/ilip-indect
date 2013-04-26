@@ -92,12 +92,19 @@ class PaltalkRoomsController extends AppController {
             }
 
 		//check if we are coming from the actual view after changing a value
-                if (!empty($this->data['Edit'])) {
-                   $room = $this->Paltalk_room->read(null, $this->data['Edit']['id']);
-                   $room['Paltalk_room']['relevance']=$this->data['Edit']['relevance'];
-                   $room['Paltalk_room']['comments']=$this->data['Edit']['comments'];
-                   $this->Paltalk_room->save($room);
-                }
+    if (!empty($this->data['EditCom'])) {
+
+        $room = $this->Paltalk_room->read(null, $this->data['EditCom']['id']);
+        $room['Paltalk_room']['comments']=$this->data['EditCom']['comments'];
+        $this->Paltalk_room->save($room);
+
+    }else if (!empty($this->data['EditRel'])) {
+
+        $room = $this->Paltalk_room->read(null, $this->data['EditRel']['id']);
+        $room['Paltalk_room']['relevance']=$this->data['EditRel']['relevance'];
+        $this->Paltalk_room->save($room);
+    }
+
 	    //prepare the filter
             if (!empty($srch)) {
                 $filter[0]['OR']['Paltalk_room.room LIKE'] = "%$srch%";

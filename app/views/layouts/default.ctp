@@ -28,7 +28,7 @@ if (!isset($menu_left)) {
   <meta name='keywords' content='ilip,decoder,internet,ip,traffic,interception,pcap'>
 
   <?php if (isset($refresh_time)):  ?>
-      <meta http-equiv="refresh" content="<?php echo $refresh_time ?>">
+      <!-- <meta http-equiv="refresh" content="<?php echo $refresh_time ?>"> -->
   <?php endif; ?>
   <title>Indect Lawful Interception Platform (ILIP) : <?php echo $title_for_layout;?></title>
   <?php 
@@ -237,8 +237,8 @@ if (!isset($menu_left)) {
 
     function sendData(elemOfForm){
       var frm = elemOfForm.parents('form');
-      console.log(elemOfForm.parents('form'))
-      console.log(frm.attr('action'))
+      // console.log(elemOfForm.parents('form'))
+      // console.log(frm.attr('action'))
       $.ajax({
             type: frm.attr('method'),
             url: frm.attr('action'),

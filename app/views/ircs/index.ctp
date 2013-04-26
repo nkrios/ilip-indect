@@ -12,7 +12,7 @@
 <table class="shadow-box-bottom">
 <tr>
 	<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
-	<th class="from"><?php echo $paginator->sort(__('Url', true), 'url'); ?></th>
+	<th class="url"><?php echo $paginator->sort(__('Url', true), 'url'); ?></th>
 	<th class="number"><?php echo $paginator->sort(__('Channels', true), 'channel_num'); ?></th>
 	<th class="relevance"><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>
 	<th class='comments'><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
@@ -29,12 +29,21 @@
 		}
 	    ?>
 	</td>
-	<td><?php echo $irc['Irc']['comments'];?></td>
+
+	<td title="<?php echo htmlentities($irc['Irc']['comments']) ?>">
+		<?php
+		if( strlen(htmlentities($irc['Irc']['comments'])) > 50 ){
+		 	echo substr(htmlentities($irc['Irc']['comments']),0,50).'...'; 
+		}else{
+			echo htmlentities($irc['Irc']['comments']); 
+		}
+		?>
+	</td>
 
   </tr>
 <?php else : ?>
  <tr>
-	<td><?php echo $irc['Irc']['capture_date']; ?></td>
+	<td><?php echo $html->link($irc['Irc']['capture_date'],'/ircs/view/' . $irc['Irc']['id']); ?></td>
 	<td><?php echo $html->link($irc['Irc']['url'],'/ircs/view/' . $irc['Irc']['id']); ?></td>
 	<td><?php echo $irc['Irc']['channel_num']; ?></td>
     <td><?php 
@@ -43,17 +52,19 @@
 		}
 	    ?>
 	</td>
-	<td><?php echo $irc['Irc']['comments'];?></td>
+	<td title="<?php echo htmlentities($irc['Irc']['comments']) ?>">
+		<?php
+		if( strlen(htmlentities($irc['Irc']['comments'])) > 50 ){
+		 	echo substr(htmlentities($irc['Irc']['comments']),0,50).'...'; 
+		}else{
+			echo htmlentities($irc['Irc']['comments']); 
+		}
+		?>
+	</td>
   </tr>
 <?php endif ?>
 <?php endforeach; ?>
 </table>
 
-  <table id="listpage" class="shadow-box-bottom">
-    <tr>
-      <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-            <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-      <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-    </tr>
-  </table>
+<?php echo $this->element('paginator'); ?>
 </div>

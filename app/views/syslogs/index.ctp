@@ -10,7 +10,7 @@
   <table class="shadow-box-bottom">
  	<tr>
 		<th class="date"><?php echo $paginator->sort(__('Date', true), 'capture_date'); ?></th>
-		<th class="subject"><?php echo $paginator->sort(__('Hosts', true), 'hosts'); ?></th>
+		<th class="ip"><?php echo $paginator->sort(__('Hosts', true), 'hosts'); ?></th>
 		<th class="size"><?php echo $paginator->sort(__('Size', true), 'cmd_size'); ?></th>
 		<th class="relevance"><?php echo $paginator->sort(__('Relevance',true), 'relevance'); ?></th>
 		<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
@@ -19,7 +19,7 @@
  <?php foreach ($syslogs as $syslog): ?>
  <?php if ($syslog['Syslog']['first_visualization_user_id']) : ?>
   <tr>
-	<td><?php echo $syslog['Syslog']['capture_date']; ?></td>
+	<td><?php echo $html->link($syslog['Syslog']['capture_date'],'/syslogs/view/' . $syslog['Syslog']['id']); ?></td>
 	<td><?php echo $html->link($syslog['Syslog']['hosts'],'/syslogs/view/' . $syslog['Syslog']['id']); ?></td>
 	<td><?php echo $syslog['Syslog']['log_size']; ?></td>
     <td><?php 
@@ -28,11 +28,19 @@
 		}
 	    ?>
 	</td>
-	<td><?php echo $syslog['Syslog']['comments']; ?></td>
+		<td title="<?php echo htmlentities($syslog['Syslog']['comments']) ?>">
+			<?php
+			if( strlen(htmlentities($syslog['Syslog']['comments'])) > 50 ){
+			 	echo substr(htmlentities($syslog['Syslog']['comments']),0,50).'...'; 
+			}else{
+				echo htmlentities($syslog['Syslog']['comments']); 
+			}
+			?>
+		</td>
   </tr>
  <?php else : ?>
   <tr>
-	<td><?php echo $syslog['Syslog']['capture_date']; ?></td>
+	<td><?php echo $html->link($syslog['Syslog']['capture_date'],'/syslogs/view/' . $syslog['Syslog']['id']); ?></td>
 	<td><?php echo $html->link($syslog['Syslog']['hosts'],'/syslogs/view/' . $syslog['Syslog']['id']); ?></td>
 	<td><?php echo $syslog['Syslog']['log_size']; ?></td>
     <td><?php 
@@ -41,18 +49,20 @@
 		}
 	    ?>
 	</td>
-	<td><?php echo $syslog['Syslog']['comments']; ?></td>
+	<td title="<?php echo htmlentities($syslog['Syslog']['comments']) ?>">
+		<?php
+		if( strlen(htmlentities($syslog['Syslog']['comments'])) > 50 ){
+		 	echo substr(htmlentities($syslog['Syslog']['comments']),0,50).'...'; 
+		}else{
+			echo htmlentities($syslog['Syslog']['comments']); 
+		}
+		?>
+	</td>
   </tr>
  <?php endif ?>
 <?php endforeach; ?>
 </table>
 </table>
 
-  <table id="listpage" class="shadow-box-bottom">
-    <tr>
-      <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-            <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-      <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-    </tr>
-  </table>
+<?php echo $this->element('paginator'); ?>
 </div>

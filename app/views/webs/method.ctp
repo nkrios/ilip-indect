@@ -48,7 +48,7 @@
 		    <?php 
 		    echo $this->Form->create('Edit', array('url' => '/webs/method/'.$message['Web']['id']));
 			echo $this->Form->input('relevance', array('options' => $relevanceoptions, 'default' => $message['Web']['relevance'] ,'empty'=>'-','label'=>'Relevance: '));
-			echo $this->Form->input('comments', array('type'=>'string','rows'=>'3','default' => $message['Web']['comments']));
+			echo $this->Form->input('comments', array('type'=>'string','rows'=>3,'default' => $message['Web']['comments']));
 			echo $this->Form->end(); 
 			?>
 		</div>

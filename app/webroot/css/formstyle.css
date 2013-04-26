@@ -50,6 +50,10 @@ form input[type=text],form input[type="password"], form textarea {
   display: inline-block;
   width: 100%;
 }
+form input[type="file"]{
+    background: #EEE;
+    border: 1px solid #CCC;
+}
 form textarea[readonly]{
   width: 90%;
   height: auto;

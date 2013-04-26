@@ -90,12 +90,19 @@ class UnknowsController extends AppController {
 		    $this->Session->write('relevance', $rel);
             }
 		//check if we are coming from the actual index after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $unknow = $this->Unknow->read(null, $this->data['Edit']['id']);
-                  $unknow['Unknow']['relevance']=$this->data['Edit']['relevance'];
-                  $unknow['Unknow']['comments']=$this->data['Edit']['comments'];
-                  $this->Unknow->save($unknow);
-            }
+    if (!empty($this->data['EditCom'])) {
+
+        $unknow = $this->Unknow->read(null, $this->data['EditCom']['id']);
+         $unknow['Unknow']['comments']=$this->data['EditCom']['comments'];
+        $this->Unknow->save($unknow);
+
+    }else if (!empty($this->data['EditRel'])) {
+
+        $unknow = $this->Unknow->read(null, $this->data['EditRel']['id']);
+        $unknow['Unknow']['relevance']=$this->data['EditRel']['relevance'];
+        $this->Unknow->save($unknow);
+    }
+
 		$this->data = null;
 	    //prepare the filter
             if (!empty($srch)) {

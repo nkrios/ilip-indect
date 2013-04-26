@@ -163,29 +163,39 @@ class IrcsController extends AppController {
 		    $this->Session->write('relevance', $rel);
             }
 
-	    //check if we are coming from the actual view after changing a value
-	    if (!empty($this->data['Edit'])) {
-                  $irc_channel = $this->Irc_channel->read(null, $this->data['Edit']['id']);
-                  $irc_channel['Irc_channel']['relevance']=$this->data['Edit']['relevance'];
-                  $irc_channel['Irc_channel']['comments']=$this->data['Edit']['comments'];
-                  $this->Irc_channel->save($irc_channel);
+	//check if we are coming from the actual view after changing a value
+        if (!empty($this->data['EditCom'])) {
 
-		if($irc['Irc']['relevance'] < $irc_channel['Irc_channel']['relevance']){
-			$irc['Irc']['relevance'] = $irc_channel['Irc_channel']['relevance'];
-	                $this->Irc->save($irc);
-		}
-		else if($irc['Irc']['relevance'] > $irc_channel['Irc_channel']['relevance']){
-			$irc['Irc']['relevance'] = $irc_channel['Irc_channel']['relevance'];
-			//check all the relevances to update the parent irc relevance to the maximum
-                        $irc_channels = $this->Irc_channel->find('all', array('conditions' => $filter));
-			foreach($irc_channels as $aux){
-				if($aux['Irc_channel']['relevance'] > $irc['Irc']['relevance']){
-					$irc['Irc']['relevance'] = $aux['Irc_channel']['relevance'];
-				}
-			}
-	                $this->Irc->save($irc);
-		}
+            $irc_channel = $this->Irc_channel->read(null, $this->data['EditCom']['id']);
+            $irc_channel['Irc_channel']['comments']=$this->data['EditCom']['comments'];
+            $this->Irc_channel->save($irc_channel);
+
+        }else if (!empty($this->data['EditRel'])) {
+
+            $irc_channel = $this->Irc_channel->read(null, $this->data['EditRel']['id']);
+            $irc_channel['Irc_channel']['relevance']=$this->data['EditRel']['relevance'];
+            $this->Irc_channel->save($irc_channel);
+
+            if($irc['Irc']['relevance'] < $irc_channel['Irc_channel']['relevance']){
+                $irc['Irc']['relevance'] = $irc_channel['Irc_channel']['relevance'];
+                        $this->Irc->save($irc);
             }
+            else if($irc['Irc']['relevance'] > $irc_channel['Irc_channel']['relevance']){
+                $irc['Irc']['relevance'] = $irc_channel['Irc_channel']['relevance'];
+                //check all the relevances to update the parent irc relevance to the maximum
+                            $irc_channels = $this->Irc_channel->find('all', array('conditions' => $filter));
+                foreach($irc_channels as $aux){
+                    if($aux['Irc_channel']['relevance'] > $irc['Irc']['relevance']){
+                        $irc['Irc']['relevance'] = $aux['Irc_channel']['relevance'];
+                    }
+                }
+                $this->Irc->save($irc);
+            }
+
+        }
+
+
+
 	    if (!empty($this->data['Edit_Irc'])) {
                   $irc['Irc']['comments']=$this->data['Edit_Irc']['comments'];
                   $this->Irc->save($irc);

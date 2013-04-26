@@ -36,58 +36,56 @@ function unicode2html($string) {
 
 	  	?>
 	  <tr>
-		<td rowspan='2'><?php echo $chat['Fbchat']['capture_date']; ?></td>
-		<td rowspan='2'><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>
-		<td rowspan='2'><a href="#" onclick="popupVetrina('/fbuchats/view/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php echo $friend; ?></a></td>
-		<td rowspan='2'><?php echo $h.":".$m.":".$s; ?></td>
-		<td rowspan='2'><?php echo $chat['Fbchat']['data_size']; ?></td>
-		<td>
-		<?php 
-			echo $form->create('Edit',array( 'url' => '/fbuchats/chats/'.$chat['Fbchat']['fbuchat_id']));
-			echo $form->select('relevance', $relevanceoptions, $chat['Fbchat']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true))); ?>
-		</td>
-		<td><?php
+			<td><?php echo $chat['Fbchat']['capture_date']; ?></td>
+			<td><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>
+			<td><a href="#" onclick="popupVetrina('/fbuchats/view/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php echo $friend; ?></a></td>
+			<td><?php echo $h.":".$m.":".$s; ?></td>
+			<td><?php echo $chat['Fbchat']['data_size']; ?></td>
+			<td><?php 
+				echo $this->Form->create('EditRel',array('url' => '/fbuchats/chats/'.$chat['Fbchat']['fbuchat_id']));
+				echo $this->Form->input('relevance',array('options' =>$relevanceoptions, 'default'=>$chat['Fbchat']['relevance'],'type'=>'select','empty' => '-', 'label'=>false));
 				echo $form->hidden('id', array('value' => $chat['Fbchat']['id']));
-				echo $form->input ('comments', array ('default' => $chat['Fbchat']['comments'],'label' => false));
-			?>
-		</td>
+				echo $this->Form->end();
+				?>	    	
+		    </td>
+			<td><?php 
+				echo $this->Form->create('EditCom',array('url' => '/fbuchats/chats/'.$chat['Fbchat']['fbuchat_id']));	
+				echo $this->Form->textarea('comments',array('type'=>'string','rows'=>'2','default' => $chat['Fbchat']['comments'],'label' => false));
+				echo $form->hidden('id', array('value' => $chat['Fbchat']['id']));
+				echo $this->Form->end();
+				?>
+			</td>
 
-	    <td class="pinfo" rowspan='2'><a href="#" onclick="popupVetrina('/fbuchats/info/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $chat['']['id']); ?></div></td>
-	  </tr>
-	  <tr>
-		<td colspan='2'><?php echo $form->end(__('Save', true)); ?></td>
+	    	<td class="pinfo"><a href="#" onclick="popupVetrina('/fbuchats/info/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $chat['']['id']); ?></div></td>
 	  </tr>
 	 <?php else : ?>
 	  <tr>
-	        <td rowspan='2'><?php echo $chat['Fbchat']['capture_date']; ?></td>
-	        <td rowspan='2'><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>
-	        <td rowspan='2'><a href="#" onclick="popupVetrina('/fbuchats/view/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php echo $friend; ?></a></td>
-	        <td rowspan='2'><?php echo $h.":".$m.":".$s; ?></td>
-	        <td rowspan='2'><?php echo $chat['Fbchat']['data_size']; ?></td>
-		<td>
-		<?php 
-			echo $form->create('Edit',array( 'url' => '/fbuchats/chats/'.$chat['Fbchat']['fbuchat_id']));
-			echo $form->select('relevance', $relevanceoptions, $chat['Fbchat']['relevance'] ,array('label' => __('Choose relevance', true), 'empty' => __('-', true))); ?>
-		</td>
-		<td><?php
+	        <td><?php echo $chat['Fbchat']['capture_date']; ?></td>
+	        <td><?php echo unicode2html($chats[0]['Fbchat']['user']); ?></td>
+	        <td><a href="#" onclick="popupVetrina('/fbuchats/view/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php echo $friend; ?></a></td>
+	        <td><?php echo $h.":".$m.":".$s; ?></td>
+	        <td><?php echo $chat['Fbchat']['data_size']; ?></td>
+
+			<td><?php 
+				echo $this->Form->create('EditRel',array('url' => '/fbuchats/chats/'.$chat['Fbchat']['fbuchat_id']));
+				echo $this->Form->input('relevance',array('options' =>$relevanceoptions, 'default'=>$chat['Fbchat']['relevance'],'type'=>'select','empty' => '-', 'label'=>false));
 				echo $form->hidden('id', array('value' => $chat['Fbchat']['id']));
-				echo $form->input ('comments', array ('default' => $chat['Fbchat']['comments'],'label' => false));
-			?>
-		</td>
-	    <td class="pinfo" rowspan='2'><a href="#" onclick="popupVetrina('/fbuchats/info/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $chat['Fbchat']['id']); ?></div>
-		</td>
-	  </tr>
-	  <tr>
-		<td colspan='2'><?php echo $form->end(__('Save', true)); ?></td>
+				echo $this->Form->end();
+				?>	    	
+		    </td>
+			<td><?php 
+				echo $this->Form->create('EditCom',array('url' => '/fbuchats/chats/'.$chat['Fbchat']['fbuchat_id']));	
+				echo $this->Form->textarea('comments',array('type'=>'string','rows'=>'2','default' => $chat['Fbchat']['comments'],'label' => false));
+				echo $form->hidden('id', array('value' => $chat['Fbchat']['id']));
+				echo $this->Form->end();
+				?>
+			</td>
+
+		    <td class="pinfo"><a href="#" onclick="popupVetrina('/fbuchats/info/<?php echo $chat['Fbchat']['id']; ?>','scrollbar=auto'); return false"><?php __('info.xml'); ?></a> <div class="ipcap"><?php echo $html->link('pcap', 'pcap/' . $chat['Fbchat']['id']); ?></div>
+			</td>
 	  </tr>
 	 <?php endif ?>
 	<?php endforeach; ?>
 	</table>
-  <table id="listpage" class="shadow-box-bottom">
-    <tr>
-      <th class="next"><?php echo $paginator->prev(__('Previous', true), array(), null, array('class'=>'disabled')); ?></th>
-            <th><?php echo $paginator->numbers(); echo ' ('.$paginator->counter().')';?></th>
-      <th class="next"><?php echo $paginator->next(__('Next', true), array(), null, array('class' => 'disabled')); ?></th>
-    </tr>
-  </table>
+<?php echo $this->element('paginator'); ?>
 </div>
