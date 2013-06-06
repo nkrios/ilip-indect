@@ -22,14 +22,20 @@
 	      <td><?php echo $plugin['Plugin']['pluginDescription']; ?>&nbsp;</td>
 	      <td class="actions">
 		      <!--<?php //echo $this->Html->link(__('View', true), array('action' => 'view', $plugin['Plugin']['pluginID'])); ?>-->
-		      <?php 
+		      <?php
             echo $this->Html->link(
               $html->image('/img/view.png',array('class'=>'button','alt'=>'View/Edit','title'=>'View/Edit')), 
               array('action' => 'edit', $plugin['Plugin']['pluginID']),
               array('escape'=>false)
               );
-
-		        echo $this->Html->link(
+              
+              echo $this->Html->link(
+              $html->image('/img/view.png',array('class'=>'button','alt'=>'Train','title'=>'Train')), 
+              array('action' => 'train', $plugin['Plugin']['pluginID']),
+              array('escape'=>false)
+              );
+             
+		echo $this->Html->link(
               $html->image('/img/delete2.png',array('class'=>'button','alt'=>'Delete','title'=>'Delete')),
               array('action' => 'delete', $plugin['Plugin']['pluginID']),
               array('escape'=>false),
