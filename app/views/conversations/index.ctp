@@ -15,18 +15,15 @@
 
 	<table class="shadow-box-bottom">
 		<tr>	
-			<th class="date"><?php echo $paginator->sort(__('Id', true), 'id'); ?></th>
+			<th class="number"><?php echo $paginator->sort(__('Id', true), 'id'); ?></th>
 			<th class="username"><?php echo $paginator->sort(__('Name', true), 'name'); ?></th>
 			<th class="date"><?php echo $paginator->sort(__('Transcription Date', true),
 	 'transcription_date'); ?></th>	
 			<th class="comments"><?php echo $paginator->sort(__('Comments',true), 'comments'); ?></th>
+			<th class="actions"><?php echo $paginator->sort(__('Actions',true), 'actions'); ?></th>
 		</tr>
 		
-		<?php foreach($conversations as $conversation): 
-
-			$url1 = array('controller'=>'Conversations', 'action'=>'view', $conversation['Conversation']['id'], null);
-			$url2 = array('controller'=>'Conversations', 'action'=>'update', $conversation['Conversation']['id'], null);
-			$url3 = array('controller'=>'Conversations', 'action'=>'index', $conversation['Conversation']['id'], $conversation['Conversation']['id']); ?> 
+		<?php foreach($conversations as $conversation):  ?> 
 			<tr>
 				<td><?php echo $conversation['Conversation']['id']; ?></td>
 				<td><?php echo $conversation['Conversation']['name']; ?></td>
@@ -41,18 +38,15 @@
 				?>
 				</td>
 				<td><?php 
-					echo $form->button('VIEW', array('onclick' => "location.href='".$this->Html->url($url1)."'")); 
-					echo $form->button('UPDATE', array('onclick' => "location.href='".$this->Html->url($url2)."'"));
-					echo $form->button('DELETE', array('onclick' => "location.href='".$this->Html->url($url3)."'"));
 
 				    echo $this->Html->link(
 				      $html->image('/img/view.png',array('class'=>'button','alt'=>'View/Edit','title'=>'View/Edit')), 
-				      array('action' => 'edit', $conversation['Conversation']['id']),
+				      array('action' => 'view', $conversation['Conversation']['id']),
 				      array('escape'=>false)
 				      );
 				      
 				   echo $this->Html->link(
-				      $html->image('/img/view.png',array('class'=>'button','alt'=>'Update','title'=>'Update')), 
+				      $html->image('/img/update_action.png',array('class'=>'button','alt'=>'Update','title'=>'Update')), 
 				      array('action' => 'update', $conversation['Conversation']['id']),
 				      array('escape'=>false)
 				      );

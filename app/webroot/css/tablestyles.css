@@ -42,8 +42,8 @@ table tr th.relevance,
 table tr th.number,
 table tr th.size,
 table tr th.method{width: 5%;}
-table tr th.comments{width: 25%;}
-table tr th.url{width: 30%;}
+table tr th.comments,
+table tr th.url{width: 25%;}
 table tr th.actions,
 table tr th.type,
 table tr th.plfl,

@@ -206,10 +206,12 @@ footer #language_box select#lang option{border-radius: 0.5em;}
 .notice {
   color: #656565;
   font-size: 14px;
-  background-color: #f4f4f4;
+  background-color: #F6C9C5;
   padding: 0.5em;
   margin: 1em 0;
   display:block;
+  border-radius: 10px;
+  border:1px solid #C6C9C5;
 }
 .tip { color: #656565;  background-color: #ddd;}
 
@@ -221,6 +223,7 @@ footer #language_box select#lang option{border-radius: 0.5em;}
   border:1px solid #aaa;
   margin: 0.5em auto;
   padding: 0.3em;
+
   background-color: #8FB0FF;
   text-shadow: 0 1px 2px #999;
   box-shadow: 0 1px 1px #333;

@@ -1,6 +1,8 @@
-<!-- Jesús Vallinot Sánchez-->
 
-<div class="generic">
+<div class="generic boxstyle_white">
+
+	<h2 class="shadow-box-bottom"><?php echo 'Transcriptions - Edit conversation: '.$conversation['Conversation']['name']; ?></h2>
+
 <?php
 
 $users_relative_path = "/app/webroot/user_data/";
@@ -14,12 +16,11 @@ $count2 = 1;
 echo $form->create('Conversation', array('controller'=>'Conversations', 'action'=>'edit/'.$conversation['Conversation']['id'].'/2', 'type'=>'post')); ?>
 
 <!--tabla que contendra el audio, nombre y alias de la conversacion-->
-<br/>
 <table>
 	<tr>
-		<th width="33%"><?php echo __('Audio',true); ?></th>
-		<th width="33%"><?php echo __('Conversation name',true); ?></th>
-		<th width="33%"><?php echo __('Conversation Alias',true); ?></th>
+		<th><?php echo __('Audio',true); ?></th>
+		<th><?php echo __('Conversation name',true); ?></th>
+		<th><?php echo __('Conversation Alias',true); ?></th>
 	</tr>
 	<tr>
 		<td>
@@ -34,13 +35,13 @@ echo $form->create('Conversation', array('controller'=>'Conversations', 'action'
 <!--tabla que contendra el audio, identificador sip y alias de cada interlocutor-->
 <table>
 	<tr>
-		<th width="33%"><?php echo __('Audio',true); ?></th>
-		<th width="33%"><?php echo __('Speaker',true); ?></th>
-		<th width="33%"><?php echo __('Alias',true); ?></th>
+		<th><?php echo __('Audio',true); ?></th>
+		<th><?php echo __('Speaker',true); ?></th>
+		<th><?php echo __('Alias',true); ?></th>
 	</tr>
 	<!--AUDIO-->
 	<tr>
-		<td><audio src="<?php echo $voip_relative_path.$streams[0]['Stream']['filename'] ?>" controls="controls""/></td> <!--WAV-->
+		<td><audio src="<?php echo $voip_relative_path.$streams[0]['Stream']['filename'] ?>" controls="controls"/></td> <!--WAV-->
 		<td><?php echo $streams[0]['Stream']['name'] ?></td> <!--ID SIP-->
 		<td><input type="text" name="alias1" size=40 value="<?php echo $streams[0]['Stream']['alias']; ?>"/></td> <!--ALIAS-->
 	</tr>
