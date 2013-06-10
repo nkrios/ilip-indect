@@ -4,14 +4,17 @@ class PluginsController extends AppController {
 	var $name = 'Plugins';
         var $components = array('Xplico');
 	var $paginate = array('limit' => 20);
+        var $uses = array('Plugin', 'Pol','Sol');
 
 	function beforeFilter() {
                 $groupid = $this->Session->read('group');
                 $polid = $this->Session->read('pol');
                 $solid = $this->Session->read('sol');
+/*
                 if (!$groupid || !$polid || !$solid) {
                     $this->redirect('/users/login');
                 }
+*/
 	}
 
 	function index() {

@@ -103,9 +103,9 @@ class ConversationsController extends AppController{
 	        $this->set('menu_left', $this->Xplico->leftmenuarray(4) );
 		$this->set('relevanceoptions',$this->Xplico->relevanceoptions());
 
-		$voip_absolute_path = "/opt/voip/transcript/voip/";
+		$voip_absolute_path = "/opt/voip/transcript/voip_data/";
 		$bin_absolute_path = "/opt/voip/transcript/bin/";
-		$users_absolute_path = "/opt/voip/transcript/users/";
+		$users_absolute_path = "/opt/voip/transcript/user_data/";
 
 		//App::import('Model', 'Streams');
 		//$stream = new Stream();
@@ -137,21 +137,17 @@ class ConversationsController extends AppController{
 			if( $ret1 > 0 || $ret2 > 0 )
 			{
 				//generate the fragments
-				//audioSplit.sh: <user1.wav> <user2.wav> <user1_name> <user2_name> <conversation.txt> <pad>"
-				//exec($bin_absolute_path."/audioSplit.sh ".$voip_absolute_path."/".$_POST['name1'].".wav ".$voip_absolute_path."/"
-				//		.$_POST['name2'].".wav ".$_POST['conversation_name']." 0.5");
-				exec($bin_absolute_path."audioSplit.sh ".$streams[0]['Stream']['filepath']." ".$streams[1]['Stream']['filepath'].
-							" ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name']." ".$streams[3]['Stream']['filepath']." 0".
+				//audioSplit.sh: <conversation.txt> <pad> <user1_name> <user1.wav> [<user2.wav> <user2_name>]
+				exec($bin_absolute_path."audioSplit.sh ".$streams[3]['Stream']['filepath']." 0 ".
+							$streams[0]['Stream']['name']." ".$streams[0]['Stream']['filepath']." ".$streams[1]['Stream']['name']." ".$streams[1]['Stream']['filepath'].
 							" > /opt/audioSplit_result.txt 2>&1");
+
 			}
 			//if there aren't any fragments, suppose audiosplit hasn't been done so do it with pad=0.5
 			else{
 				//generate the fragments
-				//audioSplit.sh: <user1.wav> <user2.wav> <user1_name> <user2_name> <conversation.txt> <pad>"
-				//exec($bin_absolute_path."/audioSplit.sh ".$voip_absolute_path."/".$_POST['name1'].".wav ".$voip_absolute_path."/"
-				//		.$_POST['name2'].".wav ".$_POST['conversation_name']." 0.5");
-				exec($bin_absolute_path."audioSplit.sh ".$streams[0]['Stream']['filepath']." ".$streams[1]['Stream']['filepath'].
-							" ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name']." ".$streams[3]['Stream']['filepath']." 0.5".
+				exec($bin_absolute_path."audioSplit.sh ".$streams[3]['Stream']['filepath']." 0.5 ".
+							$streams[0]['Stream']['name']." ".$streams[0]['Stream']['filepath']." ".$streams[1]['Stream']['name']." ".$streams[1]['Stream']['filepath'].
 							" > /opt/audioSplit_result.txt 2>&1");
 			}
 			//read again the file with the new timestamps
@@ -192,34 +188,35 @@ class ConversationsController extends AppController{
 				}
 				fclose($file);
 
-				//audioSplit.sh: <user1.wav> <user2.wav> <user1_name> <user2_name> <conversation.txt> <pad>"
-				//exec($bin_absolute_path."/./audioSplit.sh ".$voip_absolute_path."/".$_POST['name1'].".wav ".$voip_absolute_path."/".$_POST['name2'].".wav "
-				//			.$voip_absolute_path."/".$_POST['conversation_name'].".txt 0");
-				exec($bin_absolute_path."audioSplit.sh ".$streams[0]['Stream']['filepath']." ".$streams[1]['Stream']['filepath'].
-							" ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name']." ".$streams[3]['Stream']['filepath']." 0".
+				//audioSplit.sh: <conversation.txt> <pad> <user1_name> <user1.wav> [<user2.wav> <user2_name>]
+				//generate the fragments again
+				exec($bin_absolute_path."audioSplit.sh ".$streams[3]['Stream']['filepath']." 0 ".
+							$streams[0]['Stream']['name']." ".$streams[0]['Stream']['filepath']." ".$streams[1]['Stream']['name']." ".$streams[1]['Stream']['filepath'].
 							" > /opt/audioSplit_result.txt 2>&1");
 
-				//ejecuta files.sh: <user1_name> <user2_name> <conversation.txt> <pad>"
+				//ejecuta files.sh: <conversation.txt> <user1_name> [<user2_name>]
 				//exec($bin_absolute_path."/./files.sh ".$voip_absolute_path."/".$_POST['name1'].".wav ".$voip_absolute_path."/".$_POST['name2'].".wav "
 				//			.$voip_absolute_path."/".$_POST['conversation_name'].".txt");
-				exec($bin_absolute_path."files.sh ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name'].
-								" ".$streams[3]['Stream']['filepath']." > /opt/files_result.txt 2>&1");
-
-				//no need to read again the file for the timestamps, they haven't changed
-
+//				exec($bin_absolute_path."files.sh ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name'].
+//								" ".$streams[3]['Stream']['filepath']." > /opt/files_result.txt 2>&1");
+				//files.sh <conversation.txt> <user1_name> [<user2_name>]
+				print_r($bin_absolute_path."files.sh ".$streams[3]['Stream']['filepath']." ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name'].
+								" > /opt/files_result.txt 2>&1");
+				exec($bin_absolute_path."files.sh ".$streams[3]['Stream']['filepath']." ".$streams[0]['Stream']['name']." ".$streams[1]['Stream']['name'].
+								" > /opt/files_result.txt 2>&1");
 			}
-			//si viene desde edit.ctp, cuando se ha pulsado el boton TRAIN
+			//si viene desde edit.ctp, cuando se ha pulsado el boton TRAIN -> save primero!!
 			else if(isset($this->params['form']['train1']) || isset($this->params['form']['train2'])){
 				//training buttons will still be available after this training until new changes are done
 				$train_button=1;
 				if(isset($this->params['form']['train1'])){
 					//training.sh <user_name>
-					//exec($bin_absolute_path."/./training.sh ".$voip_absolute_path."/".$_POST['train1'].".wav");
+					print_r($bin_absolute_path."training.sh ".$streams[0]['Stream']['name']." > /opt/training1_result.txt 2>&1");
 					exec($bin_absolute_path."training.sh ".$streams[0]['Stream']['name']." > /opt/training1_result.txt 2>&1");
 					$this->Session->setFlash("Speaker ".$_POST['train1']." has been trained");
 				}else{
 					//training.sh <user_name>
-					//exec($bin_absolute_path."/./training.sh ".$voip_absolute_path."/".$_POST['train2'].".wav");
+					print_r($bin_absolute_path."training.sh ".$streams[1]['Stream']['name']." > /opt/training2_result.txt 2>&1");
 					exec($bin_absolute_path."training.sh ".$streams[1]['Stream']['name']." > /opt/training2_result.txt 2>&1");
 					$this->Session->setFlash("Speaker ".$_POST['train2']." has been trained");
 				}		

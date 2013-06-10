@@ -3,8 +3,8 @@
 <div class="generic">
 <?php
 
-$users_relative_path = "/app/webroot/users/";
-$voip_relative_path = "/app/webroot/voip/";
+$users_relative_path = "/app/webroot/user_data/";
+$voip_relative_path = "/app/webroot/voip_data/";
 $image_relative_path = "/app/webroot/img/";
 
 $count1 = 1;

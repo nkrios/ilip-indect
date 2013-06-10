@@ -6,8 +6,8 @@
 echo $this->Form->create('Conversation', array('action'=>'edit/'.$conversation['Conversation']['id'].'/1')); 
 
 //rutas absoluta y relativa a los ficheros de audio y texto de las conversaciones
-$voip_absolute_path = $_SERVER['DOCUMENT_ROOT']."/app/webroot/voip/";
-$voip_relative_path = "/app/webroot/voip/";
+$voip_absolute_path = $_SERVER['DOCUMENT_ROOT']."/app/webroot/voip_data/";
+$voip_relative_path = "/app/webroot/voip_data/";
 $image_relative_path = "/app/webroot/img/";
 
 $flag = 1;
@@ -43,8 +43,8 @@ La tabla streams (archivos de audio y texto) tiene 7 campos:
 			<audio src="<?php echo $voip_relative_path.$streams[2]['Stream']['filename'] ?>" controls="controls" caching="safe" onClick="IniciarCrono()"/>
 
 		</td> <!--WAV-->
-		<td><?php echo $streams[2]['Stream']['name'] ?></td><!--ID SIP-->
-		<td><?php echo $streams[2]['Stream']['alias'] ?></td><!--ALIAS-->
+		<td><?php echo $streams[3]['Stream']['name'] ?></td><!--ID SIP-->
+		<td><?php echo $streams[3]['Stream']['alias'] ?></td><!--ALIAS-->
 	</tr>
 </table>
 <br/>
