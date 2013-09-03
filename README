@@ -1,28 +1,25 @@
-CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+Indect Lawful Interception Platform (ILIP) - GUI
+------------------------------------------------
 
-The Cake Software Foundation - promoting development related to CakePHP
-http://cakefoundation.org/
+-New GUI based on Xplico project. Performed by Universidad Carlos III de Madrid and included inside framework of Indect European project.
 
-CakePHP - the rapid development PHP framework
-http://www.cakephp.org
 
-Cookbook - user documentation for learning about CakePHP
-http://book.cakephp.org
+ILIP License:
+------------
+Most files in ILIP are under the GNU General Public License version 2.0 because it's based on Xplico Open-Source project.
 
-API - quick reference to CakePHP
-http://api.cakephp.org
 
-The Bakery - everything CakePHP
-http://bakery.cakephp.org
+Xplico License:
+--------------
 
-The Show - live and archived podcasts about CakePHP and more
-http://live.cakephp.org
+Most files in Xplico are under the GNU General Public License version 2.0. Read the file COPYING.GPLv2.0 for details. Some other files are under the Creative Commons BY-NC-SA license. Read the file COPYING.CC_BY-NC-SA for details.
 
-CakePHP TV - screen casts from events and video tutorials
-http://tv.cakephp.org
+Brief:
+ - Xplico as application (program) is licensed under the GNU General Public License v2.0.
 
-CakePHP Google Group - community mailing list and forum
-http://groups.google.com/group/cake-php
+ - DeMa is licensed under the GNU General Public License v2.0.
 
-#cakephp on irc.freenode.net - chat with CakePHP developers
-irc://irc.freenode.net/cakephp
+ - The manipulators msite, mpaltalk, mfbc, mfile and mwmail are licensed under the GNU General Public License v2.0.
+
+ - mimedump.pyc and session_mng.pyc are licensed under the Creative Commons license CC BY-NC-SA (Attribution-NonCommercial-ShareAlike 3.0 Unported)
+
